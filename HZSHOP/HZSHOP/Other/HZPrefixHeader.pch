@@ -1,0 +1,89 @@
+//
+//  HZPrefixHeader.pch
+//  HZSHOP
+//
+//  Created by 英峰 on 2019/4/9.
+//  Copyright © 2019年 英峰. All rights reserved.
+//
+
+#ifndef HZPrefixHeader_pch
+#define HZPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <Availability.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "CrazyNetWork.h"
+#import "CrazyDB.h"
+#import "CrazyAutoLayout.h"
+#import "CrazyExtensionHeader.h"
+#import "CrazyFunction.h"
+#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "UIView+SDAutoLayout.h"
+#import "IQKeyboardManager.h"
+#import "MJExtension.h"
+#import "MJRefresh.h"
+#import "JSONKit.h"
+#import "Masonry.h"
+#import "WYFTools.h"
+#import "UIColor+hexColor.h"
+
+#import "AppDelegate.h"
+#import "CrazyConfiguration.h"
+#import "JKToast.h"
+#import "commentStar.h"
+#import "MyMD5.h"
+#import "UITableView+FDTemplateLayoutCell.h"
+
+
+//--------------- 常量---------------
+
+#define YY_APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication]delegate])//APPdelegate
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width //屏幕宽度
+
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height //屏幕高度
+
+#define SCREEN_STATUSRECT [[UIApplication sharedApplication] statusBarFrame].size.height //状态栏高度
+
+#define SCREEN_NAVRECT    self.navigationController.navigationBar.frame.size.height //导航栏高度
+
+#define SCREEN_TABBARRECT      ((AppDelegate *)[[UIApplication sharedApplication]delegate]).tabBarControll.tabBar.frame.size.height //标签栏高度
+
+//获取系统版本
+#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+
+//获取当前语言
+#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+
+#define HEIGHT(f) f * (SCREEN_WIDTH/320.0) //屏幕比例 算出实际UI大小
+
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
+#define SUCCESS     [[NSString stringWithFormat:@"%d",[dic[@"code"] intValue]] isEqualToString:@"200"]
+
+#define FAILURE     [[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"400"]
+
+
+//打印请求结果
+//#define MyDeBug
+
+#ifdef MyDeBug
+
+#define LOG(a,b)       NSLog(@"%@-----%@",a,b);
+
+#else
+
+#define LOG(a,b)
+
+#endif
+
+
+
+#endif
