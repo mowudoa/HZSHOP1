@@ -230,6 +230,23 @@
 		7142A6D8225C8D8800B15D8C /* HZCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7142A6D6225C8D8800B15D8C /* HZCategoryViewController.m */; };
 		7142A6D9225C8D8800B15D8C /* HZCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7142A6D7225C8D8800B15D8C /* HZCategoryViewController.xib */; };
 		7142A6DC225C8E4400B15D8C /* CrazyConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7142A6DB225C8E4400B15D8C /* CrazyConfiguration.m */; };
+		71742924225DC5F100DDDBCC /* HZAddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71742922225DC5F100DDDBCC /* HZAddressListViewController.m */; };
+		71742925225DC5F100DDDBCC /* HZAddressListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71742923225DC5F100DDDBCC /* HZAddressListViewController.xib */; };
+		71742929225DC75400DDDBCC /* HZNewBuildAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71742927225DC75400DDDBCC /* HZNewBuildAddressViewController.m */; };
+		7174292A225DC75400DDDBCC /* HZNewBuildAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71742928225DC75400DDDBCC /* HZNewBuildAddressViewController.xib */; };
+		7174292E225DD44600DDDBCC /* HZAddressListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7174292C225DD44600DDDBCC /* HZAddressListTableViewCell.m */; };
+		7174292F225DD44600DDDBCC /* HZAddressListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7174292D225DD44600DDDBCC /* HZAddressListTableViewCell.xib */; };
+		71EDD06D225DDE1600220105 /* HZAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD06C225DDE1600220105 /* HZAddressModel.m */; };
+		71EDD082225DE31F00220105 /* BRStringPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD071225DE31F00220105 /* BRStringPickerView.m */; };
+		71EDD083225DE31F00220105 /* NSDate+BRPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD076225DE31F00220105 /* NSDate+BRPickerView.m */; };
+		71EDD084225DE31F00220105 /* BRDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD077225DE31F00220105 /* BRDatePickerView.m */; };
+		71EDD085225DE31F00220105 /* BRBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD07A225DE31F00220105 /* BRBaseView.m */; };
+		71EDD086225DE31F00220105 /* BRAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD07D225DE31F00220105 /* BRAddressModel.m */; };
+		71EDD087225DE31F00220105 /* BRPickerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 71EDD07F225DE31F00220105 /* BRPickerView.bundle */; };
+		71EDD088225DE31F00220105 /* BRAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD081225DE31F00220105 /* BRAddressPickerView.m */; };
+		71EDD08C225DE99200220105 /* HZCartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD08A225DE99200220105 /* HZCartTableViewCell.m */; };
+		71EDD08D225DE99200220105 /* HZCartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71EDD08B225DE99200220105 /* HZCartTableViewCell.xib */; };
+		71EDD090225DECDF00220105 /* HZCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD08F225DECDF00220105 /* HZCartModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -714,6 +731,37 @@
 		7142A6D7225C8D8800B15D8C /* HZCategoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCategoryViewController.xib; sourceTree = "<group>"; };
 		7142A6DA225C8E4400B15D8C /* CrazyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrazyConfiguration.h; sourceTree = "<group>"; };
 		7142A6DB225C8E4400B15D8C /* CrazyConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrazyConfiguration.m; sourceTree = "<group>"; };
+		71742921225DC5F100DDDBCC /* HZAddressListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressListViewController.h; sourceTree = "<group>"; };
+		71742922225DC5F100DDDBCC /* HZAddressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressListViewController.m; sourceTree = "<group>"; };
+		71742923225DC5F100DDDBCC /* HZAddressListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZAddressListViewController.xib; sourceTree = "<group>"; };
+		71742926225DC75400DDDBCC /* HZNewBuildAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZNewBuildAddressViewController.h; sourceTree = "<group>"; };
+		71742927225DC75400DDDBCC /* HZNewBuildAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZNewBuildAddressViewController.m; sourceTree = "<group>"; };
+		71742928225DC75400DDDBCC /* HZNewBuildAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZNewBuildAddressViewController.xib; sourceTree = "<group>"; };
+		7174292B225DD44600DDDBCC /* HZAddressListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressListTableViewCell.h; sourceTree = "<group>"; };
+		7174292C225DD44600DDDBCC /* HZAddressListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressListTableViewCell.m; sourceTree = "<group>"; };
+		7174292D225DD44600DDDBCC /* HZAddressListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZAddressListTableViewCell.xib; sourceTree = "<group>"; };
+		71EDD06B225DDE1600220105 /* HZAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressModel.h; sourceTree = "<group>"; };
+		71EDD06C225DDE1600220105 /* HZAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressModel.m; sourceTree = "<group>"; };
+		71EDD070225DE31F00220105 /* BRStringPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringPickerView.h; sourceTree = "<group>"; };
+		71EDD071225DE31F00220105 /* BRStringPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStringPickerView.m; sourceTree = "<group>"; };
+		71EDD072225DE31F00220105 /* BRPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPickerView.h; sourceTree = "<group>"; };
+		71EDD073225DE31F00220105 /* BRPickerViewMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPickerViewMacro.h; sourceTree = "<group>"; };
+		71EDD075225DE31F00220105 /* BRDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerView.h; sourceTree = "<group>"; };
+		71EDD076225DE31F00220105 /* NSDate+BRPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BRPickerView.m"; sourceTree = "<group>"; };
+		71EDD077225DE31F00220105 /* BRDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerView.m; sourceTree = "<group>"; };
+		71EDD078225DE31F00220105 /* NSDate+BRPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRPickerView.h"; sourceTree = "<group>"; };
+		71EDD07A225DE31F00220105 /* BRBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRBaseView.m; sourceTree = "<group>"; };
+		71EDD07B225DE31F00220105 /* BRBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRBaseView.h; sourceTree = "<group>"; };
+		71EDD07D225DE31F00220105 /* BRAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressModel.m; sourceTree = "<group>"; };
+		71EDD07E225DE31F00220105 /* BRAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressPickerView.h; sourceTree = "<group>"; };
+		71EDD07F225DE31F00220105 /* BRPickerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BRPickerView.bundle; sourceTree = "<group>"; };
+		71EDD080225DE31F00220105 /* BRAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressModel.h; sourceTree = "<group>"; };
+		71EDD081225DE31F00220105 /* BRAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressPickerView.m; sourceTree = "<group>"; };
+		71EDD089225DE99200220105 /* HZCartTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCartTableViewCell.h; sourceTree = "<group>"; };
+		71EDD08A225DE99200220105 /* HZCartTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCartTableViewCell.m; sourceTree = "<group>"; };
+		71EDD08B225DE99200220105 /* HZCartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCartTableViewCell.xib; sourceTree = "<group>"; };
+		71EDD08E225DECDF00220105 /* HZCartModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCartModel.h; sourceTree = "<group>"; };
+		71EDD08F225DECDF00220105 /* HZCartModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCartModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -817,6 +865,8 @@
 		7142A3F2225C8C1800B15D8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				71EDD08E225DECDF00220105 /* HZCartModel.h */,
+				71EDD08F225DECDF00220105 /* HZCartModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -824,6 +874,9 @@
 		7142A3F3225C8C1800B15D8C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				71EDD089225DE99200220105 /* HZCartTableViewCell.h */,
+				71EDD08A225DE99200220105 /* HZCartTableViewCell.m */,
+				71EDD08B225DE99200220105 /* HZCartTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -912,6 +965,12 @@
 				7142A6CB225C8D6200B15D8C /* HZMineViewController.h */,
 				7142A6CC225C8D6200B15D8C /* HZMineViewController.m */,
 				7142A6CD225C8D6200B15D8C /* HZMineViewController.xib */,
+				71742921225DC5F100DDDBCC /* HZAddressListViewController.h */,
+				71742922225DC5F100DDDBCC /* HZAddressListViewController.m */,
+				71742923225DC5F100DDDBCC /* HZAddressListViewController.xib */,
+				71742926225DC75400DDDBCC /* HZNewBuildAddressViewController.h */,
+				71742927225DC75400DDDBCC /* HZNewBuildAddressViewController.m */,
+				71742928225DC75400DDDBCC /* HZNewBuildAddressViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -919,6 +978,8 @@
 		7142A3FE225C8C1800B15D8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				71EDD06B225DDE1600220105 /* HZAddressModel.h */,
+				71EDD06C225DDE1600220105 /* HZAddressModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -926,6 +987,9 @@
 		7142A3FF225C8C1800B15D8C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7174292B225DD44600DDDBCC /* HZAddressListTableViewCell.h */,
+				7174292C225DD44600DDDBCC /* HZAddressListTableViewCell.m */,
+				7174292D225DD44600DDDBCC /* HZAddressListTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1072,6 +1136,7 @@
 		7142A438225C8D1E00B15D8C /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				71EDD06E225DE31F00220105 /* BRPickerView */,
 				7142A439225C8D1E00B15D8C /* hexColor */,
 				7142A43C225C8D1E00B15D8C /* MD5 */,
 				7142A43F225C8D1E00B15D8C /* MJExtension */,
@@ -1876,6 +1941,60 @@
 			path = jsonKit;
 			sourceTree = "<group>";
 		};
+		71EDD06E225DE31F00220105 /* BRPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				71EDD06F225DE31F00220105 /* StringPickerView */,
+				71EDD072225DE31F00220105 /* BRPickerView.h */,
+				71EDD073225DE31F00220105 /* BRPickerViewMacro.h */,
+				71EDD074225DE31F00220105 /* DatePickerView */,
+				71EDD079225DE31F00220105 /* Base */,
+				71EDD07C225DE31F00220105 /* AddressPickerView */,
+			);
+			path = BRPickerView;
+			sourceTree = "<group>";
+		};
+		71EDD06F225DE31F00220105 /* StringPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				71EDD070225DE31F00220105 /* BRStringPickerView.h */,
+				71EDD071225DE31F00220105 /* BRStringPickerView.m */,
+			);
+			path = StringPickerView;
+			sourceTree = "<group>";
+		};
+		71EDD074225DE31F00220105 /* DatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				71EDD075225DE31F00220105 /* BRDatePickerView.h */,
+				71EDD076225DE31F00220105 /* NSDate+BRPickerView.m */,
+				71EDD077225DE31F00220105 /* BRDatePickerView.m */,
+				71EDD078225DE31F00220105 /* NSDate+BRPickerView.h */,
+			);
+			path = DatePickerView;
+			sourceTree = "<group>";
+		};
+		71EDD079225DE31F00220105 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				71EDD07A225DE31F00220105 /* BRBaseView.m */,
+				71EDD07B225DE31F00220105 /* BRBaseView.h */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		71EDD07C225DE31F00220105 /* AddressPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				71EDD07D225DE31F00220105 /* BRAddressModel.m */,
+				71EDD07E225DE31F00220105 /* BRAddressPickerView.h */,
+				71EDD07F225DE31F00220105 /* BRPickerView.bundle */,
+				71EDD080225DE31F00220105 /* BRAddressModel.h */,
+				71EDD081225DE31F00220105 /* BRAddressPickerView.m */,
+			);
+			path = AddressPickerView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1983,12 +2102,17 @@
 				7142A64B225C8D1F00B15D8C /* SVProgressHUD.bundle in Resources */,
 				7142A5FB225C8D1F00B15D8C /* README.txt in Resources */,
 				7142A688225C8D1F00B15D8C /* BlocksKit-Info.plist in Resources */,
+				71EDD08D225DE99200220105 /* HZCartTableViewCell.xib in Resources */,
+				71742925225DC5F100DDDBCC /* HZAddressListViewController.xib in Resources */,
 				7142A600225C8D1F00B15D8C /* SWQRCode.bundle in Resources */,
+				71EDD087225DE31F00220105 /* BRPickerView.bundle in Resources */,
 				7142A6D4225C8D7800B15D8C /* HZCartViewController.xib in Resources */,
+				7174292F225DD44600DDDBCC /* HZAddressListTableViewCell.xib in Resources */,
 				7142A6CF225C8D6200B15D8C /* HZMineViewController.xib in Resources */,
 				7142A625225C8D1F00B15D8C /* MJRefresh.bundle in Resources */,
 				7142A6D9225C8D8800B15D8C /* HZCategoryViewController.xib in Resources */,
 				7142A609225C8D1F00B15D8C /* LICENSE in Resources */,
+				7174292A225DC75400DDDBCC /* HZNewBuildAddressViewController.xib in Resources */,
 				7142A615225C8D1F00B15D8C /* glass.wav in Resources */,
 				7142A661225C8D1F00B15D8C /* IQKeyboardManager.bundle in Resources */,
 				7142A3C8225C8AF200B15D8C /* Assets.xcassets in Resources */,
@@ -2023,8 +2147,10 @@
 				7142A67B225C8D1F00B15D8C /* ZHHTTPUtil.m in Sources */,
 				7142A62E225C8D1F00B15D8C /* MJRefreshNormalHeader.m in Sources */,
 				7142A678225C8D1F00B15D8C /* UIButton+AFNetworking.m in Sources */,
+				71EDD086225DE31F00220105 /* BRAddressModel.m in Sources */,
 				7142A65A225C8D1F00B15D8C /* TMCache.m in Sources */,
 				7142A6B8225C8D1F00B15D8C /* SDWebImageDecoder.m in Sources */,
+				71EDD08C225DE99200220105 /* HZCartTableViewCell.m in Sources */,
 				7142A69E225C8D1F00B15D8C /* UIGestureRecognizer+BlocksKit.m in Sources */,
 				7142A69B225C8D1F00B15D8C /* UIBarButtonItem+BlocksKit.m in Sources */,
 				7142A415225C8C3F00B15D8C /* rootModel.m in Sources */,
@@ -2034,11 +2160,14 @@
 				7142A602225C8D1F00B15D8C /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				7142A6B7225C8D1F00B15D8C /* SDWebImageManager.m in Sources */,
 				7142A642225C8D1F00B15D8C /* NSArray+MASAdditions.m in Sources */,
+				71742929225DC75400DDDBCC /* HZNewBuildAddressViewController.m in Sources */,
 				7142A693225C8D1F00B15D8C /* NSMapTable+BlocksKit.m in Sources */,
+				71EDD083225DE31F00220105 /* NSDate+BRPickerView.m in Sources */,
 				7142A645225C8D1F00B15D8C /* MASConstraint.m in Sources */,
 				7142A616225C8D1F00B15D8C /* commentStar.m in Sources */,
 				7142A689225C8D1F00B15D8C /* NSDictionary+BlocksKit.m in Sources */,
 				7142A679225C8D1F00B15D8C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				71EDD084225DE31F00220105 /* BRDatePickerView.m in Sources */,
 				7142A665225C8D1F00B15D8C /* IQUIScrollView+Additions.m in Sources */,
 				7142A640225C8D1F00B15D8C /* MASConstraintMaker.m in Sources */,
 				7142A655225C8D1F00B15D8C /* IPAdress.m in Sources */,
@@ -2059,6 +2188,7 @@
 				7142A622225C8D1F00B15D8C /* UIImage+ChameleonPrivate.m in Sources */,
 				7142A61E225C8D1F00B15D8C /* UINavigationController+Chameleon.m in Sources */,
 				7142A6BD225C8D1F00B15D8C /* SDWebImageCompat.m in Sources */,
+				71EDD090225DECDF00220105 /* HZCartModel.m in Sources */,
 				7142A6B2225C8D1F00B15D8C /* ASINSStringAdditions.m in Sources */,
 				7142A6BA225C8D1F00B15D8C /* SDWebImageDownloader.m in Sources */,
 				7142A6AD225C8D1F00B15D8C /* ASIHTTPRequest.m in Sources */,
@@ -2092,6 +2222,9 @@
 				7142A3CE225C8AF200B15D8C /* main.m in Sources */,
 				7142A63A225C8D1F00B15D8C /* CrazyGuideView.m in Sources */,
 				7142A623225C8D1F00B15D8C /* UIScrollView+MJRefresh.m in Sources */,
+				7174292E225DD44600DDDBCC /* HZAddressListTableViewCell.m in Sources */,
+				71742924225DC5F100DDDBCC /* HZAddressListViewController.m in Sources */,
+				71EDD088225DE31F00220105 /* BRAddressPickerView.m in Sources */,
 				7142A412225C8C3F00B15D8C /* XTBaseTabBarViewController.m in Sources */,
 				7142A662225C8D1F00B15D8C /* IQKeyboardManager.m in Sources */,
 				7142A656225C8D1F00B15D8C /* animationFunction.m in Sources */,
@@ -2121,6 +2254,7 @@
 				7142A654225C8D1F00B15D8C /* CrazyAlumWithCamera.m in Sources */,
 				7142A6D3225C8D7800B15D8C /* HZCartViewController.m in Sources */,
 				7142A610225C8D1F00B15D8C /* MJFoundation.m in Sources */,
+				71EDD082225DE31F00220105 /* BRStringPickerView.m in Sources */,
 				7142A621225C8D1F00B15D8C /* UIAppearance+Swift.m in Sources */,
 				7142A67F225C8D1F00B15D8C /* FMDatabaseQueue.m in Sources */,
 				7142A6A8225C8D1F00B15D8C /* NSURLConnection+BlocksKit.m in Sources */,
@@ -2142,10 +2276,12 @@
 				7142A644225C8D1F00B15D8C /* NullSafe.m in Sources */,
 				7142A416225C8C3F00B15D8C /* XTBaseTabBar.m in Sources */,
 				7142A631225C8D1F00B15D8C /* MJRefreshFooter.m in Sources */,
+				71EDD085225DE31F00220105 /* BRBaseView.m in Sources */,
 				7142A696225C8D1F00B15D8C /* NSIndexSet+BlocksKit.m in Sources */,
 				7142A669225C8D1F00B15D8C /* WXalertView.m in Sources */,
 				7142A672225C8D1F00B15D8C /* AFSecurityPolicy.m in Sources */,
 				7142A619225C8D1F00B15D8C /* UIColor+Chameleon.m in Sources */,
+				71EDD06D225DDE1600220105 /* HZAddressModel.m in Sources */,
 				7142A69A225C8D1F00B15D8C /* UIWebView+BlocksKit.m in Sources */,
 				7142A63B225C8D1F00B15D8C /* CrazyExtensionHeader.m in Sources */,
 				7142A660225C8D1F00B15D8C /* IQPreviousNextView.m in Sources */,

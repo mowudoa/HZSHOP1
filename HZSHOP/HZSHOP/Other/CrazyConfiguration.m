@@ -43,12 +43,12 @@
 
 -(void)initCrazyConfiguration{
     //[CrazyDB shareDBName:@"mydatabase.sqlite"];//初始化数据库
- //   [self ConfigGuide];//初始化导航页
+    //[self ConfigGuide];//初始化导航页
     //[self ConfigBackBtn]; //初始化返回按钮
     //[self ConfigTMCache]; //初始化缓存时间
-    [self ConfigIQKeyboard];//初始化键盘
+      [self ConfigIQKeyboard];//初始化键盘
     //[self ConfigSVProgressHUD];//初始化挡板
-    [self ConfigToast];//初始化Toast
+      [self ConfigToast];//初始化Toast
     //[self ConfigVersion];//初始化版本升级提示
     //[self ConfigAppirater];//初始化app打分提示
 }
@@ -61,7 +61,6 @@
         guide.pageCtr.hidden = YES;
         
         [guide createLocationImageArr:@[@"yindao1",@"yindao2",@"yindao3"] block:^{
-//            @"good111",@"good222"
            
             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"Guide"];
             

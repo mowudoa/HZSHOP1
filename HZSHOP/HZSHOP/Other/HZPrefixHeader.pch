@@ -39,7 +39,7 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 
 
-//--------------- 常量---------------
+//---------------系统常量---------------
 
 #define YY_APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication]delegate])//APPdelegate
 
@@ -61,15 +61,15 @@
 
 #define HEIGHT(f) f * (SCREEN_WIDTH/320.0) //屏幕比例 算出实际UI大小
 
+//RGB颜色
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-
+//请求状态码
 #define SUCCESS     [[NSString stringWithFormat:@"%d",[dic[@"code"] intValue]] isEqualToString:@"200"]
 
 #define FAILURE     [[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"400"]
-
 
 //打印请求结果
 //#define MyDeBug
@@ -84,6 +84,4 @@
 
 #endif
 
-
-
-#endif
+#endif //  HZPrefixHeader.pch

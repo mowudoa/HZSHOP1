@@ -38,6 +38,7 @@
         
         _imageDataList = @[@"home-icon1",@"busi-icon1",@"mall-icon1",@"pers-icon1"];
     }
+    
     return _imageDataList;
     
 }
@@ -47,6 +48,7 @@
         
         _selectedDataList = @[@"home-icon2",@"busi-icon2",@"mall-icon2",@"pers-icon2"];
     }
+    
     return _selectedDataList;
     
 }
@@ -56,6 +58,7 @@
         
         _titleDataList = @[@"首页",@"分类",@"购物车",@"个人中心"];
     }
+    
     return _titleDataList;
     
 }
