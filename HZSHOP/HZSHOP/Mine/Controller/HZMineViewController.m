@@ -8,6 +8,8 @@
 
 #import "HZMineViewController.h"
 #import "HZAddressListViewController.h"
+#import "HZMyFollowGoodsViewController.h"
+#import "HZMyBrowseViewController.h"
 
 @interface HZMineViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;//背景scrollview
@@ -32,7 +34,7 @@
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor whiteColor] withView:_rechargeButton];
     
 }
-//收货地址
+#pragma mark 收货地址
 - (IBAction)addressList:(UIButton *)sender {
 
     HZAddressListViewController *address = [[HZAddressListViewController alloc] init];
@@ -41,6 +43,22 @@
     
 }
 
+#pragma mark 我的关注
+- (IBAction)myFollow:(UIButton *)sender {
+
+    HZMyFollowGoodsViewController *myfollw = [[HZMyFollowGoodsViewController alloc] init];
+    
+    [self.navigationController pushViewController:myfollw animated:YES];
+    
+}
+#pragma mark 我的足迹
+- (IBAction)myBrowse:(UIButton *)sender {
+
+    HZMyBrowseViewController *browse = [[HZMyBrowseViewController alloc] init];
+    
+    [self.navigationController pushViewController:browse animated:YES];
+    
+}
 -(void)viewWillAppear:(BOOL)animated
 {
    

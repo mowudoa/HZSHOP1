@@ -679,6 +679,9 @@
                                         </imageView>
                                         <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMk-az-RV9">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                            <connections>
+                                                <action selector="myFollow:" destination="-1" eventType="touchUpInside" id="KnM-06-Wny"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -738,6 +741,9 @@
                                         </imageView>
                                         <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8x-vc-lRg">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                            <connections>
+                                                <action selector="myBrowse:" destination="-1" eventType="touchUpInside" id="k1T-5U-zIh"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

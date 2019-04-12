@@ -28,7 +28,7 @@
     
     [backBtn addTarget:self action:@selector(backBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    [backBtn setImage:[UIImage imageNamed:@"小于号"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"小于号h"] forState:UIControlStateNormal];
     
     UIBarButtonItem* im = [[UIBarButtonItem alloc]initWithCustomView:backBtn];
     

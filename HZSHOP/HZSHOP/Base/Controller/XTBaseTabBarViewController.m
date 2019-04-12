@@ -45,7 +45,7 @@ XTBaseTabBarDelegate
 -(void)createTabBar
 {
     //添加子控制器
-    NSArray* controllers = @[@"HZHome",@"HZCategory",@"HZCart",@"HZMine"];
+    NSArray* controllers = @[@"HZHome",@"HZCategory",@"HZDistributionCenter",@"HZCart",@"HZMine"];
     
     NSMutableArray *ViewControllers = [[NSMutableArray alloc] init];
     
@@ -61,12 +61,12 @@ XTBaseTabBarDelegate
         
         XTBaseNavController* nav = [[XTBaseNavController alloc]initWithRootViewController:VC];
         
-        [nav.navigationBar setBarTintColor:[UIColor redColor]];
+        [nav.navigationBar setBarTintColor:[UIColor colorWithHexString:@"#F7F7F7"]];
         
         [nav.navigationBar setTintColor:[UIColor whiteColor]];
         
         [nav.navigationBar setTitleTextAttributes:
-         @{NSForegroundColorAttributeName: [UIColor whiteColor],
+         @{NSForegroundColorAttributeName: [UIColor blackColor],
            NSFontAttributeName : [UIFont systemFontOfSize:16]}];
         
         [ViewControllers addObject:nav];

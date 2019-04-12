@@ -11,7 +11,9 @@
 
 @interface HZNewBuildAddressViewController ()
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+
 @property (weak, nonatomic) IBOutlet UITextField *areaTextField;
 
 @end
@@ -25,6 +27,7 @@
     [self initUI];
     
 }
+
 -(void)initUI
 {
     self.navigationItem.title = @"新建地址";
@@ -33,6 +36,7 @@
     
     _switchButton.transform = CGAffineTransformMakeScale(0.75, 0.75);
 }
+
 - (IBAction)areaChoice:(UIButton *)sender {
 
     NSArray *defaultSelArr = [self.areaTextField.text componentsSeparatedByString:@" "];

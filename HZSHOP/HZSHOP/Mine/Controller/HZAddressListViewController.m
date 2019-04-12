@@ -16,6 +16,7 @@ UITableViewDelegate,
 UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *addressListTableView;
+
 @property (weak, nonatomic) IBOutlet UIButton *buildAddressButton;
 
 @end
@@ -31,6 +32,7 @@ UITableViewDataSource
     [self registercell];
     
 }
+
 -(void)initUI
 {
     self.navigationItem.title = @"收货地址";
@@ -38,6 +40,7 @@ UITableViewDataSource
     [WYFTools viewLayer:5 withView:_buildAddressButton];
     
 }
+
 -(void)registercell
 {
     
@@ -48,6 +51,7 @@ UITableViewDataSource
     [_addressListTableView registerNib:nib forCellReuseIdentifier:@"AddressTableViewCell"];
     
 }
+
 - (IBAction)newBuildAddress:(UIButton *)sender {
 
     HZNewBuildAddressViewController *buildAddress = [[HZNewBuildAddressViewController alloc] init];
@@ -55,8 +59,8 @@ UITableViewDataSource
     [self.navigationController pushViewController:buildAddress animated:YES];
     
 }
-#pragma mark - UITableViewDataSource  数据源方法
 
+#pragma mark - UITableViewDataSource  数据源方法
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 10;
@@ -76,19 +80,21 @@ UITableViewDataSource
     return cell;
     
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
   
 }
+
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
     return [self createHeaderView];
     
 }
-#pragma mark - UITableViewDelegate  代理
 
+#pragma mark - UITableViewDelegate  代理
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return HEIGHT(125);
@@ -114,7 +120,6 @@ UITableViewDataSource
 }
 
 #pragma mark ADDRESS_CELL_DELEGATE  自定义cell代理
-
 -(void)buttonEdit:(NSString *)addressId withMode:(HZAddressModel *)model
 {
     

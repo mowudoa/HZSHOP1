@@ -36,7 +36,7 @@
     
     if (!_imageDataList) {
         
-        _imageDataList = @[@"home-icon1",@"busi-icon1",@"mall-icon1",@"pers-icon1"];
+        _imageDataList = @[@"home-icon1",@"busi-icon1",@"busi-icon1",@"mall-icon1",@"pers-icon1"];
     }
     
     return _imageDataList;
@@ -46,7 +46,7 @@
     
     if (!_selectedDataList) {
         
-        _selectedDataList = @[@"home-icon2",@"busi-icon2",@"mall-icon2",@"pers-icon2"];
+        _selectedDataList = @[@"home-icon2",@"busi-icon2",@"busi-icon2",@"mall-icon2",@"pers-icon2"];
     }
     
     return _selectedDataList;
@@ -56,7 +56,8 @@
     
     if (!_titleDataList) {
         
-        _titleDataList = @[@"首页",@"分类",@"购物车",@"个人中心"];
+        _titleDataList = @[@"首页",@"分类",@"分销中心",@"购物车",@"个人中心"];
+        
     }
     
     return _titleDataList;

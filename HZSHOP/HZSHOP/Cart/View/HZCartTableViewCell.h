@@ -12,12 +12,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZCartTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
+
 @property (weak, nonatomic) IBOutlet UILabel *goodsTitle;
+
 @property (weak, nonatomic) IBOutlet UILabel *goodsPrice;
+
 @property (weak, nonatomic) IBOutlet UILabel *numLabel;
+
 @property (weak, nonatomic) IBOutlet UITextField *numTextField;
+
 @property(strong,nonatomic)HZCartModel* carModel;
 
 @end
