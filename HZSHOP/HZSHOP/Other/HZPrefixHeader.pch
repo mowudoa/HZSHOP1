@@ -72,7 +72,7 @@
 #define FAILURE     [[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"400"]
 
 //打印请求结果
-//#define MyDeBug
+#define MyDeBug
 
 #ifdef MyDeBug
 
@@ -83,5 +83,11 @@
 #define LOG(a,b)
 
 #endif
+
+
+//------------------接口------------
+#define USER_REGISTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=account.register"//注册
+
+#define USER_LOGIN          @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=account.login"//登录
 
 #endif //  HZPrefixHeader.pch

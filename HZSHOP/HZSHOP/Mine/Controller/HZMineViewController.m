@@ -7,14 +7,20 @@
 //
 
 #import "HZMineViewController.h"
+#import "HZCartViewController.h"
+#import "HZLoginViewController.h"
+#import "HZMyBrowseViewController.h"
 #import "HZAddressListViewController.h"
 #import "HZMyFollowGoodsViewController.h"
-#import "HZMyBrowseViewController.h"
 
 @interface HZMineViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;//背景scrollview
+
 @property (weak, nonatomic) IBOutlet UIView *bgView;//scrollview的内容视图
+
 @property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
+
+@property (weak, nonatomic) IBOutlet UIImageView *userIcon;//用户头像
 
 @end
 
@@ -33,6 +39,10 @@
     
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor whiteColor] withView:_rechargeButton];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
+    
+    [self.userIcon addGestureRecognizer:tap];
+    
 }
 #pragma mark 收货地址
 - (IBAction)addressList:(UIButton *)sender {
@@ -40,6 +50,17 @@
     HZAddressListViewController *address = [[HZAddressListViewController alloc] init];
     
     [self.navigationController pushViewController:address animated:YES];
+    
+}
+
+#pragma mark 我的购物车
+- (IBAction)myCart:(UIButton *)sender {
+
+    HZCartViewController *cart = [[HZCartViewController alloc] init];
+    
+    cart.isRootNav = YES;
+    
+    [self.navigationController pushViewController:cart animated:YES];
     
 }
 
@@ -59,12 +80,22 @@
     [self.navigationController pushViewController:browse animated:YES];
     
 }
+#pragma mark 注册
+-(void)tapUserIcon:(UITapGestureRecognizer *)tap
+{
+    HZLoginViewController *login = [[HZLoginViewController alloc] init];
+    
+    [self.navigationController pushViewController:login animated:YES];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
 }
+
 -(void)viewDidLayoutSubviews
 {
     UIView* conView = (UIView*)[_bgScrollView viewWithTag:2048];

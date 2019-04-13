@@ -18,6 +18,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+-(void)initBackButton
+{
+    UIButton* backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [backBtn setFrame:CGRectMake(0, 0, 25, 25)];
+    
+    [backBtn addTarget:self action:@selector(backBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [backBtn setImage:[UIImage imageNamed:@"小于号h"] forState:UIControlStateNormal];
+    
+    UIBarButtonItem* im = [[UIBarButtonItem alloc]initWithCustomView:backBtn];
+    
+    self.navigationItem.leftBarButtonItem = im;
+    
+}
+
+-(void)backBtn:(UIButton*)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

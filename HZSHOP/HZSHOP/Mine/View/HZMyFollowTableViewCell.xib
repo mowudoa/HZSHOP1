@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="123.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baseImage" translatesAutoresizingMaskIntoConstraints="NO" id="OAI-ey-Het">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OAI-ey-Het">
                         <rect key="frame" x="16" y="18" width="90" height="88"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="OAI-ey-Het" secondAttribute="height" multiplier="44:43" id="eY5-tw-DbW"/>
@@ -79,6 +79,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="baseImage" width="180" height="180"/>
+        <image name="appIcon" width="549" height="549"/>
     </resources>
 </document>

@@ -9,6 +9,7 @@
 #import "HZMyBrowseViewController.h"
 #import "HZGoodsModel.h"
 #import "HZMyFollowTableViewCell.h"
+#import "HZGoodsDetailViewController.h"
 
 @interface HZMyBrowseViewController ()<
 UITableViewDelegate,
@@ -116,7 +117,9 @@ UITableViewDataSource
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    HZGoodsDetailViewController *detail = [[HZGoodsDetailViewController alloc] init];
     
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 
@@ -159,7 +162,7 @@ UITableViewDataSource
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 5;
+    return 0.01;
 }
 
 /*

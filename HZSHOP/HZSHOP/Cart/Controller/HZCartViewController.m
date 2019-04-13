@@ -62,6 +62,12 @@ UITableViewDataSource
     //通知以刷新价格
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getTotalPrice:) name:@"getToalMoney" object:nil];
     
+    if (_isRootNav) {
+        
+        [self initBackButton];
+        
+    }
+    
 }
 
 -(void)initData
@@ -223,6 +229,28 @@ UITableViewDataSource
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (_isRootNav) {
+        
+        [YY_APPDELEGATE.tabBarControll.tabBar setHidden:YES];
+    }
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (_isRootNav) {
+        
+        [YY_APPDELEGATE.tabBarControll.tabBar setHidden:NO];
+    }
+    
 }
 
 /*

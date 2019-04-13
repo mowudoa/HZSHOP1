@@ -15,6 +15,7 @@
                 <outlet property="bgScrollView" destination="QCt-XV-FCS" id="ure-Oc-OS9"/>
                 <outlet property="bgView" destination="x0z-oN-UY1" id="t6r-zX-dkK"/>
                 <outlet property="rechargeButton" destination="llS-Su-0dJ" id="5jf-O0-ZaQ"/>
+                <outlet property="userIcon" destination="Bkg-BC-sBp" id="I9D-eX-zsv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -620,6 +621,9 @@
                                         </imageView>
                                         <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dod-Co-zmu">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                            <connections>
+                                                <action selector="myCart:" destination="-1" eventType="touchUpInside" id="UEK-1G-dEf"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -9,6 +9,7 @@
 #import "HZMyFollowGoodsViewController.h"
 #import "HZGoodsModel.h"
 #import "HZMyFollowTableViewCell.h"
+#import "HZGoodsDetailViewController.h"
 
 @interface HZMyFollowGoodsViewController ()<
 UITableViewDelegate,
@@ -91,7 +92,9 @@ UITableViewDataSource
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    HZGoodsDetailViewController *detail = [[HZGoodsDetailViewController alloc] init];
     
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 
