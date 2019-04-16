@@ -23,6 +23,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;//用户头像
 
+@property (weak, nonatomic) IBOutlet UILabel *balanceMoney;//余额
+
+@property (weak, nonatomic) IBOutlet UILabel *integral;//积分
+
 @end
 
 @implementation HZMineViewController
@@ -106,8 +110,45 @@
     
     [self presentViewController:nav animated:YES completion:nil];
     
-  //  [self.navigationController pushViewController:login animated:YES];
     
+}
+
+#pragma mark 根据user_id获取用户信息
+-(void)getUserInfo
+{
+    if ([USER_DEFAULT objectForKey:@"isLogin"]) {
+    
+        MJWeakSelf;
+        
+        NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]};
+        
+        [CrazyNetWork CrazyRequest_Post:MEMBER_CENTER parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+            
+            MJStrongSelf;
+            
+            LOG(@"会员中心", dic);
+            
+            if (SUCCESS) {
+              
+                [strongSelf.userIcon sd_setImageWithURL:dic[@"data"][@"uid"][@"avatar"] placeholderImage:[UIImage imageNamed:@"1213per"]];
+              
+                strongSelf.balanceMoney.text = dic[@"data"][@"uid"][@"credit1"];
+                
+                strongSelf.integral.text = dic[@"data"][@"uid"][@"credit2"];
+                
+            }else{
+                
+                [JKToast showWithText:dic[@"message"]];
+
+            }
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+        }];
+        
+    }
+    
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -115,6 +156,8 @@
    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
+    [self getUserInfo];
+    
 }
 
 -(void)viewDidLayoutSubviews

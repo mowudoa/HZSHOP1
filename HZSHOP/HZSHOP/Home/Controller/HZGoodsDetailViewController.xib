@@ -535,7 +535,7 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="A40-5a-n0B" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="8ja-B7-pfq"/>
                 <constraint firstItem="A40-5a-n0B" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="O6H-hb-cq6"/>

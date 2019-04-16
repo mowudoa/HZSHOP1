@@ -62,24 +62,57 @@
 
 - (IBAction)userLogin:(UIButton *)sender {
 
-    NSDictionary *dict = @{@"mobile":_phoneTextField.text,
-                          @"pwd":_passwordTexfField.text
-                          };
     
-    [CrazyNetWork CrazyRequest_Post:USER_LOGIN parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
-      
-        LOG(@"登录", dic);
+    if ([_phoneTextField.text isEqualToString:@""] || [_phoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
         
-        if (SUCCESS) {
+        [JKToast showWithText:@"手机号不可为空"];
+        
+    }else if ([CrazyFunction CrazyValidatePhoneNum:_phoneTextField.text]){
+        
+        [JKToast showWithText:@"请输入正确的手机号"];
+        
+    }else if ([_passwordTexfField.text isEqualToString:@""] || [_passwordTexfField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        
+        [JKToast showWithText:@"请输入密码"];
+        
+    }else{
+    
+        NSDictionary *dict = @{@"mobile":_phoneTextField.text,
+                               @"pwd":_passwordTexfField.text
+                               };
+        
+        [CrazyNetWork CrazyRequest_Post:USER_LOGIN parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
             
-        }else{
+            LOG(@"登录", dic);
             
-        }
+            if (SUCCESS) {
+               
+                [JKToast showWithText:dic[@"message"]];
+                
+                [USER_DEFAULT setBool:YES forKey:@"isLogin"];
+                
+                [USER_DEFAULT setObject:dic[@"data"][@"openid"] forKey:@"user_id"];
+                
+                [USER_DEFAULT synchronize];
+                
+                sleep(2);
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+            }else{
+              
+                [JKToast showWithText:dic[@"message"]];
+
+            }
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+            
+        }];
         
-    } fail:^(NSError *error, NSString *url, NSString *Json) {
-        
-        
-    }];
+    }
+    
+   
 }
 - (IBAction)userRegister:(UIButton *)sender {
 

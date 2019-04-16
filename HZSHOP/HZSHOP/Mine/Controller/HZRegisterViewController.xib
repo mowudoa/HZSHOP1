@@ -12,8 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HZRegisterViewController">
             <connections>
+                <outlet property="codeTextField" destination="mST-Bf-yp6" id="DTZ-p2-BVD"/>
                 <outlet property="getCodeButton" destination="30C-pj-BMX" id="bcb-mL-rCw"/>
+                <outlet property="passWordSecondTextField" destination="axx-6D-VcY" id="Z1E-DC-8fr"/>
+                <outlet property="passWordTextField" destination="GsN-Nm-iJt" id="FU9-81-Da2"/>
                 <outlet property="registerButton" destination="NCV-PK-5fL" id="ZMd-bp-IRg"/>
+                <outlet property="userPhoneTextField" destination="bmA-LO-gtF" id="MsF-Ed-pYg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -242,6 +246,9 @@
                     <state key="normal" title="点击注册">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="userRegister:" destination="-1" eventType="touchUpInside" id="1hx-Bf-ONd"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>

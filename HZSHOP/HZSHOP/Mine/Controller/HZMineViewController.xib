@@ -12,8 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HZMineViewController">
             <connections>
+                <outlet property="balanceMoney" destination="VV1-gl-zhK" id="MKO-l9-aDY"/>
                 <outlet property="bgScrollView" destination="QCt-XV-FCS" id="ure-Oc-OS9"/>
                 <outlet property="bgView" destination="x0z-oN-UY1" id="t6r-zX-dkK"/>
+                <outlet property="integral" destination="rry-bw-QNf" id="KgB-Cu-cPO"/>
                 <outlet property="rechargeButton" destination="llS-Su-0dJ" id="5jf-O0-ZaQ"/>
                 <outlet property="userIcon" destination="Bkg-BC-sBp" id="I9D-eX-zsv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

@@ -6,6 +6,9 @@
 // 弱引用
 #define MJWeakSelf __weak typeof(self) weakSelf = self;
 
+//
+#define MJStrongSelf             __strong typeof(weakSelf) strongSelf = weakSelf;
+
 // 日志输出
 #ifdef DEBUG
 #define MJRefreshLog(...) NSLog(__VA_ARGS__)

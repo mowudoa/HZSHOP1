@@ -151,7 +151,7 @@ static CrazyFunction *function = nil;
 //手机号码
 +(BOOL)CrazyValidatePhoneNum:(NSString *)str
 {
-    NSString *regex = @"1[0-9]{10}";
+    NSString *regex = @"1[0-9]{9}";
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     

@@ -75,6 +75,8 @@
 
 #define BOTTOM_SAFEAREA (IPHONEX_Y_N ? 34:0)//底部安全距离
 
+#define USER_DEFAULT [NSUserDefaults standardUserDefaults]  //实例化
+
 
 //打印请求结果
 #define MyDeBug
@@ -91,8 +93,13 @@
 
 
 //------------------接口------------
+
+#define USER_ID             @"openid"//user_id
+
 #define USER_REGISTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=account.register"//注册
 
 #define USER_LOGIN          @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=account.login"//登录
+
+#define MEMBER_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.userIndex"//会员中心
 
 #endif //  HZPrefixHeader.pch

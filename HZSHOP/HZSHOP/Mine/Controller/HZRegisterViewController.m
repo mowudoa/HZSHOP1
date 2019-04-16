@@ -11,6 +11,10 @@
 @interface HZRegisterViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UITextField *userPhoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passWordSecondTextField;
 
 @end
 
@@ -39,12 +43,64 @@
 
     }
     
-    
     [WYFTools viewLayer:3 withView:_getCodeButton];
     
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor blackColor] withView:_getCodeButton];
     
     [WYFTools viewLayer:5 withView:_registerButton];
+    
+}
+#pragma mark 用户注册
+- (IBAction)userRegister:(UIButton *)sender {
+
+    if ([_userPhoneTextField.text isEqualToString:@""] || [_userPhoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        
+        [JKToast showWithText:@"手机号不可为空"];
+        
+    }else if ([CrazyFunction CrazyValidatePhoneNum:_userPhoneTextField.text]){
+        
+        [JKToast showWithText:@"请输入正确的手机号"];
+
+    }else if ([_passWordTextField.text isEqualToString:@""] || [_passWordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        
+        [JKToast showWithText:@"请输入密码"];
+        
+    }else if ([_passWordSecondTextField.text isEqualToString:@""] || [_passWordSecondTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        
+        [JKToast showWithText:@"请输入确认密码"];
+        
+    }else if (![_passWordTextField.text isEqualToString:_passWordSecondTextField.text]){
+        
+        [JKToast showWithText:@"两次密码输入不一致"];
+        
+    }else{
+        
+        NSDictionary *dict = @{@"mobile":_userPhoneTextField.text,
+                               @"pwd":_passWordTextField.text
+                               };
+        
+        [CrazyNetWork CrazyRequest_Post:USER_REGISTER parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+            
+            LOG(@"注册", dic);
+            
+            if (SUCCESS) {
+                
+                [JKToast showWithText:dic[@"message"]];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }else{
+               
+                [JKToast showWithText:dic[@"message"]];
+
+            }
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+            
+        }];
+        
+    }
     
 }
 

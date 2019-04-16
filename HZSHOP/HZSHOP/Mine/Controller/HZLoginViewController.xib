@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HZLoginViewController">
             <connections>
                 <outlet property="loginButton" destination="NQH-mX-gzA" id="KVG-Pi-q7d"/>
+                <outlet property="passwordTexfField" destination="fgf-lc-GJ4" id="Hkx-8F-Oy5"/>
                 <outlet property="phoneTextField" destination="WOP-59-ao9" id="Uqw-XT-Bwi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -74,7 +75,7 @@
                                     <rect key="frame" x="30" y="0.0" width="260" height="42"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

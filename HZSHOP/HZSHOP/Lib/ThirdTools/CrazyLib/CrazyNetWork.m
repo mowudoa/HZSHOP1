@@ -125,6 +125,7 @@ NSString *encrpty = @"";
         easyfly.block_fail(error,[operation.request.URL absoluteString],operation.responseString);
         
         [CrazyNetWork CrazyHiddenHUD];
+        
     }];
     
 }
