@@ -71,6 +71,11 @@
 
 #define FAILURE     [[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"400"]
 
+#define IPHONEX_Y_N  (SCREEN_STATUSRECT == 44)//是否为iPhone X
+
+#define BOTTOM_SAFEAREA (IPHONEX_Y_N ? 34:0)//底部安全距离
+
+
 //打印请求结果
 #define MyDeBug
 

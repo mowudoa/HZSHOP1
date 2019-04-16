@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		713D13D42261B6690094A259 /* HZCouponListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 713D13D22261B6690094A259 /* HZCouponListTableViewCell.m */; };
+		713D13D52261B6690094A259 /* HZCouponListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 713D13D32261B6690094A259 /* HZCouponListTableViewCell.xib */; };
+		713D13D92261CA870094A259 /* HZCouponListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 713D13D72261CA870094A259 /* HZCouponListViewController.m */; };
+		713D13DA2261CA870094A259 /* HZCouponListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 713D13D82261CA870094A259 /* HZCouponListViewController.xib */; };
+		713D13DD2261CB8E0094A259 /* HZcouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 713D13DC2261CB8E0094A259 /* HZcouponModel.m */; };
+		713D13E12261D3200094A259 /* HZMyCouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 713D13DF2261D3200094A259 /* HZMyCouponsViewController.m */; };
+		713D13E22261D3200094A259 /* HZMyCouponsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 713D13E02261D3200094A259 /* HZMyCouponsViewController.xib */; };
 		7141881B22603B9B00ED7987 /* HZGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7141881922603B9B00ED7987 /* HZGoodsDetailViewController.m */; };
 		7141881C22603B9B00ED7987 /* HZGoodsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7141881A22603B9B00ED7987 /* HZGoodsDetailViewController.xib */; };
 		714188202260778100ED7987 /* HZGoodsInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7141881E2260778100ED7987 /* HZGoodsInfoTableViewCell.m */; };
@@ -259,6 +266,18 @@
 		7174292A225DC75400DDDBCC /* HZNewBuildAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71742928225DC75400DDDBCC /* HZNewBuildAddressViewController.xib */; };
 		7174292E225DD44600DDDBCC /* HZAddressListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7174292C225DD44600DDDBCC /* HZAddressListTableViewCell.m */; };
 		7174292F225DD44600DDDBCC /* HZAddressListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7174292D225DD44600DDDBCC /* HZAddressListTableViewCell.xib */; };
+		718CED0B226429EB00238FE5 /* HZCartOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED09226429EB00238FE5 /* HZCartOrderViewController.m */; };
+		718CED0C226429EB00238FE5 /* HZCartOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED0A226429EB00238FE5 /* HZCartOrderViewController.xib */; };
+		718CED102264342700238FE5 /* HZLeaveMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED0E2264342700238FE5 /* HZLeaveMessageTableViewCell.m */; };
+		718CED112264342700238FE5 /* HZLeaveMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED0F2264342700238FE5 /* HZLeaveMessageTableViewCell.xib */; };
+		718CED15226434FD00238FE5 /* HZCouPonSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED13226434FD00238FE5 /* HZCouPonSelectTableViewCell.m */; };
+		718CED16226434FD00238FE5 /* HZCouPonSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED14226434FD00238FE5 /* HZCouPonSelectTableViewCell.xib */; };
+		718CED1A226435B000238FE5 /* HZGoodsPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED18226435B000238FE5 /* HZGoodsPriceTableViewCell.m */; };
+		718CED1B226435B000238FE5 /* HZGoodsPriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED19226435B000238FE5 /* HZGoodsPriceTableViewCell.xib */; };
+		718CED1F226458EB00238FE5 /* HZAddressSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED1D226458EB00238FE5 /* HZAddressSelectTableViewCell.m */; };
+		718CED20226458EB00238FE5 /* HZAddressSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED1E226458EB00238FE5 /* HZAddressSelectTableViewCell.xib */; };
+		718CED24226478A600238FE5 /* HZCartOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED22226478A600238FE5 /* HZCartOrderTableViewCell.m */; };
+		718CED25226478A600238FE5 /* HZCartOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED23226478A600238FE5 /* HZCartOrderTableViewCell.xib */; };
 		71EDD06D225DDE1600220105 /* HZAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD06C225DDE1600220105 /* HZAddressModel.m */; };
 		71EDD082225DE31F00220105 /* BRStringPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD071225DE31F00220105 /* BRStringPickerView.m */; };
 		71EDD083225DE31F00220105 /* NSDate+BRPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD076225DE31F00220105 /* NSDate+BRPickerView.m */; };
@@ -290,6 +309,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		713D13D12261B6690094A259 /* HZCouponListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCouponListTableViewCell.h; sourceTree = "<group>"; };
+		713D13D22261B6690094A259 /* HZCouponListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCouponListTableViewCell.m; sourceTree = "<group>"; };
+		713D13D32261B6690094A259 /* HZCouponListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCouponListTableViewCell.xib; sourceTree = "<group>"; };
+		713D13D62261CA870094A259 /* HZCouponListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCouponListViewController.h; sourceTree = "<group>"; };
+		713D13D72261CA870094A259 /* HZCouponListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCouponListViewController.m; sourceTree = "<group>"; };
+		713D13D82261CA870094A259 /* HZCouponListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCouponListViewController.xib; sourceTree = "<group>"; };
+		713D13DB2261CB8E0094A259 /* HZcouponModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZcouponModel.h; sourceTree = "<group>"; };
+		713D13DC2261CB8E0094A259 /* HZcouponModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZcouponModel.m; sourceTree = "<group>"; };
+		713D13DE2261D3200094A259 /* HZMyCouponsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZMyCouponsViewController.h; sourceTree = "<group>"; };
+		713D13DF2261D3200094A259 /* HZMyCouponsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZMyCouponsViewController.m; sourceTree = "<group>"; };
+		713D13E02261D3200094A259 /* HZMyCouponsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZMyCouponsViewController.xib; sourceTree = "<group>"; };
 		7141881822603B9B00ED7987 /* HZGoodsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZGoodsDetailViewController.h; sourceTree = "<group>"; };
 		7141881922603B9B00ED7987 /* HZGoodsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZGoodsDetailViewController.m; sourceTree = "<group>"; };
 		7141881A22603B9B00ED7987 /* HZGoodsDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZGoodsDetailViewController.xib; sourceTree = "<group>"; };
@@ -798,6 +828,24 @@
 		7174292B225DD44600DDDBCC /* HZAddressListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressListTableViewCell.h; sourceTree = "<group>"; };
 		7174292C225DD44600DDDBCC /* HZAddressListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressListTableViewCell.m; sourceTree = "<group>"; };
 		7174292D225DD44600DDDBCC /* HZAddressListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZAddressListTableViewCell.xib; sourceTree = "<group>"; };
+		718CED08226429EB00238FE5 /* HZCartOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCartOrderViewController.h; sourceTree = "<group>"; };
+		718CED09226429EB00238FE5 /* HZCartOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCartOrderViewController.m; sourceTree = "<group>"; };
+		718CED0A226429EB00238FE5 /* HZCartOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCartOrderViewController.xib; sourceTree = "<group>"; };
+		718CED0D2264342700238FE5 /* HZLeaveMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZLeaveMessageTableViewCell.h; sourceTree = "<group>"; };
+		718CED0E2264342700238FE5 /* HZLeaveMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZLeaveMessageTableViewCell.m; sourceTree = "<group>"; };
+		718CED0F2264342700238FE5 /* HZLeaveMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZLeaveMessageTableViewCell.xib; sourceTree = "<group>"; };
+		718CED12226434FD00238FE5 /* HZCouPonSelectTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCouPonSelectTableViewCell.h; sourceTree = "<group>"; };
+		718CED13226434FD00238FE5 /* HZCouPonSelectTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCouPonSelectTableViewCell.m; sourceTree = "<group>"; };
+		718CED14226434FD00238FE5 /* HZCouPonSelectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCouPonSelectTableViewCell.xib; sourceTree = "<group>"; };
+		718CED17226435B000238FE5 /* HZGoodsPriceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZGoodsPriceTableViewCell.h; sourceTree = "<group>"; };
+		718CED18226435B000238FE5 /* HZGoodsPriceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZGoodsPriceTableViewCell.m; sourceTree = "<group>"; };
+		718CED19226435B000238FE5 /* HZGoodsPriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZGoodsPriceTableViewCell.xib; sourceTree = "<group>"; };
+		718CED1C226458EB00238FE5 /* HZAddressSelectTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressSelectTableViewCell.h; sourceTree = "<group>"; };
+		718CED1D226458EB00238FE5 /* HZAddressSelectTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressSelectTableViewCell.m; sourceTree = "<group>"; };
+		718CED1E226458EB00238FE5 /* HZAddressSelectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZAddressSelectTableViewCell.xib; sourceTree = "<group>"; };
+		718CED21226478A600238FE5 /* HZCartOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCartOrderTableViewCell.h; sourceTree = "<group>"; };
+		718CED22226478A600238FE5 /* HZCartOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCartOrderTableViewCell.m; sourceTree = "<group>"; };
+		718CED23226478A600238FE5 /* HZCartOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCartOrderTableViewCell.xib; sourceTree = "<group>"; };
 		71EDD06B225DDE1600220105 /* HZAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressModel.h; sourceTree = "<group>"; };
 		71EDD06C225DDE1600220105 /* HZAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressModel.m; sourceTree = "<group>"; };
 		71EDD070225DE31F00220105 /* BRStringPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringPickerView.h; sourceTree = "<group>"; };
@@ -917,6 +965,9 @@
 				7142A6D0225C8D7800B15D8C /* HZCartViewController.h */,
 				7142A6D1225C8D7800B15D8C /* HZCartViewController.m */,
 				7142A6D2225C8D7800B15D8C /* HZCartViewController.xib */,
+				718CED08226429EB00238FE5 /* HZCartOrderViewController.h */,
+				718CED09226429EB00238FE5 /* HZCartOrderViewController.m */,
+				718CED0A226429EB00238FE5 /* HZCartOrderViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -936,6 +987,21 @@
 				71EDD089225DE99200220105 /* HZCartTableViewCell.h */,
 				71EDD08A225DE99200220105 /* HZCartTableViewCell.m */,
 				71EDD08B225DE99200220105 /* HZCartTableViewCell.xib */,
+				718CED0D2264342700238FE5 /* HZLeaveMessageTableViewCell.h */,
+				718CED0E2264342700238FE5 /* HZLeaveMessageTableViewCell.m */,
+				718CED0F2264342700238FE5 /* HZLeaveMessageTableViewCell.xib */,
+				718CED12226434FD00238FE5 /* HZCouPonSelectTableViewCell.h */,
+				718CED13226434FD00238FE5 /* HZCouPonSelectTableViewCell.m */,
+				718CED14226434FD00238FE5 /* HZCouPonSelectTableViewCell.xib */,
+				718CED17226435B000238FE5 /* HZGoodsPriceTableViewCell.h */,
+				718CED18226435B000238FE5 /* HZGoodsPriceTableViewCell.m */,
+				718CED19226435B000238FE5 /* HZGoodsPriceTableViewCell.xib */,
+				718CED1C226458EB00238FE5 /* HZAddressSelectTableViewCell.h */,
+				718CED1D226458EB00238FE5 /* HZAddressSelectTableViewCell.m */,
+				718CED1E226458EB00238FE5 /* HZAddressSelectTableViewCell.xib */,
+				718CED21226478A600238FE5 /* HZCartOrderTableViewCell.h */,
+				718CED22226478A600238FE5 /* HZCartOrderTableViewCell.m */,
+				718CED23226478A600238FE5 /* HZCartOrderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1054,6 +1120,12 @@
 				71418831226096CB00ED7987 /* HZRegisterViewController.h */,
 				71418832226096CB00ED7987 /* HZRegisterViewController.m */,
 				71418833226096CB00ED7987 /* HZRegisterViewController.xib */,
+				713D13D62261CA870094A259 /* HZCouponListViewController.h */,
+				713D13D72261CA870094A259 /* HZCouponListViewController.m */,
+				713D13D82261CA870094A259 /* HZCouponListViewController.xib */,
+				713D13DE2261D3200094A259 /* HZMyCouponsViewController.h */,
+				713D13DF2261D3200094A259 /* HZMyCouponsViewController.m */,
+				713D13E02261D3200094A259 /* HZMyCouponsViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1065,6 +1137,8 @@
 				71EDD06C225DDE1600220105 /* HZAddressModel.m */,
 				714F34F9225EEE4D004685A4 /* HZGoodsModel.h */,
 				714F34FA225EEE4D004685A4 /* HZGoodsModel.m */,
+				713D13DB2261CB8E0094A259 /* HZcouponModel.h */,
+				713D13DC2261CB8E0094A259 /* HZcouponModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1078,6 +1152,9 @@
 				714F34F4225EED2E004685A4 /* HZMyFollowTableViewCell.h */,
 				714F34F5225EED2E004685A4 /* HZMyFollowTableViewCell.m */,
 				714F34F6225EED2E004685A4 /* HZMyFollowTableViewCell.xib */,
+				713D13D12261B6690094A259 /* HZCouponListTableViewCell.h */,
+				713D13D22261B6690094A259 /* HZCouponListTableViewCell.m */,
+				713D13D32261B6690094A259 /* HZCouponListTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2226,13 +2303,17 @@
 			files = (
 				714F34F3225EECB2004685A4 /* HZMyFollowGoodsViewController.xib in Resources */,
 				7142A64B225C8D1F00B15D8C /* SVProgressHUD.bundle in Resources */,
+				713D13DA2261CA870094A259 /* HZCouponListViewController.xib in Resources */,
+				718CED20226458EB00238FE5 /* HZAddressSelectTableViewCell.xib in Resources */,
 				7142A5FB225C8D1F00B15D8C /* README.txt in Resources */,
 				7142A688225C8D1F00B15D8C /* BlocksKit-Info.plist in Resources */,
 				71EDD08D225DE99200220105 /* HZCartTableViewCell.xib in Resources */,
 				714188212260778100ED7987 /* HZGoodsInfoTableViewCell.xib in Resources */,
+				718CED25226478A600238FE5 /* HZCartOrderTableViewCell.xib in Resources */,
 				71742925225DC5F100DDDBCC /* HZAddressListViewController.xib in Resources */,
 				7142A600225C8D1F00B15D8C /* SWQRCode.bundle in Resources */,
 				71EDD087225DE31F00220105 /* BRPickerView.bundle in Resources */,
+				718CED16226434FD00238FE5 /* HZCouPonSelectTableViewCell.xib in Resources */,
 				714F3509225F0A04004685A4 /* HZMyBrowseViewController.xib in Resources */,
 				7142A6D4225C8D7800B15D8C /* HZCartViewController.xib in Resources */,
 				7174292F225DD44600DDDBCC /* HZAddressListTableViewCell.xib in Resources */,
@@ -2240,6 +2321,7 @@
 				7142A625225C8D1F00B15D8C /* MJRefresh.bundle in Resources */,
 				714188262260814900ED7987 /* HZSelectNumTableViewCell.xib in Resources */,
 				7141882B226081E100ED7987 /* HZjumbShopTableViewCell.xib in Resources */,
+				718CED112264342700238FE5 /* HZLeaveMessageTableViewCell.xib in Resources */,
 				71418830226083D900ED7987 /* HZLoginViewController.xib in Resources */,
 				714F3504225F07E9004685A4 /* HZDistributionCenterViewController.xib in Resources */,
 				7142A6D9225C8D8800B15D8C /* HZCategoryViewController.xib in Resources */,
@@ -2247,12 +2329,16 @@
 				7142A609225C8D1F00B15D8C /* LICENSE in Resources */,
 				7141881C22603B9B00ED7987 /* HZGoodsDetailViewController.xib in Resources */,
 				7174292A225DC75400DDDBCC /* HZNewBuildAddressViewController.xib in Resources */,
+				718CED1B226435B000238FE5 /* HZGoodsPriceTableViewCell.xib in Resources */,
 				7142A615225C8D1F00B15D8C /* glass.wav in Resources */,
 				7142A661225C8D1F00B15D8C /* IQKeyboardManager.bundle in Resources */,
 				7142A3C8225C8AF200B15D8C /* Assets.xcassets in Resources */,
 				714F34F8225EED2E004685A4 /* HZMyFollowTableViewCell.xib in Resources */,
+				713D13E22261D3200094A259 /* HZMyCouponsViewController.xib in Resources */,
 				7142A6CA225C8D5200B15D8C /* HZHomeViewController.xib in Resources */,
+				718CED0C226429EB00238FE5 /* HZCartOrderViewController.xib in Resources */,
 				714F350E225F31B0004685A4 /* HZCommissionDetailsViewController.xib in Resources */,
+				713D13D52261B6690094A259 /* HZCouponListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2333,6 +2419,7 @@
 				7142A634225C8D1F00B15D8C /* MJRefreshAutoFooter.m in Sources */,
 				7142A68C225C8D1F00B15D8C /* NSObject+BKBlockObservation.m in Sources */,
 				7142A67E225C8D1F00B15D8C /* RDVTabBarItem.m in Sources */,
+				718CED1A226435B000238FE5 /* HZGoodsPriceTableViewCell.m in Sources */,
 				7142A63C225C8D1F00B15D8C /* CrazyViewController.m in Sources */,
 				7142A6AE225C8D1F00B15D8C /* ASIFormDataRequest.m in Sources */,
 				7142A653225C8D1F00B15D8C /* CrazyAutoLayout.m in Sources */,
@@ -2341,6 +2428,7 @@
 				7142A686225C8D1F00B15D8C /* JKAlert.m in Sources */,
 				7142A698225C8D1F00B15D8C /* NSMutableSet+BlocksKit.m in Sources */,
 				7142A6A5225C8D1F00B15D8C /* MFMessageComposeViewController+BlocksKit.m in Sources */,
+				718CED24226478A600238FE5 /* HZCartOrderTableViewCell.m in Sources */,
 				7142A663225C8D1F00B15D8C /* IQNSArray+Sort.m in Sources */,
 				7142A651225C8D1F00B15D8C /* CrazyDB.m in Sources */,
 				7142A697225C8D1F00B15D8C /* NSMutableDictionary+BlocksKit.m in Sources */,
@@ -2368,6 +2456,7 @@
 				7142A656225C8D1F00B15D8C /* animationFunction.m in Sources */,
 				7142A671225C8D1F00B15D8C /* AFNetworkReachabilityManager.m in Sources */,
 				7142A6C1225C8D1F00B15D8C /* NSData+ImageContentType.m in Sources */,
+				718CED102264342700238FE5 /* HZLeaveMessageTableViewCell.m in Sources */,
 				7142A66F225C8D1F00B15D8C /* AFURLRequestSerialization.m in Sources */,
 				7142A66D225C8D1F00B15D8C /* AFURLSessionManager.m in Sources */,
 				7142A624225C8D1F00B15D8C /* MJRefreshConst.m in Sources */,
@@ -2391,6 +2480,7 @@
 				7142A65B225C8D1F00B15D8C /* IQTextView.m in Sources */,
 				7142A64A225C8D1F00B15D8C /* SVIndefiniteAnimatedView.m in Sources */,
 				7142A654225C8D1F00B15D8C /* CrazyAlumWithCamera.m in Sources */,
+				713D13D92261CA870094A259 /* HZCouponListViewController.m in Sources */,
 				714F3503225F07E9004685A4 /* HZDistributionCenterViewController.m in Sources */,
 				7142A6D3225C8D7800B15D8C /* HZCartViewController.m in Sources */,
 				7142A610225C8D1F00B15D8C /* MJFoundation.m in Sources */,
@@ -2406,6 +2496,7 @@
 				7142A646225C8D1F00B15D8C /* MASViewConstraint.m in Sources */,
 				7142A641225C8D1F00B15D8C /* MASLayoutConstraint.m in Sources */,
 				7142A684225C8D1F00B15D8C /* createDB.m in Sources */,
+				718CED1F226458EB00238FE5 /* HZAddressSelectTableViewCell.m in Sources */,
 				7142A605225C8D1F00B15D8C /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				7142A68D225C8D1F00B15D8C /* NSTimer+BlocksKit.m in Sources */,
 				7142A601225C8D1F00B15D8C /* SWScannerView.m in Sources */,
@@ -2429,9 +2520,11 @@
 				7142A652225C8D1F00B15D8C /* CrazyLocation.m in Sources */,
 				7142A692225C8D1F00B15D8C /* NSObject+BKAssociatedObjects.m in Sources */,
 				7142A685225C8D1F00B15D8C /* NullSafe.m in Sources */,
+				713D13DD2261CB8E0094A259 /* HZcouponModel.m in Sources */,
 				7142A628225C8D1F00B15D8C /* MJRefreshBackGifFooter.m in Sources */,
 				7142A69F225C8D1F00B15D8C /* UIPopoverController+BlocksKit.m in Sources */,
 				7142A6A6225C8D1F00B15D8C /* A2BlockInvocation.m in Sources */,
+				713D13D42261B6690094A259 /* HZCouponListTableViewCell.m in Sources */,
 				7142A65D225C8D1F00B15D8C /* IQTitleBarButtonItem.m in Sources */,
 				714F350D225F31B0004685A4 /* HZCommissionDetailsViewController.m in Sources */,
 				7142A632225C8D1F00B15D8C /* MJRefreshHeader.m in Sources */,
@@ -2464,6 +2557,7 @@
 				7142A6A7225C8D1F00B15D8C /* NSCache+BlocksKit.m in Sources */,
 				7142A6C0225C8D1F00B15D8C /* SDWebImageDownloaderOperation.m in Sources */,
 				7142A67A225C8D1F00B15D8C /* UIWebView+AFNetworking.m in Sources */,
+				718CED15226434FD00238FE5 /* HZCouPonSelectTableViewCell.m in Sources */,
 				7142A60B225C8D1F00B15D8C /* MJProperty.m in Sources */,
 				7142A635225C8D1F00B15D8C /* MJRefreshComponent.m in Sources */,
 				7142A629225C8D1F00B15D8C /* MJRefreshBackStateFooter.m in Sources */,
@@ -2474,6 +2568,7 @@
 				7142A687225C8D1F00B15D8C /* JKToast.m in Sources */,
 				7142A6BC225C8D1F00B15D8C /* UIImage+MultiFormat.m in Sources */,
 				7142A67D225C8D1F00B15D8C /* RDVTabBarController.m in Sources */,
+				713D13E12261D3200094A259 /* HZMyCouponsViewController.m in Sources */,
 				714188252260814900ED7987 /* HZSelectNumTableViewCell.m in Sources */,
 				7142A64F225C8D1F00B15D8C /* CrazyRegular.m in Sources */,
 				7142A676225C8D1F00B15D8C /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -2494,6 +2589,7 @@
 				7142A62D225C8D1F00B15D8C /* MJRefreshAutoNormalFooter.m in Sources */,
 				7142A64D225C8D1F00B15D8C /* easyflyAnimation.m in Sources */,
 				7142A659225C8D1F00B15D8C /* TMMemoryCache.m in Sources */,
+				718CED0B226429EB00238FE5 /* HZCartOrderViewController.m in Sources */,
 				7142A64E225C8D1F00B15D8C /* CrazyScreenShot.m in Sources */,
 				7142A411225C8C3F00B15D8C /* XTBaseViewController.m in Sources */,
 				7142A6B4225C8D1F00B15D8C /* UITableView+SDAutoTableViewCellHeight.m in Sources */,

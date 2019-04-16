@@ -9,10 +9,11 @@
 #import "HZMineViewController.h"
 #import "HZCartViewController.h"
 #import "HZLoginViewController.h"
+#import "HZMyCouponsViewController.h"
 #import "HZMyBrowseViewController.h"
+#import "HZCouponListViewController.h"
 #import "HZAddressListViewController.h"
 #import "HZMyFollowGoodsViewController.h"
-
 @interface HZMineViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;//背景scrollview
 
@@ -42,6 +43,22 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
     
     [self.userIcon addGestureRecognizer:tap];
+    
+}
+#pragma mark 优惠前领取中心
+- (IBAction)couponList:(UIButton *)sender {
+
+    HZCouponListViewController *coupon = [[HZCouponListViewController alloc] init];
+    
+    [self.navigationController pushViewController:coupon animated:YES];
+    
+}
+#pragma mark 我的优惠券
+- (IBAction)myCoupon:(UIButton *)sender {
+
+    HZMyCouponsViewController *myCoupon = [[HZMyCouponsViewController alloc] init];
+    
+    [self.navigationController pushViewController:myCoupon animated:YES];
     
 }
 #pragma mark 收货地址
@@ -80,12 +97,16 @@
     [self.navigationController pushViewController:browse animated:YES];
     
 }
-#pragma mark 注册
+#pragma mark 登录
 -(void)tapUserIcon:(UITapGestureRecognizer *)tap
 {
     HZLoginViewController *login = [[HZLoginViewController alloc] init];
     
-    [self.navigationController pushViewController:login animated:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
+  //  [self.navigationController pushViewController:login animated:YES];
     
 }
 

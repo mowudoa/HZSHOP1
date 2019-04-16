@@ -9,6 +9,8 @@
 #import "HZRegisterViewController.h"
 
 @interface HZRegisterViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @end
 
@@ -17,6 +19,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    [self initUI];
+    
+}
+-(void)initUI
+{
+    if (_registerOrChangePass == userRegisterType) {
+        
+        self.navigationItem.title = @"注册";
+
+        [_registerButton setTitle:@"立即注册" forState:UIControlStateNormal];
+        
+    }else if (_registerOrChangePass == forgetLoginPassWordType){
+       
+        self.navigationItem.title = @"忘记密码";
+
+        [_registerButton setTitle:@"立即修改" forState:UIControlStateNormal];
+
+    }
+    
+    
+    [WYFTools viewLayer:3 withView:_getCodeButton];
+    
+    [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor blackColor] withView:_getCodeButton];
+    
+    [WYFTools viewLayer:5 withView:_registerButton];
+    
 }
 
 /*

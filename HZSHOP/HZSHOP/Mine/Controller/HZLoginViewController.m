@@ -7,6 +7,7 @@
 //
 
 #import "HZLoginViewController.h"
+#import "HZRegisterViewController.h"
 
 @interface HZLoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
@@ -22,14 +23,41 @@
     // Do any additional setup after loading the view from its nib.
     
     [self initUI];
-    
+
 }
 -(void)initUI
 {
-    self.navigationItem.title = @"注册";
     
     [WYFTools viewLayer:5 withView:_loginButton];
     
+}
+-(void)initBackButton
+{
+    UIButton* backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 25, 25)];
+    
+    backView.userInteractionEnabled = YES;
+    
+    backView.backgroundColor = [UIColor clearColor];
+    
+    [backBtn setFrame:CGRectMake(0, 0, 25, 25)];
+    
+    [backBtn addTarget:self action:@selector(backBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [backBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    
+    [backView addSubview:backBtn];
+    
+    UIBarButtonItem* im = [[UIBarButtonItem alloc]initWithCustomView:backView];
+    
+    self.navigationItem.leftBarButtonItem = im;
+}
+-(void)backBtn:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)userLogin:(UIButton *)sender {
@@ -40,7 +68,7 @@
     
     [CrazyNetWork CrazyRequest_Post:USER_LOGIN parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
       
-        LOG(@"注册", dic);
+        LOG(@"登录", dic);
         
         if (SUCCESS) {
             
@@ -52,6 +80,42 @@
         
         
     }];
+}
+- (IBAction)userRegister:(UIButton *)sender {
+
+    HZRegisterViewController *userRegister = [[HZRegisterViewController alloc] init];
+    
+    userRegister.registerOrChangePass = userRegisterType;
+    
+    [self.navigationController pushViewController:userRegister animated:YES];
+    
+}
+- (IBAction)userForgetPassWord:(UIButton *)sender {
+
+    
+    HZRegisterViewController *userRegister = [[HZRegisterViewController alloc] init];
+    
+    userRegister.registerOrChangePass = forgetLoginPassWordType;
+    
+    [self.navigationController pushViewController:userRegister animated:YES];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //去掉导航栏下划线,达到纯present的效果
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    [self.navigationController.navigationBar setShadowImage:nil];
+    
 }
 /*
 #pragma mark - Navigation

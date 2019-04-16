@@ -10,6 +10,8 @@
 
 @interface XTBaseBackViewController : UIViewController
 
+-(void)initBackButton;
+
 -(void)backBtn:(UIButton*)sender;
 
 @end
