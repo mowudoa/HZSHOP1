@@ -9,11 +9,13 @@
 #import "HZMineViewController.h"
 #import "HZCartViewController.h"
 #import "HZLoginViewController.h"
-#import "HZMyCouponsViewController.h"
+#import "HZMyOrderViewController.h"
 #import "HZMyBrowseViewController.h"
+#import "HZMyCouponsViewController.h"
 #import "HZCouponListViewController.h"
 #import "HZAddressListViewController.h"
 #import "HZMyFollowGoodsViewController.h"
+
 @interface HZMineViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;//背景scrollview
 
@@ -49,6 +51,41 @@
     [self.userIcon addGestureRecognizer:tap];
     
 }
+
+#pragma mark 我的订单
+- (IBAction)myOrderClick:(UIButton *)sender {
+
+    HZMyOrderViewController *order = [[HZMyOrderViewController alloc] init];
+    
+    if (sender.tag == 300) {
+     
+        order.orderType = WXMyOrderAll;
+        
+    }else if (sender.tag == 301){
+        
+        order.orderType = WXMyOrderUnPay;
+        
+    }else if (sender.tag == 302){
+        
+        order.orderType = WXMyOrderUnSend;
+
+    }else if (sender.tag == 303){
+        
+        order.orderType = WXMyOrderUnReceive;
+
+    }else if (sender.tag == 304){
+      
+        order.orderType = WXMyOrderComplete;
+
+    }else{
+       
+        
+    }
+    
+    [self.navigationController pushViewController:order animated:YES];
+    
+}
+
 #pragma mark 优惠前领取中心
 - (IBAction)couponList:(UIButton *)sender {
 

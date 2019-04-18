@@ -10,7 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum {
+    tableViewType,
+    collectionViewType
+}goodsListType;
+
 @interface HZAllGoodsViewController : XTBaseBackViewController
+
+@property(nonatomic) goodsListType listType;
 
 @end
 

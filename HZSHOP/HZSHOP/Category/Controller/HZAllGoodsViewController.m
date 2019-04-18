@@ -9,7 +9,7 @@
 #import "HZAllGoodsViewController.h"
 #import "HZGoodsCollectionViewCell.h"
 #import "HZGoodsDetailViewController.h"
-
+#import "HZTableCollectionViewCell.h"
 @interface HZAllGoodsViewController ()<
 UISearchBarDelegate,
 UICollectionViewDelegate,
@@ -21,6 +21,8 @@ UICollectionViewDelegateFlowLayout
 @property(nonatomic,strong) UISearchBar *searchBar;
 
 @property(nonatomic,strong) UIView *searchView;
+
+@property(strong,nonatomic)UIBarButtonItem* rightItem;
 
 @end
 
@@ -41,6 +43,10 @@ UICollectionViewDelegateFlowLayout
  
     self.navigationItem.titleView = self.searchView;
     
+    self.navigationItem.rightBarButtonItem = self.rightItem;
+    
+    _listType = collectionViewType;
+    
 }
 
 -(void)registeCell
@@ -50,13 +56,17 @@ UICollectionViewDelegateFlowLayout
     
     [_allGoodsCollectionView registerNib:cate forCellWithReuseIdentifier:@"GoodsCollectionViewCell"];
     
+    UINib* cate1 = [UINib nibWithNibName:@"HZTableCollectionViewCell" bundle:nil];
+    
+    [_allGoodsCollectionView registerNib:cate1 forCellWithReuseIdentifier:@"TableCollectionViewCell"];
+    
 }
 
 -(UIView *)searchView
 {
     if (_searchView == nil) {
         
-        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH*0.8,30)];
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH*0.75,30)];
         
         _searchView.backgroundColor = [UIColor clearColor];
         
@@ -72,7 +82,7 @@ UICollectionViewDelegateFlowLayout
 {
     if (_searchBar == nil) {
         
-        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH*0.8,30)];
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH*0.75,30)];
         
         _searchBar.searchBarStyle = UISearchBarStyleMinimal;
         
@@ -91,7 +101,72 @@ UICollectionViewDelegateFlowLayout
     return _searchBar;
     
 }
-#pragma mark UISerchBar
+
+#pragma mark rightButtonItem
+-(UIBarButtonItem*)rightItem
+{
+    if (_rightItem == nil) {
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [btn setFrame:view.frame];
+        
+        [btn setImage:[UIImage imageNamed:@"liebiao"] forState:UIControlStateNormal];
+       
+        [btn setImage:[UIImage imageNamed:@"app-liebiao"] forState:UIControlStateSelected];
+
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        [btn setTitleColor:[UIColor colorWithHexString:@"#9B9B9B"] forState:UIControlStateNormal];
+        
+        [btn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [view addSubview:btn];
+        
+        _rightItem = [[UIBarButtonItem alloc]initWithCustomView:view];
+        
+    }
+    
+    return _rightItem;
+}
+
+#pragma mark 切换商品展示方式
+-(void)rightAction:(UIButton *)sender
+{
+    
+    sender.selected = !sender.selected;
+    
+    if (sender.selected) {
+        
+        _listType = tableViewType;
+        
+    }else{
+        
+        _listType = collectionViewType;
+        
+    }
+    
+    [_allGoodsCollectionView reloadData];
+    
+}
+
+#pragma mark 商品选择排序
+- (IBAction)goodsSort:(UIButton *)sender {
+
+    for (UIView *view in sender.superview.superview.subviews) {
+        
+        ((UIButton *)[view.subviews objectAtIndex:0]).selected = NO;
+    
+    }
+ 
+    sender.selected = !sender.selected;
+    
+}
+
+
+#pragma mark UISerchBarDelagate
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"%@",searchBar.text);
@@ -107,6 +182,13 @@ UICollectionViewDelegateFlowLayout
 }
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (_listType == tableViewType) {
+        
+        HZTableCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TableCollectionViewCell" forIndexPath:indexPath];
+        
+        return cell;
+        
+    }
     
     HZGoodsCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsCollectionViewCell" forIndexPath:indexPath];
     
@@ -128,11 +210,35 @@ UICollectionViewDelegateFlowLayout
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(2, 2, 0, 2);
+    if (_listType == tableViewType) {
+        
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+        
+    }
+    
+    return UIEdgeInsetsMake(2, 2, 2, 2);
+}
+
+// 两行cell之间的间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+
+    if (_listType == tableViewType) {
+        
+        return 0;
+        
+    }
+    
+    return 5;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (_listType == tableViewType) {
+        
+        return CGSizeMake(SCREEN_WIDTH, 124);
+        
+    }
     
     return CGSizeMake((_allGoodsCollectionView.width-10)/2-2, ((_allGoodsCollectionView.width-10)/2-2) + 90);
     

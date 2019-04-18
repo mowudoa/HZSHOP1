@@ -9,6 +9,7 @@
 #import "HZMyCouponsViewController.h"
 #import "HZcouponModel.h"
 #import "HZCouponListTableViewCell.h"
+#import "HZCouponDetailViewController.h"
 @interface HZMyCouponsViewController ()<
 UITableViewDelegate,
 UITableViewDataSource
@@ -154,6 +155,9 @@ UITableViewDataSource
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    HZCouponDetailViewController *detail = [[HZCouponDetailViewController alloc] init];
+    
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 

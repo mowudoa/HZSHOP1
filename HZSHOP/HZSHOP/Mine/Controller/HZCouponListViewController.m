@@ -9,6 +9,7 @@
 #import "HZCouponListViewController.h"
 #import "HZcouponModel.h"
 #import "HZCouponListTableViewCell.h"
+#import "HZCouponDetailViewController.h"
 @interface HZCouponListViewController ()<
 UITableViewDelegate,
 UITableViewDataSource
@@ -35,23 +36,61 @@ UITableViewDataSource
 -(void)initUI
 {
     self.navigationItem.title = @"优惠券领取中心";
+    
+    _couponArray = [[NSMutableArray alloc] init];
+
 }
 -(void)initData
 {
     
-    _couponArray = [[NSMutableArray alloc] init];
+    MJWeakSelf;
     
-    for (int i = 0; i < 10; i ++) {
+    [CrazyNetWork CrazyRequest_Get:COUPON_CENTER parameters:nil HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json)
+    {
         
-        HZcouponModel *model = [[HZcouponModel alloc] init];
+        LOG(@"优惠券中心", dic);
         
-        model.couponTitle = [NSString stringWithFormat:@"优惠券%d",i];
+        MJStrongSelf;
         
-        [_couponArray addObject:model];
+        if (SUCCESS) {
+           
+            NSArray *couponList = dic[@"data"][@"list"];
+            
+            for (NSDictionary *coupnDic in couponList) {
+                
+                HZcouponModel *model = [[HZcouponModel alloc] init];
+                
+                model.couponId = coupnDic[@"id"];
+                
+                model.couponTitle = coupnDic[@"couponname"];
+                
+                model.couponMoney = coupnDic[@"_backmoney"];
+                
+                model.couponLimit = coupnDic[@"title2"];
+                
+                model.couponInfo = coupnDic[@"title5"];
+                
+                model.couponNum = [coupnDic[@"last"] stringValue];
+                
+                model.couponStockNum = [coupnDic[@"total"] stringValue];
+                
+                model.couponLifeTime = coupnDic[@"title4"];
+                
+                [strongSelf.couponArray addObject:model];
+                
+            }
+            
+        }else{
+            
+            
+        }
         
-    }
-    
-    [_couponTableView reloadData];
+        [strongSelf.couponTableView reloadData];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+                               
+        
+    }];
     
 }
 -(void)registercell
@@ -79,13 +118,30 @@ UITableViewDataSource
     
     cell.couponTitle.text = [cell.couponTitle.text stringByAppendingString:model.couponTitle];
     
+    cell.couponMoney.text = [NSString stringWithFormat:@"￥%@",model.couponMoney];
+    
+    cell.couponLimit.text = model.couponLimit;
+    
+    cell.couponInfo.text = model.couponInfo;
+    
+    cell.couponStockNum.text = [NSString stringWithFormat:@"剩余%@/%@",model.couponNum,model.couponStockNum];
+    
+    cell.couponLifeTime.text = model.couponLifeTime;
+    
     return cell;
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    HZcouponModel *model = _couponArray[indexPath.row];
    
+    HZCouponDetailViewController *detail = [[HZCouponDetailViewController alloc] init];
+    
+    detail.couponId = model.couponId;
+    
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 

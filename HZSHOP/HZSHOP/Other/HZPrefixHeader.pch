@@ -102,4 +102,8 @@
 
 #define MEMBER_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.userIndex"//会员中心
 
+#define COUPON_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.couponList"//领取优惠券中心
+
+#define COUPON_DETAIL       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.coupon_detail"
+
 #endif //  HZPrefixHeader.pch

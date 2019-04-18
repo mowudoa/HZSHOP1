@@ -19,16 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="123.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OAI-ey-Het">
-                        <rect key="frame" x="16" y="18" width="90" height="88"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="OAI-ey-Het" secondAttribute="height" multiplier="44:43" id="eY5-tw-DbW"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2t-MI-uXr">
                         <rect key="frame" x="121" y="18" width="168" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Yjl-1j-Opp"/>
+                            <constraint firstAttribute="height" constant="21" id="w0l-ft-3hU"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
@@ -37,7 +31,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y100.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zM-WV-L0b">
                         <rect key="frame" x="121" y="85" width="168" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="R0H-t2-gm0"/>
+                            <constraint firstAttribute="height" constant="21" id="8ag-Bu-dfl"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.9882352941176471" green="0.3411764705882353" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,20 +47,26 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OAI-ey-Het">
+                        <rect key="frame" x="16" y="18" width="88" height="88"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="OAI-ey-Het" secondAttribute="height" multiplier="1:1" id="Jd1-v1-Ivm"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="E2t-MI-uXr" secondAttribute="trailing" constant="15" id="0DP-Fd-oOz"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="4zM-WV-L0b" secondAttribute="bottom" constant="7" id="Dhe-Wc-MHA"/>
-                    <constraint firstItem="4zM-WV-L0b" firstAttribute="leading" secondItem="OAI-ey-Het" secondAttribute="trailing" constant="15" id="HbK-xv-Xkz"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="4zM-WV-L0b" secondAttribute="trailing" constant="15" id="PNl-gW-dod"/>
-                    <constraint firstItem="E2t-MI-uXr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="USw-Be-XbB"/>
+                    <constraint firstItem="E2t-MI-uXr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="DcF-Xc-bh8"/>
+                    <constraint firstItem="OAI-ey-Het" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Kj4-ei-HhZ"/>
+                    <constraint firstItem="4zM-WV-L0b" firstAttribute="leading" secondItem="OAI-ey-Het" secondAttribute="trailing" constant="17" id="S7p-AU-SH5"/>
                     <constraint firstAttribute="trailing" secondItem="1Xd-Jm-f45" secondAttribute="trailing" id="UTx-AO-lsm"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="OAI-ey-Het" secondAttribute="bottom" constant="7" id="Uz1-zH-Nqn"/>
                     <constraint firstItem="1Xd-Jm-f45" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XMy-Zg-JG3"/>
                     <constraint firstAttribute="bottom" secondItem="1Xd-Jm-f45" secondAttribute="bottom" id="YLZ-3f-Gu4"/>
-                    <constraint firstItem="OAI-ey-Het" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cuh-Oo-kUh"/>
-                    <constraint firstItem="E2t-MI-uXr" firstAttribute="leading" secondItem="OAI-ey-Het" secondAttribute="trailing" constant="15" id="sZx-P5-oXQ"/>
-                    <constraint firstItem="OAI-ey-Het" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="sho-E3-yKO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="E2t-MI-uXr" secondAttribute="trailing" constant="15" id="fLr-eb-wab"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="4zM-WV-L0b" secondAttribute="bottom" constant="7" id="ge7-Ny-HuY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="4zM-WV-L0b" secondAttribute="trailing" constant="15" id="mDm-Ge-V05"/>
+                    <constraint firstItem="E2t-MI-uXr" firstAttribute="leading" secondItem="OAI-ey-Het" secondAttribute="trailing" constant="17" id="mTF-oW-wRD"/>
+                    <constraint firstItem="OAI-ey-Het" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="qE5-Oz-Eml"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OAI-ey-Het" secondAttribute="bottom" constant="7" id="sYI-Hz-73v"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>

@@ -1,14 +1,14 @@
 //
-//  HZCouponListTableViewCell.m
+//  HZCouponInfoTableViewCell.m
 //  HZSHOP
 //
-//  Created by 英峰 on 2019/4/13.
+//  Created by 英峰 on 2019/4/18.
 //  Copyright © 2019年 英峰. All rights reserved.
 //
 
-#import "HZCouponListTableViewCell.h"
+#import "HZCouponInfoTableViewCell.h"
 
-@implementation HZCouponListTableViewCell
+@implementation HZCouponInfoTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,11 +19,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    
-    [WYFTools viewLayer:_buyButton.height/2 withView:_buyButton];
-    
-    [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor orangeColor] withView:_buyButton];
-    
 }
 
 @end
