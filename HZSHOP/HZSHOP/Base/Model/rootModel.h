@@ -16,5 +16,13 @@
 
 -(void)setNilValueForKey:(NSString *)key;
 
+@property(nonatomic,copy) NSString *rootId;//id
+
+@property(nonatomic,copy) NSString *rootTitle;//标题
+
+@property(nonatomic,copy) NSString *rootImageUrl;//icon
+
+@property(nonatomic,copy) NSString *rootRemark;//备注
+
 
 @end

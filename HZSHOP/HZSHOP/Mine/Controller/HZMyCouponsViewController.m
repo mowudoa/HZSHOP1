@@ -124,7 +124,7 @@ UITableViewDataSource
         
          HZcouponModel*model = [[HZcouponModel alloc] init];
         
-        model.couponTitle = [NSString stringWithFormat:@"优惠券%d",i];
+        model.rootTitle = [NSString stringWithFormat:@"优惠券%d",i];
 
         [_couponArray addObject:model];
         
@@ -146,7 +146,7 @@ UITableViewDataSource
     
     HZcouponModel *model = _couponArray[indexPath.row];
     
-    cell.couponTitle.text = [cell.couponTitle.text stringByAppendingString:model.couponTitle];
+    cell.couponTitle.text = [cell.couponTitle.text stringByAppendingString:model.rootTitle];
     
     return cell;
     

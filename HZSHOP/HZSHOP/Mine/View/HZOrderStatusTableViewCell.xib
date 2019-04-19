@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="HZOrderStatusTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待付款" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKD-ei-qhO">
+                        <rect key="frame" x="20" y="11.5" width="280" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="1bg-mU-M4O"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTT-9i-dKE">
+                        <rect key="frame" x="0.0" y="34.5" width="320" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ohJ-FP-HOE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单金额(含运费):Y 54.67" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2M-5P-178">
+                        <rect key="frame" x="36" y="37.5" width="248" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="CBZ-kU-dVf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.98823529409999999" green="0.68235294120000001" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="JTT-9i-dKE" secondAttribute="trailing" id="5Ma-17-3ex"/>
+                    <constraint firstItem="JTT-9i-dKE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5UW-KD-2I6"/>
+                    <constraint firstItem="eKD-ei-qhO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="CZh-O6-ZLM"/>
+                    <constraint firstItem="A2M-5P-178" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="O0Y-Xw-KCZ"/>
+                    <constraint firstItem="A2M-5P-178" firstAttribute="top" secondItem="JTT-9i-dKE" secondAttribute="bottom" constant="2" id="WDD-gq-9zV"/>
+                    <constraint firstAttribute="trailing" secondItem="eKD-ei-qhO" secondAttribute="trailing" constant="20" id="eBk-RO-g6f"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="A2M-5P-178" secondAttribute="trailing" constant="20" id="oZv-zq-FpM"/>
+                    <constraint firstItem="JTT-9i-dKE" firstAttribute="top" secondItem="eKD-ei-qhO" secondAttribute="bottom" constant="2" id="y9Z-Nd-24w"/>
+                    <constraint firstItem="JTT-9i-dKE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zuo-PP-uCv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="97.599999999999994" y="103.44827586206897"/>
+        </tableViewCell>
+    </objects>
+</document>

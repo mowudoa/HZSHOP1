@@ -10,12 +10,13 @@
 #import "HZCartViewController.h"
 #import "HZLoginViewController.h"
 #import "HZMyOrderViewController.h"
+#import "HZRechargeViewController.h"
 #import "HZMyBrowseViewController.h"
 #import "HZMyCouponsViewController.h"
 #import "HZCouponListViewController.h"
 #import "HZAddressListViewController.h"
 #import "HZMyFollowGoodsViewController.h"
-
+#import "HZRechargeHistoryViewController.h"
 @interface HZMineViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;//背景scrollview
 
@@ -49,6 +50,15 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserIcon:)];
     
     [self.userIcon addGestureRecognizer:tap];
+    
+}
+
+#pragma mark 充值
+- (IBAction)rehargeMOney:(UIButton *)sender {
+
+    HZRechargeViewController *recharge = [[HZRechargeViewController alloc] init];
+    
+    [self.navigationController pushViewController:recharge animated:YES];
     
 }
 
@@ -138,6 +148,16 @@
     [self.navigationController pushViewController:browse animated:YES];
     
 }
+
+#pragma mark 充值记录
+- (IBAction)rechargeHistory:(UIButton *)sender {
+
+    HZRechargeHistoryViewController *history = [[HZRechargeHistoryViewController alloc] init];
+    
+    [self.navigationController pushViewController:history animated:YES];
+    
+}
+
 #pragma mark 登录
 -(void)tapUserIcon:(UITapGestureRecognizer *)tap
 {

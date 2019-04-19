@@ -59,6 +59,8 @@ UITableViewDataSource
     
     self.navigationItem.rightBarButtonItem = self.rightItem;
     
+    _cartGoodsArray = [[NSMutableArray alloc] init];
+
     //通知以刷新价格
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getTotalPrice:) name:@"getToalMoney" object:nil];
     
@@ -72,23 +74,52 @@ UITableViewDataSource
 
 -(void)initData
 {
-    _cartGoodsArray = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < 10; i ++) {
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]};
+
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:SHOP_CART parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+     
+        LOG(@"购物车",dic);
         
-        HZCartModel *model = [[HZCartModel alloc] init];
+        MJStrongSelf;
         
-        model.goodstitle = [NSString stringWithFormat:@"商品%d",i];
+        if (SUCCESS) {
+            
+            NSArray *cartList = dic[@"data"][@"list"];
+            
+            for (NSDictionary *cartDic in cartList) {
+                
+                HZCartModel *model = [[HZCartModel alloc] init];
+
+                model.rootId = cartDic[@"id"];
+                
+                model.goodsNum = cartDic[@"total"];
+                
+                model.rootTitle = cartDic[@"title"];
+                
+                model.rootImageUrl = cartDic[@"thumb"];
+                
+                model.goodsSalesPrice = cartDic[@"productprice"];
+                
+                model.goodsOldPrice = [cartDic[@"marketprice"] stringValue];
+                
+                model.goodsStockNum = cartDic[@"stock"];
+               
+                [strongSelf.cartGoodsArray addObject:model];
+            }
+            
+        }else{
+            
+            
+        }
         
-        model.goodssalesprice = @"100";
+        [strongSelf.cartListTableView reloadData];
         
-        model.goodsStockNum = @"100";
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
         
-        model.goodsnum = @"1";
-        
-        [_cartGoodsArray addObject:model];
-        
-    }
+    }];
     
     [_cartListTableView reloadData];
     
@@ -133,7 +164,7 @@ UITableViewDataSource
         
         if (sender.selected) {
             
-            GoodsPrice +=([shopModel.goodssalesprice doubleValue]*[shopModel.goodsnum integerValue]);
+            GoodsPrice +=([shopModel.goodsSalesPrice doubleValue]*[shopModel.goodsNum integerValue]);
             
         }else{
             
@@ -157,7 +188,7 @@ UITableViewDataSource
         
         if (model.isSelect) {
             
-            GoodsPrice +=([model.goodssalesprice doubleValue]*[model.goodsnum integerValue]);
+            GoodsPrice +=([model.goodsSalesPrice doubleValue]*[model.goodsNum integerValue]);
             
         }
     }

@@ -68,6 +68,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <state key="normal" title="充值"/>
+                                                    <connections>
+                                                        <action selector="rehargeMOney:" destination="-1" eventType="touchUpInside" id="H1b-eq-DS8"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -892,6 +895,9 @@
                                         </imageView>
                                         <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcK-bP-69e">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                            <connections>
+                                                <action selector="rechargeHistory:" destination="-1" eventType="touchUpInside" id="Xw1-SX-62R"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,7 +7,7 @@
 //
 
 #import "HZCartOrderTableViewCell.h"
-#import "HZCartTableViewCell.h"
+#import "HZOrderTableViewCell.h"
 
 @implementation HZCartOrderTableViewCell
 
@@ -34,9 +34,9 @@
 -(void)registercell
 {
     
-    UINib* nib = [UINib nibWithNibName:@"HZCartTableViewCell" bundle:nil];
+    UINib* nib = [UINib nibWithNibName:@"HZOrderTableViewCell" bundle:nil];
     
-    [_cartGoodsTableView registerNib:nib forCellReuseIdentifier:@"CartTableViewCell"];
+    [_cartGoodsTableView registerNib:nib forCellReuseIdentifier:@"OrderTableViewCell"];
     
 }
 
@@ -55,7 +55,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    HZCartTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CartTableViewCell" forIndexPath:indexPath];
+    HZOrderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"OrderTableViewCell" forIndexPath:indexPath];
     
     return cell;
     
@@ -88,7 +88,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HEIGHT(127);
+    return HEIGHT(124);
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

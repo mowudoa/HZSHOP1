@@ -70,7 +70,7 @@
     self.goodsTitle.text = @"就这样，label的高度就能达到初步的自适应，如果要求教过的话，可以设置一些属性，或者使用代码自适应";
     
     self.goodsSubTitle.text = @"就这样";
-    
+        
      [self reloadData];
     
 }

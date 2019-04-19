@@ -46,9 +46,9 @@ UITableViewDataSource
         
         HZGoodsModel *model = [[HZGoodsModel alloc] init];
         
-        model.goodsName = [NSString stringWithFormat:@"商品0%d",i];
+        model.rootTitle = [NSString stringWithFormat:@"商品0%d",i];
         
-        model.goodsId = [NSString stringWithFormat:@"%d",i];
+        model.rootId = [NSString stringWithFormat:@"%d",i];
         
         model.goodsPrice = [NSString stringWithFormat:@"%d",i*10];
         
@@ -88,7 +88,7 @@ UITableViewDataSource
     
     HZGoodsModel *model = _browseListArray[indexPath.section];
     
-    cell.goodsTitle.text = model.goodsName;
+    cell.goodsTitle.text = model.rootTitle;
     
     cell.goodsPrice.text = model.goodsPrice;
     

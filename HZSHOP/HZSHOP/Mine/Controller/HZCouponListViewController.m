@@ -60,9 +60,9 @@ UITableViewDataSource
                 
                 HZcouponModel *model = [[HZcouponModel alloc] init];
                 
-                model.couponId = coupnDic[@"id"];
+                model.rootId = coupnDic[@"id"];
                 
-                model.couponTitle = coupnDic[@"couponname"];
+                model.rootTitle = coupnDic[@"couponname"];
                 
                 model.couponMoney = coupnDic[@"_backmoney"];
                 
@@ -116,7 +116,7 @@ UITableViewDataSource
     
     HZcouponModel *model = _couponArray[indexPath.row];
     
-    cell.couponTitle.text = [cell.couponTitle.text stringByAppendingString:model.couponTitle];
+    cell.couponTitle.text = [cell.couponTitle.text stringByAppendingString:model.rootTitle];
     
     cell.couponMoney.text = [NSString stringWithFormat:@"￥%@",model.couponMoney];
     
@@ -139,7 +139,7 @@ UITableViewDataSource
    
     HZCouponDetailViewController *detail = [[HZCouponDetailViewController alloc] init];
     
-    detail.couponId = model.couponId;
+    detail.couponId = model.rootId;
     
     [self.navigationController pushViewController:detail animated:YES];
     

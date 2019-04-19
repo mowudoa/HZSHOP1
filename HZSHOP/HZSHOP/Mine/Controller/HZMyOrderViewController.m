@@ -9,7 +9,7 @@
 #import "HZMyOrderViewController.h"
 #import "HZOrderModel.h"
 #import "HZOrderTableViewCell.h"
-
+#import "HZOrderDetailViewController.h"
 @interface HZMyOrderViewController ()<
 UITableViewDelegate,
 UITableViewDataSource
@@ -102,6 +102,9 @@ UITableViewDataSource
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    HZOrderDetailViewController *orderDetail = [[HZOrderDetailViewController alloc] init];
+    
+    [self.navigationController pushViewController:orderDetail animated:YES];
 
 }
 
@@ -169,8 +172,6 @@ UITableViewDataSource
     lineLabel.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
 
     [bgView addSubview:lineLabel];
-
-    
     
     UILabel *dingdanNum = [WYFTools createLabel:CGRectMake(5, 10, SCREEN_WIDTH-10, 20) bgColor:[UIColor clearColor] text:@"" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"#BABABA"] tag:section];
     
@@ -196,16 +197,16 @@ UITableViewDataSource
     
     [view addSubview:lineLabel1];
     
-    UIButton *leftBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH-75-75, 8, 70, 25) bgColor:[UIColor colorWithHexString:@"#FF9980"] title:@"" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor] slectedTitleColor:nil tag:section action:@selector(tapleftBtn:) vc:self];
+    UIButton *leftBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH-75-75, 8, 70, 25) bgColor:[UIColor clearColor] title:@"取消订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#666666"] slectedTitleColor:nil tag:section action:@selector(tapleftBtn:) vc:self];
     
-    [WYFTools viewLayer:3 withView:leftBtn];
+    [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#666666"] withView:leftBtn];
     
     [view addSubview:leftBtn];
     
-    UIButton *rightBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH-75, 8, 70, 25) bgColor:[UIColor colorWithHexString:@"#FF9980"] title:@"" titleFont:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor] slectedTitleColor:nil tag:section action:@selector(tapBtn:) vc:self];
+    UIButton *rightBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH-75, 8, 70, 25) bgColor:[UIColor clearColor] title:@"支付订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor redColor] slectedTitleColor:nil tag:section action:@selector(tapBtn:) vc:self];
     
-    [WYFTools viewLayer:3 withView:rightBtn];
-    
+    [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor redColor] withView:rightBtn];
+
     [view addSubview:rightBtn];
     
     view.backgroundColor=[UIColor whiteColor];
@@ -285,7 +286,37 @@ UITableViewDataSource
 //
 //        leftBtn.hidden = YES;
 //    }
-   
+    
+    CGSize size = [rightBtn.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, rightBtn.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : rightBtn.titleLabel.font} context:nil].size;
+
+    [rightBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+       
+        make.width.equalTo(@(size.width + 20));
+        
+        make.right.equalTo(view.mas_right).offset(-5);
+        
+        make.top.equalTo(view.mas_top).offset(8);
+        
+        make.height.mas_equalTo(25);
+        
+    }];
+    
+    [leftBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+       
+        make.right.equalTo(rightBtn.mas_left).offset(-5);
+        
+        make.width.equalTo(@(size.width + 20));
+        
+        make.top.equalTo(view.mas_top).offset(8);
+        
+        make.height.mas_equalTo(25);
+        
+    }];
+    
+    [WYFTools viewLayer:leftBtn.height/2 withView:leftBtn];
+
+    [WYFTools viewLayer:rightBtn.height/2 withView:rightBtn];
+
     [bgView addSubview:view];
     
     return bgView;

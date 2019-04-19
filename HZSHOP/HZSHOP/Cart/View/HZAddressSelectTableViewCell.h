@@ -12,6 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZAddressSelectTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *addressInfoView;
+
+@property (weak, nonatomic) IBOutlet UIView *addressAddView;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressUserName;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressUserPhone;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressDetail;
+
 @end
 
 NS_ASSUME_NONNULL_END

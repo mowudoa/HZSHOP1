@@ -12,17 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZCartModel : rootModel
 
-@property(copy,nonatomic)NSString* goodsnum;
+@property(copy,nonatomic)NSString* goodsNum;//商品数量
 
-@property(copy,nonatomic)NSString* goodssalesprice;
+@property(copy,nonatomic)NSString* goodsOldPrice;//购买原价
 
-@property(copy,nonatomic)NSString* goodstitle;
+@property(copy,nonatomic)NSString* goodsSalesPrice;//购买价格
 
-@property(copy,nonatomic)NSString* goodsId;
-
-@property(copy,nonatomic)NSString* goodsImageUrl;
-
-@property(copy,nonatomic)NSString* goodsStockNum;
+@property(copy,nonatomic)NSString* goodsStockNum;//库存
 
 @property(assign,nonatomic)BOOL isSelect;
 

@@ -120,6 +120,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="addressAddView" destination="7GP-U5-rPs" id="eLD-Cn-Uvd"/>
+                <outlet property="addressDetail" destination="ggD-ho-Br3" id="aPg-LN-6d0"/>
+                <outlet property="addressInfoView" destination="Mhi-PI-nUK" id="LQz-Zu-oUF"/>
+                <outlet property="addressUserName" destination="4qX-3Y-glt" id="gMP-cS-sFr"/>
+                <outlet property="addressUserPhone" destination="55G-tD-1kC" id="1ei-gV-p8i"/>
+            </connections>
             <point key="canvasLocation" x="52.799999999999997" y="96.251874062968525"/>
         </tableViewCell>
     </objects>

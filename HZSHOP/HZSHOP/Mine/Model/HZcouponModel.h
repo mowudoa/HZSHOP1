@@ -12,10 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZcouponModel : rootModel
 
-@property(nonatomic,copy) NSString *couponId;//id
-
-@property(nonatomic,copy) NSString *couponTitle;//标题
-
 @property(nonatomic,copy) NSString *couponMoney;//优惠金额
 
 @property(nonatomic,copy) NSString *couponLimit;//使用门槛

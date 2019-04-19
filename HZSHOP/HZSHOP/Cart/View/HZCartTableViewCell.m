@@ -42,11 +42,13 @@
     
     _selectButton.selected = carModel.isSelect;
 
-    _goodsPrice.text = _carModel.goodssalesprice;
+    _goodsPrice.text = _carModel.goodsSalesPrice;
     
-    _numTextField.text = _carModel.goodsnum;
+    _numTextField.text = _carModel.goodsNum;
     
-    _goodsTitle.text = _carModel.goodstitle;
+    _goodsTitle.text = _carModel.rootTitle;
+
+    _goodsOldPrice.text = _carModel.goodsOldPrice;
     
 }
 
@@ -102,7 +104,7 @@
     
     _numTextField.text = [NSString stringWithFormat:@"%ld",(long)num];
     
-    _carModel.goodsnum = _numTextField.text;
+    _carModel.goodsNum = _numTextField.text;
     
     [self refreshCartList];
     
@@ -146,7 +148,7 @@
         
         if (_numTextField.text.length > 0) {
             
-            _carModel.goodsnum = _numTextField.text;
+            _carModel.goodsNum = _numTextField.text;
             
             [self refreshCartList];
             
@@ -154,7 +156,7 @@
             
             _numTextField.text = @"1";
             
-            _carModel.goodsnum = _numTextField.text;
+            _carModel.goodsNum = _numTextField.text;
             
             [self refreshCartList];
             

@@ -12,12 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZOrderModel : rootModel
 
-@property(copy,nonatomic)NSString* orderID; //订单id
-
-@property(copy,nonatomic)NSString* orderTitle; //订单名字
-
-@property(copy,nonatomic)NSString* orderImage; //订单图片
-
 @property(copy,nonatomic)NSString* orderStatus; //订单状态
 
 @property(copy,nonatomic)NSString* orderPrice; //订单价格

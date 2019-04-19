@@ -69,7 +69,7 @@ UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 5;
+    return 7;
     
 }
 
@@ -108,10 +108,35 @@ UITableViewDataSource
         
         HZGoodsPriceTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"GoodsPriceTableViewCell" forIndexPath:indexPath];
         
+        if (indexPath.section == 4) {
+            
+            cell.title.text = @"商品小计:";
+            
+            cell.money.text = @"￥3.00";
+            
+            cell.money.textColor = [UIColor colorWithHexString:@"#666666"];
+            
+        }else if (indexPath.section == 5) {
+            
+            cell.title.text = @"运费:";
+            
+            cell.money.text = @"￥4.00";
+        
+            cell.money.textColor = [UIColor colorWithHexString:@"#666666"];
+
+        }else if (indexPath.section == 6) {
+            
+            cell.title.text = @"实付费(含运费):";
+            
+            cell.money.text = @"￥7.00";
+            
+            cell.money.textColor = [UIColor redColor];
+            
+        }
+        
         return cell;
         
     }
-    
     
 }
 
@@ -151,7 +176,15 @@ UITableViewDataSource
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10;
+    if (section < 4) {
+        
+        return 8;
+
+    }else{
+        
+        return 0.01;
+    }
+    
 }
 
 /*
