@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *goodsPrice;
 
+@property (weak, nonatomic) IBOutlet UILabel *goodsOldPrice;
+
 @end
 
 NS_ASSUME_NONNULL_END

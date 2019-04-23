@@ -105,7 +105,11 @@
 
 #define COUPON_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.couponList"//领取优惠券中心
 
-#define COUPON_DETAIL       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.coupon_detail"//优惠券详情
+#define COUPON_DETAIL       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.detail.coupon_detail"//优惠券详情
 
 #define SHOP_CART           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.cart.card_list"//购物车
+
+#define MY_FOLLOW           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.favorite.favorite_list"//我的关注
+
+#define CANCLE_FOLLOW       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.favorite.favorite_remove"//取消关注
 #endif //  HZPrefixHeader.pch

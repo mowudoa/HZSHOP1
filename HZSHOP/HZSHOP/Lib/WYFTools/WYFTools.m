@@ -316,28 +316,16 @@ static WYFTools *god = nil;
 
 }
 //创建Label加载HTML富文本
-+(UILabel *)createLabelLoadHtml:(NSString *)htmlString withFont:(UIFont *)font
++(UILabel *)createLabelLoadHtml:(NSString *)htmlString withFont:(UIFont *)font labelWidth:(CGFloat)labelWidth
 {
     //接口返回为html字符串,所以详情用label富文本加载html数据
     UILabel *label1 = [[UILabel alloc] init];
     
-    NSString *infoStr = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",SCREEN_WIDTH - 40,htmlString];
-    
-    NSData *data = [infoStr dataUsingEncoding:NSUnicodeStringEncoding];
-    
-    NSDictionary *options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
-    
-    NSMutableAttributedString *html = [[NSMutableAttributedString alloc]initWithData:data
-                                
-                                                               options:options
-                                
-                                                    documentAttributes:nil
-                                
-                                                                 error:nil];
+    NSString *infoStr = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",labelWidth,htmlString];
     
     if (htmlString != nil && htmlString != NULL) {
         
-        label1.attributedText = html;
+        label1.attributedText =  [self htmlAttributedString:infoStr];
         
     }
     
@@ -346,8 +334,26 @@ static WYFTools *god = nil;
     label1.font  = font;
     
     return label1;
+    
 }
-
++(NSMutableAttributedString *)htmlAttributedString:(NSString *)string
+{
+    
+    NSData *data = [string dataUsingEncoding:NSUnicodeStringEncoding];
+    
+    NSDictionary *options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
+    
+    NSMutableAttributedString *html = [[NSMutableAttributedString alloc]initWithData:data
+                                       
+                                                                             options:options
+                                       
+                                                                  documentAttributes:nil
+                                       
+                                                                               error:nil];
+    
+    return html;
+    
+}
 //给view设置弧度
 +(void)viewLayer:(CGFloat)radian withView:(UIView *)currentView
 {
@@ -399,6 +405,16 @@ static WYFTools *god = nil;
     NSString*timeString=[formatter stringFromDate:d];
     
     return timeString;
+    
+}
++(NSMutableAttributedString *)AddCenterLineToView:(NSString *)textString
+{
+    //中划线
+    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textString attributes:attribtDic];
+    
+    return attribtStr;
     
 }
 

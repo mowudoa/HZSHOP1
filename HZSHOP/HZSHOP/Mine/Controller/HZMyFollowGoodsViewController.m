@@ -37,26 +37,59 @@ UITableViewDataSource
 -(void)initUI
 {
     self.navigationItem.title = @"我的关注";
+    
+    _followGoodsArray = [[NSMutableArray alloc] init];
+    
 }
 -(void)initData
 {
-    _followGoodsArray = [[NSMutableArray alloc] init];
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978"};
+
+    MJWeakSelf;
     
-    for (int i = 0; i < 10; i ++) {
+    [CrazyNetWork CrazyRequest_Post:MY_FOLLOW parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+      
+        MJStrongSelf;
         
-        HZGoodsModel *model = [[HZGoodsModel alloc] init];
+        [strongSelf.followGoodsArray removeAllObjects];
         
-        model.rootTitle = [NSString stringWithFormat:@"商品0%d",i];
+        LOG(@"我的关注", dic);
         
-        model.rootId = [NSString stringWithFormat:@"%d",i];
+        if (SUCCESS) {
+           
+            NSArray *followArray = dic[@"data"][@"list"];
+            
+            for (NSDictionary *follw in followArray) {
+                
+                HZGoodsModel *model = [[HZGoodsModel alloc] init];
+                
+                model.rootId = follw[@"id"];
+                
+                model.rootTitle = follw[@"title"];
+                
+                model.goodsOldPrice = follw[@"marketprice"];
+                
+                model.goodsPrice = follw[@"productprice"];
+                
+                model.goodsId = follw[@"goodsid"];
+                
+                model.rootImageUrl = follw[@"thumb"];
+                
+                [strongSelf.followGoodsArray addObject:model];
+                
+            }
+            
+            
+        }else{
+            
+            
+        }
         
-        model.goodsPrice = [NSString stringWithFormat:@"%d",i*10];
+        [strongSelf.followGoodsTableView reloadData];
         
-        [_followGoodsArray addObject:model];
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
         
-    }
-    
-    [_followGoodsTableView reloadData];
+    }];
     
 }
 -(void)registercell
@@ -86,6 +119,10 @@ UITableViewDataSource
     
     cell.goodsPrice.text = model.goodsPrice;
     
+    cell.goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:    [NSString stringWithFormat:@"￥%@",model.goodsOldPrice]];
+    
+    [cell.iamgeIcon sd_setImageWithURL:[NSURL URLWithString:model.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
+    
     return cell;
     
 }
@@ -114,10 +151,8 @@ UITableViewDataSource
     //只要实现这个方法，就实现了默认滑动删除！！！！！
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-
-        [self.followGoodsArray removeObject:_followGoodsArray[indexPath.row]];
-        
-        [self.followGoodsTableView reloadData];
+     
+        [self cancleGoodsFollow:indexPath];
         
     }
 }
@@ -136,6 +171,40 @@ UITableViewDataSource
     return 0.1;
 }
 
+#pragma mark 取消关注
+-(void)cancleGoodsFollow:(NSIndexPath *)indexpath
+{
+
+    HZGoodsModel *model = _followGoodsArray[indexpath.row];
+    
+    MJWeakSelf;
+    
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978",
+                           @"ids":model.rootId
+                           };
+
+    [CrazyNetWork CrazyRequest_Post:CANCLE_FOLLOW parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+      
+        LOG(@"取消关注", dic);
+        
+        MJStrongSelf;
+        
+        if (SUCCESS) {
+        
+            [strongSelf.followGoodsArray removeObject:strongSelf.followGoodsArray[indexpath.row]];
+            
+            [strongSelf.followGoodsTableView reloadData];
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"message"]];
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
 /*
 #pragma mark - Navigation
 

@@ -39,8 +39,10 @@
 +(float)heightWithCreateTagLabel:(UIFont *)font tagArray:(NSArray *)array itemSpace:(float)itemSpace itemHeight:(float)itemHeight currentX:(float)currentX currentY:(float)currentY superView:(UIView *)myView action:(SEL)action vc:(id)vc buttonUserEnable:(BOOL)enable;
 
 //创建加载HTML富文本的label
-+(UILabel *)createLabelLoadHtml:(NSString *)htmlString withFont:(UIFont *)font;
-//单例
++(UILabel *)createLabelLoadHtml:(NSString *)htmlString withFont:(UIFont *)font labelWidth:(CGFloat)labelWidth;
+
+//把html字符串转化为可用label加载的富文本
++(NSMutableAttributedString *)htmlAttributedString:(NSString *)string;
 
 //给view设置弧度
 +(void)viewLayer:(CGFloat)radian withView:(UIView *)currentView;
@@ -54,6 +56,10 @@
 //时间转换
 +(NSString *)ConvertStrToTime:(NSString *)timeStr dateModel:(NSString *)dateModel withDateMultiple:(NSInteger)multiple;
 
+//view添加中划线
++(NSMutableAttributedString *)AddCenterLineToView:(NSString *)textString;
+
+//单例
 +(WYFTools *)shardGodlike;
 @property(nonatomic,copy) NSString *str;
 @property(nonatomic,copy) NSString *str1;

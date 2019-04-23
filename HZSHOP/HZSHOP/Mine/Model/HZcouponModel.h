@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,copy) NSString *couponLifeTime;//有效期
 
+@property(nonatomic,copy) NSString *couponBuyMoney;//购买金额
+
+@property(nonatomic,copy) NSString *couponBuyIntegral;//购买积分
 
 @end
 

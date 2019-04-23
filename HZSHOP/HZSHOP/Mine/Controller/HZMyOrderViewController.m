@@ -48,7 +48,7 @@ UITableViewDataSource
     
     _lineLabel=[[UILabel alloc] initWithFrame:CGRectMake(1,41,SCREEN_WIDTH/5,2)];
     
-    _lineLabel.backgroundColor=[UIColor colorWithHexString:@"#FF0270"];
+    _lineLabel.backgroundColor=[UIColor colorWithHexString:@"#FC575A"];
     
     [self.view addSubview:_lineLabel];
     
@@ -121,37 +121,23 @@ UITableViewDataSource
     
     backView.backgroundColor = [UIColor whiteColor];
     
-    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,30,SCREEN_WIDTH,1)];
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,30,SCREEN_WIDTH - 20,1)];
     
-    lineLabel.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
+    lineLabel.backgroundColor = [UIColor colorWithHexString:@"#EBEBEB"];
     
     [backView addSubview:lineLabel];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH/2-5, 30)];
-    
-    [backView addSubview:view];
-    
-    UILabel* shanghu = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH/2-5-5, 20)];
-    
-    shanghu.text = @"订单号:SH20190418092212";
-    
-    shanghu.textAlignment = NSTextAlignmentLeft;
-    
-    shanghu.font=[UIFont systemFontOfSize:12];
+    UILabel *shanghu = [WYFTools createLabel:CGRectMake(10, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:@"订单号:SH20190418092212" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"#666666"] tag:section];
     
     shanghu.adjustsFontSizeToFitWidth = YES;
     
-    [view addSubview:shanghu];
+    [backView addSubview:shanghu];
     
-    UIView* view1 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2, 5, SCREEN_WIDTH/2-10, 30)];
-    
-    [backView addSubview:view1];
-    
-    UILabel *dingdantime = [WYFTools createLabel:CGRectMake(5, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:@"待付款" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:[UIColor blackColor] tag:section];
+    UILabel *dingdantime = [WYFTools createLabel:CGRectMake(SCREEN_WIDTH/2, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:@"待付款" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"666666"] tag:section];
     
     dingdantime.adjustsFontSizeToFitWidth = YES;
     
-    [view1 addSubview:dingdantime];
+    [backView addSubview:dingdantime];
     
     return backView;
     
@@ -167,13 +153,13 @@ UITableViewDataSource
     
     bgView.backgroundColor = [UIColor whiteColor];
     
-    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,39,SCREEN_WIDTH,1)];
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,39,SCREEN_WIDTH - 20,1)];
     
-    lineLabel.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
+    lineLabel.backgroundColor = [UIColor colorWithHexString:@"#EBEBEB"];
 
     [bgView addSubview:lineLabel];
     
-    UILabel *dingdanNum = [WYFTools createLabel:CGRectMake(5, 10, SCREEN_WIDTH-10, 20) bgColor:[UIColor clearColor] text:@"" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"#BABABA"] tag:section];
+    UILabel *dingdanNum = [WYFTools createLabel:CGRectMake(10, 10, SCREEN_WIDTH - 20, 20) bgColor:[UIColor clearColor] text:@"" textFont:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"#BABABA"] tag:section];
     
     NSString *string1 = @"共一件商品,实付:";
     
@@ -181,7 +167,7 @@ UITableViewDataSource
 
     NSMutableAttributedString *string3 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",string1,string2]];
     
-    [string3 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#FA5658"] range:NSMakeRange(string1.length,  string2.length)];
+    [string3 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#FC575A"] range:NSMakeRange(string1.length,  string2.length)];
     
     [string3 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(string1.length,string2.length)];
 
@@ -197,15 +183,15 @@ UITableViewDataSource
     
     [view addSubview:lineLabel1];
     
-    UIButton *leftBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH-75-75, 8, 70, 25) bgColor:[UIColor clearColor] title:@"取消订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#666666"] slectedTitleColor:nil tag:section action:@selector(tapleftBtn:) vc:self];
+    UIButton *leftBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH - 80 - 75, 8, 70, 25) bgColor:[UIColor clearColor] title:@"取消订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#666666"] slectedTitleColor:nil tag:section action:@selector(tapleftBtn:) vc:self];
     
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#666666"] withView:leftBtn];
     
     [view addSubview:leftBtn];
     
-    UIButton *rightBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH-75, 8, 70, 25) bgColor:[UIColor clearColor] title:@"支付订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor redColor] slectedTitleColor:nil tag:section action:@selector(tapBtn:) vc:self];
+    UIButton *rightBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH - 80, 8, 70, 25) bgColor:[UIColor clearColor] title:@"支付订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#FC575A"] slectedTitleColor:nil tag:section action:@selector(tapBtn:) vc:self];
     
-    [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor redColor] withView:rightBtn];
+    [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#FC575A"] withView:rightBtn];
 
     [view addSubview:rightBtn];
     
@@ -293,7 +279,7 @@ UITableViewDataSource
        
         make.width.equalTo(@(size.width + 20));
         
-        make.right.equalTo(view.mas_right).offset(-5);
+        make.right.equalTo(view.mas_right).offset(-10);
         
         make.top.equalTo(view.mas_top).offset(8);
         

@@ -52,6 +52,8 @@ UITableViewDataSource
         
         MJStrongSelf;
         
+        [strongSelf.couponArray removeAllObjects];
+        
         if (SUCCESS) {
            
             NSArray *couponList = dic[@"data"][@"list"];
@@ -155,6 +157,7 @@ UITableViewDataSource
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.1;
+    
 }
 
 /*

@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZGoodsModel : rootModel
 
-@property(nonatomic,copy) NSString *goodsPrice;
+@property(nonatomic,copy) NSString *goodsPrice;//现价
+
+@property(nonatomic,copy) NSString *goodsOldPrice;//原件
+
+@property(nonatomic,copy) NSString *goodsId;//商品id
 
 
 @end

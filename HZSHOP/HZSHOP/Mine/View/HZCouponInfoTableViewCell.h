@@ -11,8 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZCouponInfoTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *title;
+
 @property (weak, nonatomic) IBOutlet UILabel *integralNum;
+
 @property (weak, nonatomic) IBOutlet UILabel *moneyNum;
 
 @end

@@ -108,6 +108,7 @@ UITableViewDataSource
                 model.goodsStockNum = cartDic[@"stock"];
                
                 [strongSelf.cartGoodsArray addObject:model];
+                
             }
             
         }else{

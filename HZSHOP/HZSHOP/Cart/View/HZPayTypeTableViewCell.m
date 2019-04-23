@@ -1,14 +1,14 @@
 //
-//  HZMyFollowTableViewCell.m
+//  HZPayTypeTableViewCell.m
 //  HZSHOP
 //
-//  Created by 英峰 on 2019/4/11.
+//  Created by 英峰 on 2019/4/23.
 //  Copyright © 2019年 英峰. All rights reserved.
 //
 
-#import "HZMyFollowTableViewCell.h"
+#import "HZPayTypeTableViewCell.h"
 
-@implementation HZMyFollowTableViewCell
+@implementation HZPayTypeTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,8 +19,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    
-    
 }
 
 @end

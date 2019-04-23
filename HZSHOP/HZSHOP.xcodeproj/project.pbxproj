@@ -284,6 +284,10 @@
 		714F3509225F0A04004685A4 /* HZMyBrowseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 714F3507225F0A04004685A4 /* HZMyBrowseViewController.xib */; };
 		714F350D225F31B0004685A4 /* HZCommissionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F350B225F31B0004685A4 /* HZCommissionDetailsViewController.m */; };
 		714F350E225F31B0004685A4 /* HZCommissionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 714F350C225F31B0004685A4 /* HZCommissionDetailsViewController.xib */; };
+		7164269E226EEFBF00B937F3 /* HZOrderPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7164269C226EEFBF00B937F3 /* HZOrderPayViewController.m */; };
+		7164269F226EEFBF00B937F3 /* HZOrderPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7164269D226EEFBF00B937F3 /* HZOrderPayViewController.xib */; };
+		716426A3226EFBF800B937F3 /* HZPayTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 716426A1226EFBF800B937F3 /* HZPayTypeTableViewCell.m */; };
+		716426A4226EFBF800B937F3 /* HZPayTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 716426A2226EFBF800B937F3 /* HZPayTypeTableViewCell.xib */; };
 		716631282266C40D00678F89 /* HZTableCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 716631262266C40D00678F89 /* HZTableCollectionViewCell.m */; };
 		716631292266C40D00678F89 /* HZTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 716631272266C40D00678F89 /* HZTableCollectionViewCell.xib */; };
 		7166312D2267232700678F89 /* HZMyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7166312B2267232700678F89 /* HZMyOrderViewController.m */; };
@@ -886,6 +890,12 @@
 		714F350A225F31B0004685A4 /* HZCommissionDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCommissionDetailsViewController.h; sourceTree = "<group>"; };
 		714F350B225F31B0004685A4 /* HZCommissionDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCommissionDetailsViewController.m; sourceTree = "<group>"; };
 		714F350C225F31B0004685A4 /* HZCommissionDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCommissionDetailsViewController.xib; sourceTree = "<group>"; };
+		7164269B226EEFBF00B937F3 /* HZOrderPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZOrderPayViewController.h; sourceTree = "<group>"; };
+		7164269C226EEFBF00B937F3 /* HZOrderPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZOrderPayViewController.m; sourceTree = "<group>"; };
+		7164269D226EEFBF00B937F3 /* HZOrderPayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZOrderPayViewController.xib; sourceTree = "<group>"; };
+		716426A0226EFBF800B937F3 /* HZPayTypeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZPayTypeTableViewCell.h; sourceTree = "<group>"; };
+		716426A1226EFBF800B937F3 /* HZPayTypeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZPayTypeTableViewCell.m; sourceTree = "<group>"; };
+		716426A2226EFBF800B937F3 /* HZPayTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZPayTypeTableViewCell.xib; sourceTree = "<group>"; };
 		716631252266C40D00678F89 /* HZTableCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZTableCollectionViewCell.h; sourceTree = "<group>"; };
 		716631262266C40D00678F89 /* HZTableCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZTableCollectionViewCell.m; sourceTree = "<group>"; };
 		716631272266C40D00678F89 /* HZTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZTableCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1046,6 +1056,9 @@
 				718CED08226429EB00238FE5 /* HZCartOrderViewController.h */,
 				718CED09226429EB00238FE5 /* HZCartOrderViewController.m */,
 				718CED0A226429EB00238FE5 /* HZCartOrderViewController.xib */,
+				7164269B226EEFBF00B937F3 /* HZOrderPayViewController.h */,
+				7164269C226EEFBF00B937F3 /* HZOrderPayViewController.m */,
+				7164269D226EEFBF00B937F3 /* HZOrderPayViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1080,6 +1093,9 @@
 				718CED21226478A600238FE5 /* HZCartOrderTableViewCell.h */,
 				718CED22226478A600238FE5 /* HZCartOrderTableViewCell.m */,
 				718CED23226478A600238FE5 /* HZCartOrderTableViewCell.xib */,
+				716426A0226EFBF800B937F3 /* HZPayTypeTableViewCell.h */,
+				716426A1226EFBF800B937F3 /* HZPayTypeTableViewCell.m */,
+				716426A2226EFBF800B937F3 /* HZPayTypeTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1417,8 +1433,8 @@
 		7142A435225C8D1E00B15D8C /* WYFTools */ = {
 			isa = PBXGroup;
 			children = (
-				7142A436225C8D1E00B15D8C /* WYFTools.m */,
 				7142A437225C8D1E00B15D8C /* WYFTools.h */,
+				7142A436225C8D1E00B15D8C /* WYFTools.m */,
 			);
 			path = WYFTools;
 			sourceTree = "<group>";
@@ -2439,6 +2455,7 @@
 				714188212260778100ED7987 /* HZGoodsInfoTableViewCell.xib in Resources */,
 				718CED25226478A600238FE5 /* HZCartOrderTableViewCell.xib in Resources */,
 				71742925225DC5F100DDDBCC /* HZAddressListViewController.xib in Resources */,
+				716426A4226EFBF800B937F3 /* HZPayTypeTableViewCell.xib in Resources */,
 				7166313622672C1800678F89 /* HZOrderTableViewCell.xib in Resources */,
 				7142A600225C8D1F00B15D8C /* SWQRCode.bundle in Resources */,
 				71427AE62269BECD0037BCFE /* HZRechargeHistoryTableViewCell.xib in Resources */,
@@ -2456,6 +2473,7 @@
 				7140A9952265C31600DD0FA9 /* HZGoodsCollectionViewCell.xib in Resources */,
 				7141882B226081E100ED7987 /* HZjumbShopTableViewCell.xib in Resources */,
 				71427AEB2269C7CA0037BCFE /* HZRechargeViewController.xib in Resources */,
+				7164269F226EEFBF00B937F3 /* HZOrderPayViewController.xib in Resources */,
 				718CED112264342700238FE5 /* HZLeaveMessageTableViewCell.xib in Resources */,
 				71418830226083D900ED7987 /* HZLoginViewController.xib in Resources */,
 				714F3504225F07E9004685A4 /* HZDistributionCenterViewController.xib in Resources */,
@@ -2643,6 +2661,7 @@
 				7142A646225C8D1F00B15D8C /* MASViewConstraint.m in Sources */,
 				7142A641225C8D1F00B15D8C /* MASLayoutConstraint.m in Sources */,
 				7142A684225C8D1F00B15D8C /* createDB.m in Sources */,
+				7164269E226EEFBF00B937F3 /* HZOrderPayViewController.m in Sources */,
 				718CED1F226458EB00238FE5 /* HZAddressSelectTableViewCell.m in Sources */,
 				7142A605225C8D1F00B15D8C /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				7142A68D225C8D1F00B15D8C /* NSTimer+BlocksKit.m in Sources */,
@@ -2706,6 +2725,7 @@
 				7142A614225C8D1F00B15D8C /* crazyShakeWindow.m in Sources */,
 				7142A63D225C8D1F00B15D8C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				7142A6A1225C8D1F00B15D8C /* UIImagePickerController+BlocksKit.m in Sources */,
+				716426A3226EFBF800B937F3 /* HZPayTypeTableViewCell.m in Sources */,
 				7142A6A7225C8D1F00B15D8C /* NSCache+BlocksKit.m in Sources */,
 				7142A6C0225C8D1F00B15D8C /* SDWebImageDownloaderOperation.m in Sources */,
 				7142A67A225C8D1F00B15D8C /* UIWebView+AFNetworking.m in Sources */,

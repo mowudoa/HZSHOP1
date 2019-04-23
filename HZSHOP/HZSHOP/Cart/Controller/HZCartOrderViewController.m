@@ -7,6 +7,7 @@
 //
 
 #import "HZCartOrderViewController.h"
+#import "HZOrderPayViewController.h"
 #import "HZCartOrderTableViewCell.h"
 #import "HZGoodsPriceTableViewCell.h"
 #import "HZLeaveMessageTableViewCell.h"
@@ -61,6 +62,16 @@ UITableViewDataSource
     UINib* nib4 = [UINib nibWithNibName:@"HZCartOrderTableViewCell" bundle:nil];
     
     [_cartOrderTableView registerNib:nib4 forCellReuseIdentifier:@"CartOrderTableViewCell"];
+    
+}
+
+#pragma mark 提交订单
+
+- (IBAction)submitOrder:(UIButton *)sender {
+
+    HZOrderPayViewController *orderPay = [[HZOrderPayViewController alloc] init];
+    
+    [self.navigationController pushViewController:orderPay animated:YES];
     
 }
 
