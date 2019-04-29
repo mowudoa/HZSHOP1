@@ -2015,6 +2015,17 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
 
         [invocation invoke];
     }
+    
+    //发送通知
+    if (currentTextFieldView.tag==50001) {
+        
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"doneAction" object:nil userInfo:nil]];
+    }
+    
+    if (currentTextFieldView.tag==60001) {
+        
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"putGoodsNum" object:nil userInfo:nil]];
+    }
 }
 
 #pragma mark - Customised textField/textView support.

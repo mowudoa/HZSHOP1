@@ -11,13 +11,17 @@ crazyShakeWindow *shakeWindow;
 - (instancetype)init
 {
     self = [super init];
+    
     if (self) {
         
         CrazyGuideView * guide = [[CrazyGuideView alloc]init];
+        
         [self addSubview:guide];
-//        @"good111",@"good222"
+
         [guide createLocationImageArr:@[@"yindao1.png",@"yindao2.png",@"yindao3.png"] block:^{
+            
             [guide removeFromSuperview];
+            
         }];
         
     }
@@ -28,6 +32,7 @@ crazyShakeWindow *shakeWindow;
 	if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake) {
 	    
         if(shakeWindow.Shakeblock){
+            
             shakeWindow.Shakeblock();
         }
         
@@ -35,13 +40,18 @@ crazyShakeWindow *shakeWindow;
 }
 
 +(void)shakeBlock:(crazyShakeBlock)block{
-   AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+   
+    AppDelegate * app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
     shakeWindow = app.window;
     
     shakeWindow.Shakeblock = block;
+
 }
 +(void)removeBlock{
+   
     if (shakeWindow.Shakeblock != nil ) {
+    
         shakeWindow.Shakeblock = nil;
     }
 }

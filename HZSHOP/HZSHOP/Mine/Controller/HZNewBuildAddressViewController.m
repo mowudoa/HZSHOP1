@@ -16,6 +16,14 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *areaTextField;
 
+@property (weak, nonatomic) IBOutlet UITextField *consigneeName;
+
+@property (weak, nonatomic) IBOutlet UITextField *consigneePhone;
+
+@property (weak, nonatomic) IBOutlet UIButton *consigneeAreaButton;
+
+@property (weak, nonatomic) IBOutlet UITextField *areaDetailInfo;
+
 @end
 
 @implementation HZNewBuildAddressViewController
@@ -51,6 +59,74 @@
         NSLog(@"点击了背景视图或取消按钮");
         
     }];
+}
+
+//保存地址
+- (IBAction)saveArea:(UIButton *)sender {
+
+       if ([_consigneeName.text isEqualToString:@""] || [_consigneeName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        
+        [JKToast showWithText:@"收货人不可为空"];
+        
+    }else if ([_consigneePhone.text isEqualToString:@""] || [_consigneePhone.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0){
+        
+        [JKToast showWithText:@"手机号不可为空"];
+        
+    }else if ([_areaTextField.text isEqualToString:@""] || [_areaTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0){
+        
+        [JKToast showWithText:@"地区不可为空"];
+        
+    }else if ([_areaDetailInfo.text isEqualToString:@""] || [_areaDetailInfo.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0){
+        
+        [JKToast showWithText:@"详细地址不可为空"];
+        
+    }else{
+        
+        NSString *isDefault;
+        
+        if (_switchButton.isOn) {
+            
+            isDefault = @"1";
+            
+        }else{
+            
+            isDefault = @"0";
+
+        }
+        
+        NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                               @"areas":_areaTextField.text,
+                               @"address":_areaDetailInfo.text,
+                               @"mobile":_consigneePhone.text,
+                               @"realname":_consigneeName.text,
+                               @"isdefault":isDefault
+                               };
+        
+        [CrazyNetWork CrazyRequest_Post:ADD_ADDRESS parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+            
+            LOG(@"添加地址", dic);
+            
+            if (SUCCESS) {
+                
+                [JKToast showWithText:Address_Add_Success];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }else{
+                
+                [JKToast showWithText:dic[@"datas"][@"error"]];
+                
+            }
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+            LOG(@"cuow", Json);
+            
+        }];
+        
+        
+    }
+    
 }
 
 @end

@@ -273,6 +273,11 @@
 		7142A6D8225C8D8800B15D8C /* HZCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7142A6D6225C8D8800B15D8C /* HZCategoryViewController.m */; };
 		7142A6D9225C8D8800B15D8C /* HZCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7142A6D7225C8D8800B15D8C /* HZCategoryViewController.xib */; };
 		7142A6DC225C8E4400B15D8C /* CrazyConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7142A6DB225C8E4400B15D8C /* CrazyConfiguration.m */; };
+		71445EB722753E3400C393B0 /* HZEvaluateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71445EB522753E3400C393B0 /* HZEvaluateViewController.m */; };
+		71445EB822753E3400C393B0 /* HZEvaluateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71445EB622753E3400C393B0 /* HZEvaluateViewController.xib */; };
+		71445EBB2275A06F00C393B0 /* HZCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71445EBA2275A06F00C393B0 /* HZCategoryModel.m */; };
+		71445EBF2275A2F900C393B0 /* HZCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71445EBD2275A2F900C393B0 /* HZCategoryCollectionViewCell.m */; };
+		71445EC02275A2F900C393B0 /* HZCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71445EBE2275A2F900C393B0 /* HZCategoryCollectionViewCell.xib */; };
 		714F34F2225EECB2004685A4 /* HZMyFollowGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F34F0225EECB2004685A4 /* HZMyFollowGoodsViewController.m */; };
 		714F34F3225EECB2004685A4 /* HZMyFollowGoodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 714F34F1225EECB2004685A4 /* HZMyFollowGoodsViewController.xib */; };
 		714F34F7225EED2E004685A4 /* HZMyFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F34F5225EED2E004685A4 /* HZMyFollowTableViewCell.m */; };
@@ -284,6 +289,8 @@
 		714F3509225F0A04004685A4 /* HZMyBrowseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 714F3507225F0A04004685A4 /* HZMyBrowseViewController.xib */; };
 		714F350D225F31B0004685A4 /* HZCommissionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F350B225F31B0004685A4 /* HZCommissionDetailsViewController.m */; };
 		714F350E225F31B0004685A4 /* HZCommissionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 714F350C225F31B0004685A4 /* HZCommissionDetailsViewController.xib */; };
+		7156C3092273F472006861CD /* HZApplyForRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7156C3072273F472006861CD /* HZApplyForRefundViewController.m */; };
+		7156C30A2273F472006861CD /* HZApplyForRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7156C3082273F472006861CD /* HZApplyForRefundViewController.xib */; };
 		7164269E226EEFBF00B937F3 /* HZOrderPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7164269C226EEFBF00B937F3 /* HZOrderPayViewController.m */; };
 		7164269F226EEFBF00B937F3 /* HZOrderPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7164269D226EEFBF00B937F3 /* HZOrderPayViewController.xib */; };
 		716426A3226EFBF800B937F3 /* HZPayTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 716426A1226EFBF800B937F3 /* HZPayTypeTableViewCell.m */; };
@@ -313,6 +320,7 @@
 		718CED20226458EB00238FE5 /* HZAddressSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED1E226458EB00238FE5 /* HZAddressSelectTableViewCell.xib */; };
 		718CED24226478A600238FE5 /* HZCartOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 718CED22226478A600238FE5 /* HZCartOrderTableViewCell.m */; };
 		718CED25226478A600238FE5 /* HZCartOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 718CED23226478A600238FE5 /* HZCartOrderTableViewCell.xib */; };
+		718EA9B52271A958000FF07F /* HZConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 718EA9B42271A958000FF07F /* HZConstant.m */; };
 		71EDD06D225DDE1600220105 /* HZAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD06C225DDE1600220105 /* HZAddressModel.m */; };
 		71EDD082225DE31F00220105 /* BRStringPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD071225DE31F00220105 /* BRStringPickerView.m */; };
 		71EDD083225DE31F00220105 /* NSDate+BRPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EDD076225DE31F00220105 /* NSDate+BRPickerView.m */; };
@@ -873,6 +881,14 @@
 		7142A6D7225C8D8800B15D8C /* HZCategoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCategoryViewController.xib; sourceTree = "<group>"; };
 		7142A6DA225C8E4400B15D8C /* CrazyConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrazyConfiguration.h; sourceTree = "<group>"; };
 		7142A6DB225C8E4400B15D8C /* CrazyConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrazyConfiguration.m; sourceTree = "<group>"; };
+		71445EB422753E3400C393B0 /* HZEvaluateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZEvaluateViewController.h; sourceTree = "<group>"; };
+		71445EB522753E3400C393B0 /* HZEvaluateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZEvaluateViewController.m; sourceTree = "<group>"; };
+		71445EB622753E3400C393B0 /* HZEvaluateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZEvaluateViewController.xib; sourceTree = "<group>"; };
+		71445EB92275A06F00C393B0 /* HZCategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCategoryModel.h; sourceTree = "<group>"; };
+		71445EBA2275A06F00C393B0 /* HZCategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCategoryModel.m; sourceTree = "<group>"; };
+		71445EBC2275A2F900C393B0 /* HZCategoryCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCategoryCollectionViewCell.h; sourceTree = "<group>"; };
+		71445EBD2275A2F900C393B0 /* HZCategoryCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCategoryCollectionViewCell.m; sourceTree = "<group>"; };
+		71445EBE2275A2F900C393B0 /* HZCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		714F34EF225EECB2004685A4 /* HZMyFollowGoodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZMyFollowGoodsViewController.h; sourceTree = "<group>"; };
 		714F34F0225EECB2004685A4 /* HZMyFollowGoodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZMyFollowGoodsViewController.m; sourceTree = "<group>"; };
 		714F34F1225EECB2004685A4 /* HZMyFollowGoodsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZMyFollowGoodsViewController.xib; sourceTree = "<group>"; };
@@ -890,6 +906,9 @@
 		714F350A225F31B0004685A4 /* HZCommissionDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCommissionDetailsViewController.h; sourceTree = "<group>"; };
 		714F350B225F31B0004685A4 /* HZCommissionDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCommissionDetailsViewController.m; sourceTree = "<group>"; };
 		714F350C225F31B0004685A4 /* HZCommissionDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCommissionDetailsViewController.xib; sourceTree = "<group>"; };
+		7156C3062273F472006861CD /* HZApplyForRefundViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZApplyForRefundViewController.h; sourceTree = "<group>"; };
+		7156C3072273F472006861CD /* HZApplyForRefundViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZApplyForRefundViewController.m; sourceTree = "<group>"; };
+		7156C3082273F472006861CD /* HZApplyForRefundViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZApplyForRefundViewController.xib; sourceTree = "<group>"; };
 		7164269B226EEFBF00B937F3 /* HZOrderPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZOrderPayViewController.h; sourceTree = "<group>"; };
 		7164269C226EEFBF00B937F3 /* HZOrderPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZOrderPayViewController.m; sourceTree = "<group>"; };
 		7164269D226EEFBF00B937F3 /* HZOrderPayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZOrderPayViewController.xib; sourceTree = "<group>"; };
@@ -934,6 +953,8 @@
 		718CED21226478A600238FE5 /* HZCartOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCartOrderTableViewCell.h; sourceTree = "<group>"; };
 		718CED22226478A600238FE5 /* HZCartOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCartOrderTableViewCell.m; sourceTree = "<group>"; };
 		718CED23226478A600238FE5 /* HZCartOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HZCartOrderTableViewCell.xib; sourceTree = "<group>"; };
+		718EA9B32271A958000FF07F /* HZConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZConstant.h; sourceTree = "<group>"; };
+		718EA9B42271A958000FF07F /* HZConstant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZConstant.m; sourceTree = "<group>"; };
 		71EDD06B225DDE1600220105 /* HZAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZAddressModel.h; sourceTree = "<group>"; };
 		71EDD06C225DDE1600220105 /* HZAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZAddressModel.m; sourceTree = "<group>"; };
 		71EDD070225DE31F00220105 /* BRStringPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringPickerView.h; sourceTree = "<group>"; };
@@ -1126,6 +1147,8 @@
 		7142A3F6225C8C1800B15D8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				71445EB92275A06F00C393B0 /* HZCategoryModel.h */,
+				71445EBA2275A06F00C393B0 /* HZCategoryModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1139,6 +1162,9 @@
 				716631252266C40D00678F89 /* HZTableCollectionViewCell.h */,
 				716631262266C40D00678F89 /* HZTableCollectionViewCell.m */,
 				716631272266C40D00678F89 /* HZTableCollectionViewCell.xib */,
+				71445EBC2275A2F900C393B0 /* HZCategoryCollectionViewCell.h */,
+				71445EBD2275A2F900C393B0 /* HZCategoryCollectionViewCell.m */,
+				71445EBE2275A2F900C393B0 /* HZCategoryCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1244,6 +1270,12 @@
 				71427AE72269C7CA0037BCFE /* HZRechargeViewController.h */,
 				71427AE82269C7CA0037BCFE /* HZRechargeViewController.m */,
 				71427AE92269C7CA0037BCFE /* HZRechargeViewController.xib */,
+				7156C3062273F472006861CD /* HZApplyForRefundViewController.h */,
+				7156C3072273F472006861CD /* HZApplyForRefundViewController.m */,
+				7156C3082273F472006861CD /* HZApplyForRefundViewController.xib */,
+				71445EB422753E3400C393B0 /* HZEvaluateViewController.h */,
+				71445EB522753E3400C393B0 /* HZEvaluateViewController.m */,
+				71445EB622753E3400C393B0 /* HZEvaluateViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1303,9 +1335,11 @@
 		7142A400225C8C1900B15D8C /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				7142A417225C8C5D00B15D8C /* HZPrefixHeader.pch */,
+				718EA9B32271A958000FF07F /* HZConstant.h */,
+				718EA9B42271A958000FF07F /* HZConstant.m */,
 				7142A3BE225C8AF100B15D8C /* AppDelegate.h */,
 				7142A3BF225C8AF100B15D8C /* AppDelegate.m */,
+				7142A417225C8C5D00B15D8C /* HZPrefixHeader.pch */,
 				7142A6DA225C8E4400B15D8C /* CrazyConfiguration.h */,
 				7142A6DB225C8E4400B15D8C /* CrazyConfiguration.m */,
 				7142A3C7225C8AF200B15D8C /* Assets.xcassets */,
@@ -1386,10 +1420,10 @@
 			isa = PBXGroup;
 			children = (
 				7142A420225C8D1E00B15D8C /* Config */,
+				7142A42B225C8D1E00B15D8C /* SWQRCodeViewController.h */,
 				7142A426225C8D1E00B15D8C /* SWQRCodeViewController.m */,
 				7142A427225C8D1E00B15D8C /* SWQRCode.bundle */,
 				7142A428225C8D1E00B15D8C /* View */,
-				7142A42B225C8D1E00B15D8C /* SWQRCodeViewController.h */,
 			);
 			path = SWQRCode;
 			sourceTree = "<group>";
@@ -1397,11 +1431,11 @@
 		7142A420225C8D1E00B15D8C /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				7142A421225C8D1E00B15D8C /* SWQRCodeConfig.m */,
-				7142A422225C8D1E00B15D8C /* SWQRCodeManager.m */,
 				7142A423225C8D1E00B15D8C /* SWQRCodeConfig.h */,
-				7142A424225C8D1E00B15D8C /* SWQRCode.h */,
+				7142A421225C8D1E00B15D8C /* SWQRCodeConfig.m */,
 				7142A425225C8D1E00B15D8C /* SWQRCodeManager.h */,
+				7142A422225C8D1E00B15D8C /* SWQRCodeManager.m */,
+				7142A424225C8D1E00B15D8C /* SWQRCode.h */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1486,8 +1520,8 @@
 		7142A43C225C8D1E00B15D8C /* MD5 */ = {
 			isa = PBXGroup;
 			children = (
-				7142A43D225C8D1E00B15D8C /* MyMD5.m */,
 				7142A43E225C8D1E00B15D8C /* MyMD5.h */,
+				7142A43D225C8D1E00B15D8C /* MyMD5.m */,
 			);
 			path = MD5;
 			sourceTree = "<group>";
@@ -1565,8 +1599,8 @@
 		7142A45E225C8D1E00B15D8C /* starView */ = {
 			isa = PBXGroup;
 			children = (
-				7142A45F225C8D1E00B15D8C /* commentStar.m */,
 				7142A460225C8D1E00B15D8C /* commentStar.h */,
+				7142A45F225C8D1E00B15D8C /* commentStar.m */,
 			);
 			path = starView;
 			sourceTree = "<group>";
@@ -2467,12 +2501,14 @@
 				7174292F225DD44600DDDBCC /* HZAddressListTableViewCell.xib in Resources */,
 				7142A6CF225C8D6200B15D8C /* HZMineViewController.xib in Resources */,
 				71427AD222695F310037BCFE /* HZOrderStatusTableViewCell.xib in Resources */,
+				71445EB822753E3400C393B0 /* HZEvaluateViewController.xib in Resources */,
 				7142A625225C8D1F00B15D8C /* MJRefresh.bundle in Resources */,
 				716631292266C40D00678F89 /* HZTableCollectionViewCell.xib in Resources */,
 				714188262260814900ED7987 /* HZSelectNumTableViewCell.xib in Resources */,
 				7140A9952265C31600DD0FA9 /* HZGoodsCollectionViewCell.xib in Resources */,
 				7141882B226081E100ED7987 /* HZjumbShopTableViewCell.xib in Resources */,
 				71427AEB2269C7CA0037BCFE /* HZRechargeViewController.xib in Resources */,
+				71445EC02275A2F900C393B0 /* HZCategoryCollectionViewCell.xib in Resources */,
 				7164269F226EEFBF00B937F3 /* HZOrderPayViewController.xib in Resources */,
 				718CED112264342700238FE5 /* HZLeaveMessageTableViewCell.xib in Resources */,
 				71418830226083D900ED7987 /* HZLoginViewController.xib in Resources */,
@@ -2483,6 +2519,7 @@
 				7141881C22603B9B00ED7987 /* HZGoodsDetailViewController.xib in Resources */,
 				713EADD122684955008B4F8D /* HZCouponDetailViewController.xib in Resources */,
 				7174292A225DC75400DDDBCC /* HZNewBuildAddressViewController.xib in Resources */,
+				7156C30A2273F472006861CD /* HZApplyForRefundViewController.xib in Resources */,
 				718CED1B226435B000238FE5 /* HZGoodsPriceTableViewCell.xib in Resources */,
 				7142A615225C8D1F00B15D8C /* glass.wav in Resources */,
 				713EADDB226859E1008B4F8D /* HZCouponInfoTableViewCell.xib in Resources */,
@@ -2546,6 +2583,7 @@
 				71742929225DC75400DDDBCC /* HZNewBuildAddressViewController.m in Sources */,
 				7142A693225C8D1F00B15D8C /* NSMapTable+BlocksKit.m in Sources */,
 				71EDD083225DE31F00220105 /* NSDate+BRPickerView.m in Sources */,
+				71445EBB2275A06F00C393B0 /* HZCategoryModel.m in Sources */,
 				7142A645225C8D1F00B15D8C /* MASConstraint.m in Sources */,
 				7142A616225C8D1F00B15D8C /* commentStar.m in Sources */,
 				7142A689225C8D1F00B15D8C /* NSDictionary+BlocksKit.m in Sources */,
@@ -2576,10 +2614,12 @@
 				7142A6BA225C8D1F00B15D8C /* SDWebImageDownloader.m in Sources */,
 				7142A6AD225C8D1F00B15D8C /* ASIHTTPRequest.m in Sources */,
 				7142A6BB225C8D1F00B15D8C /* UIImage+GIF.m in Sources */,
+				71445EBF2275A2F900C393B0 /* HZCategoryCollectionViewCell.m in Sources */,
 				7142A634225C8D1F00B15D8C /* MJRefreshAutoFooter.m in Sources */,
 				7142A68C225C8D1F00B15D8C /* NSObject+BKBlockObservation.m in Sources */,
 				7142A67E225C8D1F00B15D8C /* RDVTabBarItem.m in Sources */,
 				718CED1A226435B000238FE5 /* HZGoodsPriceTableViewCell.m in Sources */,
+				71445EB722753E3400C393B0 /* HZEvaluateViewController.m in Sources */,
 				7142A63C225C8D1F00B15D8C /* CrazyViewController.m in Sources */,
 				7142A6AE225C8D1F00B15D8C /* ASIFormDataRequest.m in Sources */,
 				71427AD122695F310037BCFE /* HZOrderStatusTableViewCell.m in Sources */,
@@ -2685,6 +2725,7 @@
 				7142A63B225C8D1F00B15D8C /* CrazyExtensionHeader.m in Sources */,
 				7142A660225C8D1F00B15D8C /* IQPreviousNextView.m in Sources */,
 				7142A652225C8D1F00B15D8C /* CrazyLocation.m in Sources */,
+				7156C3092273F472006861CD /* HZApplyForRefundViewController.m in Sources */,
 				7142A692225C8D1F00B15D8C /* NSObject+BKAssociatedObjects.m in Sources */,
 				7142A685225C8D1F00B15D8C /* NullSafe.m in Sources */,
 				713D13DD2261CB8E0094A259 /* HZcouponModel.m in Sources */,
@@ -2712,6 +2753,7 @@
 				71418834226096CB00ED7987 /* HZRegisterViewController.m in Sources */,
 				7142A5FE225C8D1F00B15D8C /* SWQRCodeManager.m in Sources */,
 				7140A9942265C31600DD0FA9 /* HZGoodsCollectionViewCell.m in Sources */,
+				718EA9B52271A958000FF07F /* HZConstant.m in Sources */,
 				714F34F2225EECB2004685A4 /* HZMyFollowGoodsViewController.m in Sources */,
 				7142A60C225C8D1F00B15D8C /* MJType.m in Sources */,
 				7142A682225C8D1F00B15D8C /* FMDatabasePool.m in Sources */,

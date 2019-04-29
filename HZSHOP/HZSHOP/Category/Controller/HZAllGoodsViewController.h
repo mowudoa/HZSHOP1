@@ -19,6 +19,10 @@ typedef enum {
 
 @property(nonatomic) goodsListType listType;
 
+@property(nonatomic,copy) NSString *classId;
+
+@property(copy,nonatomic) NSString *keyWords;//关键字
+
 @end
 
 NS_ASSUME_NONNULL_END

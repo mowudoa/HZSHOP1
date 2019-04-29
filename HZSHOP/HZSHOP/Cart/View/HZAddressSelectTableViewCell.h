@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *addressDetail;
 
+@property (weak, nonatomic) IBOutlet UIImageView *arrowTipImage;
+
 @end
 
 NS_ASSUME_NONNULL_END

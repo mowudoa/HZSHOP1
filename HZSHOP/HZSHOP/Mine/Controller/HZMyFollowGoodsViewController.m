@@ -36,14 +36,38 @@ UITableViewDataSource
 }
 -(void)initUI
 {
+    self.totalPage = 1;
+    
     self.navigationItem.title = @"我的关注";
     
     _followGoodsArray = [[NSMutableArray alloc] init];
     
+    // 下拉加载
+    self.followGoodsTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.followGoodsTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_followGoodsTableView];
+
 }
 -(void)initData
 {
-    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978"};
+    self.nowPage = 1;
+    
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978",
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
 
     MJWeakSelf;
     
@@ -67,9 +91,9 @@ UITableViewDataSource
                 
                 model.rootTitle = follw[@"title"];
                 
-                model.goodsOldPrice = follw[@"marketprice"];
+                model.goodsPrice = follw[@"marketprice"];
                 
-                model.goodsPrice = follw[@"productprice"];
+                model.goodsOldPrice = follw[@"productprice"];
                 
                 model.goodsId = follw[@"goodsid"];
                 
@@ -87,10 +111,73 @@ UITableViewDataSource
         
         [strongSelf.followGoodsTableView reloadData];
         
+        [strongSelf.followGoodsTableView.mj_header endRefreshing];
+
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
     
+}
+
+-(void)initMoreData
+{
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978",
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
+    
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:MY_FOLLOW parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        MJStrongSelf;
+        
+        LOG(@"我的关注", dic);
+        
+        if (SUCCESS) {
+            
+            NSArray *followArray = dic[@"data"][@"list"];
+            
+            for (NSDictionary *follw in followArray) {
+                
+                HZGoodsModel *model = [[HZGoodsModel alloc] init];
+                
+                model.rootId = follw[@"id"];
+                
+                model.rootTitle = follw[@"title"];
+                
+                model.goodsPrice = follw[@"marketprice"];
+                
+                model.goodsOldPrice = follw[@"productprice"];
+                
+                model.goodsId = follw[@"goodsid"];
+                
+                model.rootImageUrl = follw[@"thumb"];
+                
+                [strongSelf.followGoodsArray addObject:model];
+                
+            }
+            
+            [strongSelf.followGoodsTableView reloadData];
+            
+            [strongSelf.followGoodsTableView.mj_footer endRefreshing];
+            
+            if (followArray.count > 0) {
+                
+            }else{
+                
+                [JKToast showWithText:NOMOREDATA_STRING];
+                
+                [strongSelf.followGoodsTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+        }else{
+            
+            
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
 }
 -(void)registercell
 {

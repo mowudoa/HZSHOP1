@@ -37,12 +37,14 @@
         self.userInteractionEnabled = YES;
         
         [self createBtn];
+        
     }
     return self;
 }
 
 -(void)setNumofStar:(NSInteger)numofStar
 {
+    
     _numofStar = numofStar;
     UIButton* btn = (UIButton*)[self viewWithTag:numofStar-1+10];
     [self selectStar:btn];
@@ -51,7 +53,9 @@
 -(void)setSelectingenabled:(BOOL)selectingenabled
 {
     _selectingenabled = selectingenabled;
+    
     self.userInteractionEnabled = selectingenabled;
+    
 }
 
 -(void)createBtn
@@ -66,12 +70,25 @@
         
         [self addSubview:btn];
     }
+    
+    [self addObserver:self forKeyPath:@"currentStar" options:NSKeyValueObservingOptionNew || NSKeyValueChangeOldKey context:nil];
+
 }
 
 -(void)selectStar:(UIButton*)sender
 {
     
-    _currentStar = sender.tag - 10+1;
+    if (sender != nil) {
+     
+        self.currentStar = sender.tag - 10+1;
+        
+    }else{
+        
+        self.currentStar = 0;
+        
+    }
+    
+    
     NSArray* arr = self.subviews;
     for (UIButton* btn in arr) {
         if ([btn isKindOfClass:[UIButton class]]) {
@@ -83,6 +100,29 @@
             }
         }
     }
+    
+    
 }
-
+-(void)returnStar:(returnStarNumBlock)block
+{
+ 
+    self.returnStarNumBlock = block;
+    
+}
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    
+    if (self.returnStarNumBlock != nil) {
+        
+        self.returnStarNumBlock(_currentStar);
+        
+    }
+    
+}
+-(void)dealloc
+{
+   
+    [self removeObserver:self forKeyPath:@"currentStar"];
+    
+}
 @end

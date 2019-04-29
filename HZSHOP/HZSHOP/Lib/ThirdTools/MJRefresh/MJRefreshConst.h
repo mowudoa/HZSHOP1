@@ -4,7 +4,7 @@
 #import <objc/message.h>
 
 // 弱引用
-#define MJWeakSelf __weak typeof(self) weakSelf = self;
+#define MJWeakSelf               __weak typeof(self) weakSelf = self;
 
 //
 #define MJStrongSelf             __strong typeof(weakSelf) strongSelf = weakSelf;

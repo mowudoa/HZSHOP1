@@ -12,4 +12,8 @@
 
 -(void)initBackButton;
 
+@property(nonatomic,assign) NSInteger nowPage;
+
+@property(nonatomic,assign) NSInteger totalPage;
+
 @end

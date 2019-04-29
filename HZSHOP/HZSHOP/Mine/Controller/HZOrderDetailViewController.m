@@ -7,6 +7,7 @@
 //
 
 #import "HZOrderDetailViewController.h"
+#import "HZOrderPayViewController.h"
 #import "HZOrderCodeTableViewCell.h"
 #import "HZCartOrderTableViewCell.h"
 #import "HZGoodsPriceTableViewCell.h"
@@ -105,6 +106,8 @@ UITableViewDataSource
         HZAddressSelectTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"AddressSelectTableViewCell" forIndexPath:indexPath];
         
         cell.addressAddView.hidden = YES;
+        
+        cell.arrowTipImage.hidden = YES;
         
         cell.addressInfoView.hidden = NO;
         
@@ -205,7 +208,23 @@ UITableViewDataSource
 
 #pragma mark 订单支付/取消/删除
 - (IBAction)orderButton:(UIButton *)sender {
-
+    
+    if ([sender.titleLabel.text containsString:HZOrderPayNow]) {
+        
+        HZOrderPayViewController *orderPay = [[HZOrderPayViewController alloc] init];
+        
+        [self.navigationController pushViewController:orderPay animated:YES];
+        
+    }else if ([sender.titleLabel.text containsString:HZOrderCancleOrder]){
+        
+        
+    }else if ([sender.titleLabel.text containsString:HZOrderGoEvaluate]){
+        
+        
+    }else if ([sender.titleLabel.text containsString:HZOrderApplyForRefund]){
+        
+        
+    }
     
 }
 

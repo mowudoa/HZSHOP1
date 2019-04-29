@@ -10,8 +10,9 @@
 #import "HZOrderPayViewController.h"
 #import "HZCartOrderTableViewCell.h"
 #import "HZGoodsPriceTableViewCell.h"
-#import "HZLeaveMessageTableViewCell.h"
 #import "HZCouPonSelectTableViewCell.h"
+#import "HZAddressListViewController.h"
+#import "HZLeaveMessageTableViewCell.h"
 #import "HZAddressSelectTableViewCell.h"
 @interface HZCartOrderViewController ()<
 UITableViewDelegate,
@@ -154,7 +155,14 @@ UITableViewDataSource
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+  
+    if (indexPath.section == AddressType - 100){
+       
+        HZAddressListViewController *address = [[HZAddressListViewController alloc] init];
+        
+        [self.navigationController pushViewController:address animated:YES];
+        
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

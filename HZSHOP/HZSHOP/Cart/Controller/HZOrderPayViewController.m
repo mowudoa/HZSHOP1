@@ -86,6 +86,7 @@ UITableViewDataSource
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   
     HZPayTypeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PayTypeTableViewCell"];
     
     rootModel *model = _payTypeArray[indexPath.row];

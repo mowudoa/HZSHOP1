@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passWordSecondTextField;
 
+@property(nonatomic,assign) NSInteger num;
+
 @end
 
 @implementation HZRegisterViewController
@@ -104,6 +106,49 @@
     
 }
 
+#pragma mark 验证码获取
+- (IBAction)getCode:(UIButton *)sender {
+
+
+    self.num = 60;
+    
+    [self.getCodeButton setTitle:[NSString stringWithFormat:@"%ld",(long)(self.num)] forState:UIControlStateNormal];
+    
+    self.getCodeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    self.getCodeButton.enabled = NO;
+    
+    [self jishiTimer];
+    
+}
+
+//倒计时
+-(void)jishiTimer
+{
+    _num--;
+    
+    if (_num < 1) {
+        
+        _getCodeButton.enabled = YES;
+        
+        [_getCodeButton setTitle:[NSString stringWithFormat:@"立即获取"] forState:UIControlStateNormal];
+        
+        [_getCodeButton setBackgroundColor:[UIColor redColor]];
+        
+        return;
+        
+    }else
+    {
+        _getCodeButton.enabled = NO;
+        
+        [_getCodeButton setTitle:[NSString stringWithFormat:@"%lds",(long)_num] forState:UIControlStateNormal];
+        
+        [self performSelector:@selector(jishiTimer) withObject:nil afterDelay:1.0f];
+        
+        return;
+    }
+    
+}
 /*
 #pragma mark - Navigation
 

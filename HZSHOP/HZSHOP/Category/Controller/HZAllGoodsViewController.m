@@ -7,6 +7,7 @@
 //
 
 #import "HZAllGoodsViewController.h"
+#import "HZGoodsModel.h"
 #import "HZGoodsCollectionViewCell.h"
 #import "HZGoodsDetailViewController.h"
 #import "HZTableCollectionViewCell.h"
@@ -24,6 +25,15 @@ UICollectionViewDelegateFlowLayout
 
 @property(strong,nonatomic)UIBarButtonItem* rightItem;
 
+@property(strong,nonatomic) NSMutableArray *allGoodsArray;
+
+@property(copy,nonatomic) NSString *sortType;//排序方式
+
+@property(copy,nonatomic) NSString *collation;//排序规则
+
+@property(assign,nonatomic) NSInteger tipNum;//价格点击次数
+
+
 @end
 
 @implementation HZAllGoodsViewController
@@ -36,16 +46,23 @@ UICollectionViewDelegateFlowLayout
     
     [self registeCell];
     
+    [self initData];
+    
 }
 
 -(void)initUI
 {
+    _tipNum = 1;
  
+    _collation = @"1";
+    
     self.navigationItem.titleView = self.searchView;
     
     self.navigationItem.rightBarButtonItem = self.rightItem;
     
     _listType = collectionViewType;
+    
+    self.allGoodsArray = [[NSMutableArray alloc] init];
     
 }
 
@@ -59,6 +76,77 @@ UICollectionViewDelegateFlowLayout
     UINib* cate1 = [UINib nibWithNibName:@"HZTableCollectionViewCell" bundle:nil];
     
     [_allGoodsCollectionView registerNib:cate1 forCellWithReuseIdentifier:@"TableCollectionViewCell"];
+    
+}
+
+-(void)initData
+{
+   
+    NSMutableDictionary *keyDic = [[NSMutableDictionary alloc] init];
+
+    
+    if (_sortType != nil) {
+        
+        [keyDic addEntriesFromDictionary:@{@"px":_sortType}];
+    }
+    
+    if (_keyWords != nil) {
+        
+        [keyDic addEntriesFromDictionary:@{@"title":_keyWords}];
+    }
+    
+    [keyDic addEntriesFromDictionary:@{@"pcate":_classId,
+                                       @"pxgz":_collation
+                                       }];
+    
+    
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:ALL_GOODS parameters:keyDic HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        MJStrongSelf;
+        
+        [strongSelf.allGoodsArray removeAllObjects];
+        
+        LOG(@"商品列表", dic);
+        
+        if (SUCCESS) {
+            
+            //    [JKToast showWithText:dic[@"msg"]];
+            
+            NSArray *arr = dic[@"data"][@"list"];
+            
+            for (NSDictionary *dict in arr) {
+                
+                HZGoodsModel*model = [[HZGoodsModel alloc] init];
+                
+                model.rootTitle = dict[@"title"];
+                
+                model.rootId = dict[@"id"];
+                
+                model.goodsOldPrice = dict[@"productprice"];
+                
+                model.goodsPrice = dict[@"marketprice"];
+
+                model.rootImageUrl = dict[@"thumb"];
+                
+                [strongSelf.allGoodsArray addObject:model];
+            }
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"msg"]];
+            
+        }
+        
+        [strongSelf.allGoodsCollectionView reloadData];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+        LOG(@"cuow", Json);
+        
+    }];
+    
     
 }
 
@@ -163,6 +251,41 @@ UICollectionViewDelegateFlowLayout
  
     sender.selected = !sender.selected;
     
+    if ([sender.titleLabel.text isEqualToString:@"综合"]){
+       
+        _sortType = nil;
+        
+        _collation = @"1";
+        
+        _tipNum = 1;
+        
+    }else if ([sender.titleLabel.text isEqualToString:@"销量"]){
+        
+        _sortType = @"salesreal";
+        
+        _collation = @"1";
+
+        _tipNum = 1;
+
+    }else if ([sender.titleLabel.text isEqualToString:@"价格"]){
+        
+        _sortType = @"marketprice";
+        
+        if (_tipNum%2 == 0) {
+            
+            _collation = @"0";
+
+        }else{
+            
+            _collation = @"1";
+
+        }
+        
+        _tipNum ++;
+    }
+    
+    [self initData];
+
 }
 
 
@@ -170,6 +293,11 @@ UICollectionViewDelegateFlowLayout
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"%@",searchBar.text);
+    
+    _keyWords = searchBar.text;
+    
+    [self initData];
+    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -177,21 +305,39 @@ UICollectionViewDelegateFlowLayout
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 10;
+    return _allGoodsArray.count;
     
 }
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    HZGoodsModel *model = _allGoodsArray[indexPath.row];
+    
     if (_listType == tableViewType) {
         
         HZTableCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TableCollectionViewCell" forIndexPath:indexPath];
         
+        [cell.goodsImage sd_setImageWithURL:[NSURL URLWithString:model.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
+        
+        cell.goodsTitle.text = model.rootTitle;
+        
+        cell.goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:model.goodsOldPrice];
+        
+        cell.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.goodsPrice];
+                
         return cell;
         
     }
     
     HZGoodsCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsCollectionViewCell" forIndexPath:indexPath];
     
+    cell.goodsTitle.text = model.rootTitle;
+    
+    cell.goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:model.goodsOldPrice];
+    
+    cell.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.goodsPrice];
+    
+    [cell.goodsImage sd_setImageWithURL:[NSURL URLWithString:model.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
+
     return cell;
     
 }
@@ -201,6 +347,10 @@ UICollectionViewDelegateFlowLayout
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HZGoodsDetailViewController *goodsDetail = [[HZGoodsDetailViewController alloc] init];
+    
+    HZGoodsModel *model = _allGoodsArray[indexPath.row];
+    
+    goodsDetail.goodsId = model.rootId;
     
     [self.navigationController pushViewController:goodsDetail animated:YES];
    

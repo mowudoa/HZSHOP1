@@ -19,6 +19,8 @@ UITableViewDataSource
 
 @property (weak, nonatomic) IBOutlet UIButton *buildAddressButton;
 
+@property(nonatomic,strong) NSMutableArray *addressArray;
+
 @end
 
 @implementation HZAddressListViewController
@@ -39,6 +41,8 @@ UITableViewDataSource
     
     [WYFTools viewLayer:5 withView:_buildAddressButton];
     
+    _addressArray = [[NSMutableArray alloc] init];
+    
 }
 
 -(void)registercell
@@ -52,6 +56,56 @@ UITableViewDataSource
     
 }
 
+-(void)initData
+{
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]};
+
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:ADDRESS_LIST parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"地址列表", dic)
+        
+        MJStrongSelf;
+        
+        [strongSelf.addressArray removeAllObjects];
+        
+        if ([[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"1"]) {
+            
+            NSArray *address = dic[@"result"][@"list"];
+            
+            for (NSDictionary *addressDic in address) {
+                
+                HZAddressModel *model = [[HZAddressModel alloc] init];
+                
+                model.userName = addressDic[@"realname"];
+                
+                model.userPhone = addressDic[@"mobile"];
+                
+                model.address = [NSString stringWithFormat:@"%@%@%@",addressDic[@"province"],addressDic[@"city"],addressDic[@"area"]];
+                
+                model.addressDetail = addressDic[@"address"];
+                
+                model.rootId = addressDic[@"id"];
+                
+                model.is_default = addressDic[@"isdefault"];
+                
+                [strongSelf.addressArray addObject:model];
+            }
+            
+            [strongSelf.addressListTableView reloadData];
+            
+        }else{
+            
+            
+        }
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
 - (IBAction)newBuildAddress:(UIButton *)sender {
 
     HZNewBuildAddressViewController *buildAddress = [[HZNewBuildAddressViewController alloc] init];
@@ -63,7 +117,7 @@ UITableViewDataSource
 #pragma mark - UITableViewDataSource  数据源方法
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return _addressArray.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -74,6 +128,10 @@ UITableViewDataSource
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HZAddressListTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"AddressTableViewCell" forIndexPath:indexPath];
+    
+    HZAddressModel *model = _addressArray[indexPath.section];
+    
+    [cell setAddressmodel:model];
     
     cell.delegate = self;
     
@@ -117,6 +175,7 @@ UITableViewDataSource
     view.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
     
     return view;
+    
 }
 
 #pragma mark ADDRESS_CELL_DELEGATE  自定义cell代理
@@ -124,10 +183,42 @@ UITableViewDataSource
 {
     
 }
+
 -(void)buttonDelete:(NSString *)addressId
 {
+  
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"id":addressId
+                           };
+
+    [CrazyNetWork CrazyRequest_Post:ADDRESS_DELETE parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"删除地址", dic);
+        
+        if ([[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"1"]) {
+            
+            [JKToast showWithText:Address_Delete_Success];
+            
+            [self initData];
+            
+        }else{
+            
+            [JKToast showWithText:Address_Delete_Faile];
+
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
+    [self initData];
+
 }
 /*
 #pragma mark - Navigation

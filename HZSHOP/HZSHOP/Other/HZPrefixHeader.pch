@@ -12,72 +12,35 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-#import <Availability.h>
+#import "AppDelegate.h"
 #import <UIKit/UIKit.h>
+#import <Availability.h>
 #import <Foundation/Foundation.h>
-#import "CrazyNetWork.h"
-#import "CrazyDB.h"
-#import "CrazyAutoLayout.h"
-#import "CrazyExtensionHeader.h"
-#import "CrazyFunction.h"
-#import "UIImageView+WebCache.h"
-#import "UIButton+WebCache.h"
-#import "UIView+SDAutoLayout.h"
-#import "IQKeyboardManager.h"
-#import "MJExtension.h"
-#import "MJRefresh.h"
+
+#import "MyMD5.h"
 #import "JSONKit.h"
 #import "Masonry.h"
-#import "rootModel.h"
-#import "WYFTools.h"
-#import "UIColor+hexColor.h"
-
-#import "AppDelegate.h"
-#import "CrazyConfiguration.h"
-#import "JKToast.h"
-#import "commentStar.h"
-#import "MyMD5.h"
+#import "MJRefresh.h"
+#import "MJExtension.h"
+#import "IQKeyboardManager.h"
+#import "UIButton+WebCache.h"
+#import "UIView+SDAutoLayout.h"
+#import "UIImageView+WebCache.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 
+#import "WYFTools.h"
+#import "rootModel.h"
+#import "HZConstant.h"
 
-//---------------系统常量---------------
-
-#define YY_APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication]delegate])//APPdelegate
-
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width //屏幕宽度
-
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height //屏幕高度
-
-#define SCREEN_STATUSRECT [[UIApplication sharedApplication] statusBarFrame].size.height //状态栏高度
-
-#define SCREEN_NAVRECT    self.navigationController.navigationBar.frame.size.height //导航栏高度
-
-#define SCREEN_TABBARRECT      ((AppDelegate *)[[UIApplication sharedApplication]delegate]).tabBarControll.tabBar.frame.size.height //标签栏高度
-
-//获取系统版本
-#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
-
-//获取当前语言
-#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
-
-#define HEIGHT(f) f * (SCREEN_WIDTH/320.0) //屏幕比例 算出实际UI大小
-
-//RGB颜色
-#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
-
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
-//请求状态码
-#define SUCCESS     [[NSString stringWithFormat:@"%d",[dic[@"code"] intValue]] isEqualToString:@"200"]
-
-#define FAILURE     [[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"400"]
-
-#define IPHONEX_Y_N  (SCREEN_STATUSRECT == 44)//是否为iPhone X
-
-#define BOTTOM_SAFEAREA (IPHONEX_Y_N ? 34:0)//底部安全距离
-
-#define USER_DEFAULT [NSUserDefaults standardUserDefaults]  //实例化
-
+#import "JKToast.h"
+#import "CrazyDB.h"
+#import "commentStar.h"
+#import "CrazyNetWork.h"
+#import "CrazyFunction.h"
+#import "CrazyAutoLayout.h"
+#import "UIColor+hexColor.h"
+#import "CrazyConfiguration.h"
+#import "CrazyExtensionHeader.h"
 
 //打印请求结果
 #define MyDeBug
@@ -91,7 +54,6 @@
 #define LOG(a,b)
 
 #endif
-
 
 //------------------接口------------
 
@@ -112,4 +74,19 @@
 #define MY_FOLLOW           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.favorite.favorite_list"//我的关注
 
 #define CANCLE_FOLLOW       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.favorite.favorite_remove"//取消关注
+
+#define MY_BROWSE           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.history.history_list"//我的足迹
+
+#define DELETE_BROWSE       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.history.history_remove"//删除历史记录
+#define CATEGORY_GOODS      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_type_list"//分类列表
+
+#define ALL_GOODS           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_list"//商品列表
+
+#define GOODS_DETAIL        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_details"//商品详情
+
+#define ADD_ADDRESS         @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.submitapp"//添加收货地址
+
+#define ADDRESS_LIST        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.getselectorapp"//地址列表
+
+#define ADDRESS_DELETE      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.delete_app"//地址删除
 #endif //  HZPrefixHeader.pch

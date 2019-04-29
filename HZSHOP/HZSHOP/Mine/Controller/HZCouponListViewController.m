@@ -39,13 +39,33 @@ UITableViewDataSource
     
     _couponArray = [[NSMutableArray alloc] init];
 
+    // 下拉加载
+    self.couponTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.couponTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_couponTableView];
 }
+
 -(void)initData
 {
+    self.nowPage = 1;
     
+    NSDictionary *dict = @{@"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]};
     MJWeakSelf;
     
-    [CrazyNetWork CrazyRequest_Get:COUPON_CENTER parameters:nil HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json)
+    [CrazyNetWork CrazyRequest_Get:COUPON_CENTER parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json)
     {
         
         LOG(@"优惠券中心", dic);
@@ -89,10 +109,79 @@ UITableViewDataSource
         
         [strongSelf.couponTableView reloadData];
         
+        [strongSelf.couponTableView.mj_header endRefreshing];
+
     } fail:^(NSError *error, NSString *url, NSString *Json) {
                                
         
     }];
+    
+}
+
+-(void)initMoreData
+{
+    
+    NSDictionary *dict = @{@"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]};
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Get:COUPON_CENTER parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json)
+     {
+         
+         LOG(@"优惠券中心", dic);
+         
+         MJStrongSelf;
+         
+         if (SUCCESS) {
+             
+             NSArray *couponList = dic[@"data"][@"list"];
+             
+             for (NSDictionary *coupnDic in couponList) {
+                 
+                 HZcouponModel *model = [[HZcouponModel alloc] init];
+                 
+                 model.rootId = coupnDic[@"id"];
+                 
+                 model.rootTitle = coupnDic[@"couponname"];
+                 
+                 model.couponMoney = coupnDic[@"_backmoney"];
+                 
+                 model.couponLimit = coupnDic[@"title2"];
+                 
+                 model.couponInfo = coupnDic[@"title5"];
+                 
+                 model.couponNum = [coupnDic[@"last"] stringValue];
+                 
+                 model.couponStockNum = [coupnDic[@"total"] stringValue];
+                 
+                 model.couponLifeTime = coupnDic[@"title4"];
+                 
+                 [strongSelf.couponArray addObject:model];
+                 
+             }
+            
+             [strongSelf.couponTableView reloadData];
+             
+             [strongSelf.couponTableView.mj_footer endRefreshing];
+             
+             if (couponList.count > 0) {
+                 
+             }else{
+                 
+                 [JKToast showWithText:NOMOREDATA_STRING];
+                 
+                 [strongSelf.couponTableView.mj_footer endRefreshingWithNoMoreData];
+                 
+             }
+             
+         }else{
+             
+             
+         }
+         
+     } fail:^(NSError *error, NSString *url, NSString *Json) {
+         
+         
+     }];
     
 }
 -(void)registercell

@@ -31,6 +31,8 @@ UITextFieldDelegate
 
 -(void)initUI
 {
+    self.navigationItem.title = @"账户充值";
+    
     [WYFTools viewLayer:5 withView:_rechargeButton];
     
     [_moneyTextField addTarget:self action:@selector(showtextFiledContents) forControlEvents:UIControlEventEditingChanged];

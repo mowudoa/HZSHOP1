@@ -20,6 +20,28 @@
 
     // Configure the view for the selected state
 }
+
+-(void)setAddressmodel:(HZAddressModel *)addressmodel
+{
+    _addressmodel = addressmodel;
+    
+    _nameLabel.text = addressmodel.userName;
+    
+    _phoneLabel.text = addressmodel.userPhone;
+    
+    _addressInfoLabel.text = [NSString stringWithFormat:@"%@%@",addressmodel.address,addressmodel.addressDetail];
+    
+    if ([addressmodel.is_default isEqualToString:@"1"]) {
+        
+        _defaultButton.selected = YES;
+        
+    }else{
+        
+        _defaultButton.selected = NO;
+        
+    }
+}
+
 - (IBAction)editButton:(UIButton *)sender {
 
     if ([self.delegate respondsToSelector:@selector(buttonEdit:withMode:)]) {
@@ -31,6 +53,7 @@
 
     if ([self.delegate respondsToSelector:@selector(buttonDelete:)]) {
         
+        [self.delegate buttonDelete:_addressmodel.rootId];
     }
     
 }

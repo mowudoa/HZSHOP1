@@ -70,12 +70,32 @@ UITableViewDataSource
         
     }
     
+    // 下拉加载
+    self.cartListTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.cartListTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_cartListTableView];
+    
 }
 
 -(void)initData
 {
+    self.nowPage = 1;
     
-    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]};
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]};
 
     MJWeakSelf;
     
@@ -84,6 +104,8 @@ UITableViewDataSource
         LOG(@"购物车",dic);
         
         MJStrongSelf;
+        
+        [strongSelf.cartGoodsArray removeAllObjects];
         
         if (SUCCESS) {
             
@@ -118,11 +140,76 @@ UITableViewDataSource
         
         [strongSelf.cartListTableView reloadData];
         
+        [strongSelf.cartListTableView.mj_header endRefreshing];
+        
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
     
-    [_cartListTableView reloadData];
+}
+
+-(void)initMoreData
+{
+    
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]};
+    
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:SHOP_CART parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"购物车",dic);
+        
+        MJStrongSelf;
+        
+        if (SUCCESS) {
+            
+            NSArray *cartList = dic[@"data"][@"list"];
+            
+            for (NSDictionary *cartDic in cartList) {
+                
+                HZCartModel *model = [[HZCartModel alloc] init];
+                
+                model.rootId = cartDic[@"id"];
+                
+                model.goodsNum = cartDic[@"total"];
+                
+                model.rootTitle = cartDic[@"title"];
+                
+                model.rootImageUrl = cartDic[@"thumb"];
+                
+                model.goodsOldPrice = cartDic[@"productprice"];
+                
+                model.goodsSalesPrice = [cartDic[@"marketprice"] stringValue];
+                
+                model.goodsStockNum = cartDic[@"stock"];
+                
+                [strongSelf.cartGoodsArray addObject:model];
+                
+            }
+            
+            [strongSelf.cartListTableView reloadData];
+            
+            [strongSelf.cartListTableView.mj_footer endRefreshing];
+            
+            if (cartList.count > 0) {
+                
+            }else{
+                
+                [JKToast showWithText:NOMOREDATA_STRING];
+                
+                [strongSelf.cartListTableView.mj_footer endRefreshingWithNoMoreData];
+                
+            }
+            
+        }else{
+            
+            
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
 }
 

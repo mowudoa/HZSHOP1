@@ -34,29 +34,153 @@ UITableViewDataSource
     [self registercell];
     
 }
+
 -(void)initUI
 {
     self.navigationItem.title = @"我的足迹";
+    
+    _browseListArray = [[NSMutableArray alloc] init];
+
+    // 下拉加载
+    self.browsListTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.browsListTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_browsListTableView];
+    
 }
 -(void)initData
 {
-    _browseListArray = [[NSMutableArray alloc] init];
+    self.nowPage = 1;
     
-    for (int i = 0; i < 10; i ++) {
-        
-        HZGoodsModel *model = [[HZGoodsModel alloc] init];
-        
-        model.rootTitle = [NSString stringWithFormat:@"商品0%d",i];
-        
-        model.rootId = [NSString stringWithFormat:@"%d",i];
-        
-        model.goodsPrice = [NSString stringWithFormat:@"%d",i*10];
-        
-        [_browseListArray addObject:model];
-        
-    }
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978",
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
     
-    [_browsListTableView reloadData];
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:MY_BROWSE parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        MJStrongSelf;
+        
+        LOG(@"我的足迹", dic);
+        
+        [strongSelf.browseListArray removeAllObjects];
+        
+        if (SUCCESS) {
+            
+            NSArray *followArray = dic[@"data"][@"list"];
+            
+            for (NSDictionary *follw in followArray) {
+                
+                HZGoodsModel *model = [[HZGoodsModel alloc] init];
+                
+                model.rootId = follw[@"id"];
+                
+                model.rootTitle = follw[@"title"];
+                
+                model.goodsPrice = follw[@"marketprice"];
+                
+                model.goodsOldPrice = follw[@"productprice"];
+                
+                model.goodsId = follw[@"goodsid"];
+                
+                model.goodsTime = follw[@"createtime"];
+                
+                model.rootImageUrl = follw[@"thumb"];
+                
+                [strongSelf.browseListArray addObject:model];
+                
+            }
+            
+        }else{
+            
+            
+        }
+        
+        [strongSelf.browsListTableView reloadData];
+        
+        [strongSelf.browsListTableView.mj_header endRefreshing];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
+
+-(void)initMoreData
+{
+    
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978",
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
+    
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:MY_BROWSE parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        MJStrongSelf;
+        
+        LOG(@"我的足迹", dic);
+        
+        if (SUCCESS) {
+            
+            NSArray *followArray = dic[@"data"][@"list"];
+            
+            for (NSDictionary *follw in followArray) {
+                
+                HZGoodsModel *model = [[HZGoodsModel alloc] init];
+                
+                model.rootId = follw[@"id"];
+                
+                model.rootTitle = follw[@"title"];
+                
+                model.goodsPrice = follw[@"marketprice"];
+                
+                model.goodsOldPrice = follw[@"productprice"];
+                
+                model.goodsId = follw[@"goodsid"];
+                
+                model.goodsTime = follw[@"createtime"];
+                
+                model.rootImageUrl = follw[@"thumb"];
+                
+                [strongSelf.browseListArray addObject:model];
+                
+            }
+            
+            [strongSelf.browsListTableView reloadData];
+            
+            [strongSelf.browsListTableView.mj_footer endRefreshing];
+            
+            if (followArray.count > 0) {
+                
+            }else{
+                
+                [JKToast showWithText:NOMOREDATA_STRING];
+                
+                [strongSelf.browsListTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+        }else{
+            
+            
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
 }
 -(void)registercell
@@ -90,7 +214,11 @@ UITableViewDataSource
     
     cell.goodsTitle.text = model.rootTitle;
     
-    cell.goodsPrice.text = model.goodsPrice;
+    cell.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.goodsPrice];
+    
+    cell.goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:    [NSString stringWithFormat:@"￥%@",model.goodsOldPrice]];
+    
+    [cell.iamgeIcon sd_setImageWithURL:[NSURL URLWithString:model.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
     
     return cell;
     
@@ -98,6 +226,8 @@ UITableViewDataSource
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    HZGoodsModel *model = _browseListArray[section];
+    
     UIView* backView = [[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 31)];
     
     backView.backgroundColor = [UIColor whiteColor];
@@ -108,7 +238,7 @@ UITableViewDataSource
     
     [backView addSubview:lineLabel];
     
-    UILabel *timeLabel = [WYFTools createLabel:CGRectMake(10,0,SCREEN_WIDTH - 20,30) bgColor:[UIColor clearColor] text:@"2019-02-19 12:11:10" textFont:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"#686868"] tag:section];
+    UILabel *timeLabel = [WYFTools createLabel:CGRectMake(10,0,SCREEN_WIDTH - 20,30) bgColor:[UIColor clearColor] text:model.goodsTime textFont:[UIFont systemFontOfSize:14] textAlignment:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"#686868"] tag:section];
     
     [backView addSubview:timeLabel];
     
@@ -140,9 +270,7 @@ UITableViewDataSource
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         
-        [self.browseListArray removeObject:_browseListArray[indexPath.section]];
-        
-        [self.browsListTableView reloadData];
+        [self cancleGoodsBrowse:indexPath];
         
     }
 }
@@ -165,6 +293,40 @@ UITableViewDataSource
     return 0.01;
 }
 
+#pragma mark 删除历史记录
+-(void)cancleGoodsBrowse:(NSIndexPath *)indexpath
+{
+    
+    HZGoodsModel *model = _browseListArray[indexpath.section];
+    
+    MJWeakSelf;
+    
+    NSDictionary *dict = @{USER_ID:@"wap_user_4_13720999978",
+                           @"ids":model.rootId
+                           };
+    
+    [CrazyNetWork CrazyRequest_Post:DELETE_BROWSE parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"删除历史记录", dic);
+        
+        MJStrongSelf;
+        
+        if (SUCCESS) {
+            
+            [strongSelf.browseListArray removeObject:strongSelf.browseListArray[indexpath.section]];
+            
+            [strongSelf.browsListTableView reloadData];
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"message"]];
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
 /*
 #pragma mark - Navigation
 

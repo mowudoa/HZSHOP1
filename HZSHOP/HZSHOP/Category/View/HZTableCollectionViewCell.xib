@@ -107,6 +107,12 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="310" height="50"/>
+            <connections>
+                <outlet property="goodsImage" destination="5lW-VP-wWb" id="VVI-6i-rLp"/>
+                <outlet property="goodsOldPrice" destination="QVl-EL-dht" id="3Bu-cQ-N0l"/>
+                <outlet property="goodsPrice" destination="Jds-gC-hfx" id="ccT-uV-rLs"/>
+                <outlet property="goodsTitle" destination="AB4-s6-EDT" id="h3j-zz-eaO"/>
+            </connections>
             <point key="canvasLocation" x="116.8" y="109.74512743628186"/>
         </collectionViewCell>
     </objects>

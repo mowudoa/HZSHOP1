@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^returnStarNumBlock)(NSInteger starNum);
+
 @interface commentStar : UIView
 
 @property(assign,nonatomic)NSInteger currentStar;
 @property(assign,nonatomic)NSInteger numofStar;
 @property(assign,nonatomic)BOOL selectingenabled;
+
+@property (nonatomic, copy) returnStarNumBlock returnStarNumBlock;
+
+- (void)returnStar:(returnStarNumBlock)block;
 
 @end

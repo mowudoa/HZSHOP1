@@ -51,20 +51,27 @@
 
 
 -(void)createLocationImageArr:(NSArray *)ImageArr block:(finish_block)block{
+    
     currentPageNumber = 0.0;
+    
     otherPageNumber = 0.0;
+    
     self.block = block;
     
     for (int i =0 ; i<ImageArr.count; i++) {
         
         CGRect frame = CGRectMake(SCREEN_WIDTH *i, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
         UIView * subview = [[UIView alloc]initWithFrame:frame];
         
         UIScrollView * internalScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        
         internalScrollView.scrollEnabled = NO;
+        
         CGRect imageViewFrame =CGRectMake(0.0, 0.0, internalScrollView.frame.size.width+15, internalScrollView.frame.size.height);
         
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:imageViewFrame];
+        
         //判断是本地图片 还是网络图片
         NSString *imageName = ImageArr[i];
         if (imageName.length>4 && [[imageName substringToIndex:4] isEqualToString:@"http"]) {

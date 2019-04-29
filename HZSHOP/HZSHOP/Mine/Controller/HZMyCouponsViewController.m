@@ -50,6 +50,7 @@ UITableViewDataSource
     
     [self.view addSubview:_lineLabel];
     
+    
     [WYFTools autuLayoutNewMJ:_myCouponTableView];
     
 }

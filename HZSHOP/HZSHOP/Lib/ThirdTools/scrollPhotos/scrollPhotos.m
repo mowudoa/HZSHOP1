@@ -90,10 +90,10 @@
          //   imageUrl = [NSString stringWithFormat:@"%@%@",defaultImageUrl,[_photos[i] objectForKey:@"photo"]];
             }
             
+            imageUrl = _photos[i];
             imageView.tag = 10+i;
             imageView.userInteractionEnabled = YES;
             [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"appicon"]];
-         //   imageView.image = [UIImage imageNamed:@"icon_advertisement"];
             UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapImage:)];
             tap.numberOfTapsRequired = 1;
             tap.numberOfTouchesRequired =1;

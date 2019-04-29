@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *goodsId;//商品id
 
 
+@property(nonatomic,copy) NSString *goodsTime;//日期
+
+
 @end
 
 NS_ASSUME_NONNULL_END

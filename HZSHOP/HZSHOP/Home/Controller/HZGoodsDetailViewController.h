@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZGoodsDetailViewController : XTBaseBackViewController
 
+@property(nonatomic,copy) NSString *goodsId;
+
 @end
 
 NS_ASSUME_NONNULL_END

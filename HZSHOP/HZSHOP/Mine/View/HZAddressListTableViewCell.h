@@ -25,6 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<deleteBtnDelagate> delegate;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressInfoLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *defaultButton;
+
 @end
 
 NS_ASSUME_NONNULL_END

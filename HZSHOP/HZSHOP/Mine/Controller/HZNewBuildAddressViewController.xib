@@ -12,7 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HZNewBuildAddressViewController">
             <connections>
+                <outlet property="areaDetailInfo" destination="Xdl-7L-gPH" id="ptj-Oo-3jE"/>
                 <outlet property="areaTextField" destination="A8a-AO-j0B" id="Ckd-SY-0ZR"/>
+                <outlet property="consigneeAreaButton" destination="bqd-Dc-m5u" id="TcL-ii-Igx"/>
+                <outlet property="consigneeName" destination="4IV-Sg-b2R" id="7Eu-sv-ZHV"/>
+                <outlet property="consigneePhone" destination="sp9-BD-xnx" id="wUF-p3-lgf"/>
                 <outlet property="saveButton" destination="lzh-KL-pxk" id="NvA-ZW-pZi"/>
                 <outlet property="switchButton" destination="byc-j0-pA5" id="cqb-GF-Elr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -270,6 +274,9 @@
                             <state key="normal" title="保存地址">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="saveArea:" destination="-1" eventType="touchUpInside" id="SOj-jS-xBy"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>

@@ -9,7 +9,9 @@
 #import "HZMyOrderViewController.h"
 #import "HZOrderModel.h"
 #import "HZOrderTableViewCell.h"
+#import "HZEvaluateViewController.h"
 #import "HZOrderDetailViewController.h"
+#import "HZApplyForRefundViewController.h"
 @interface HZMyOrderViewController ()<
 UITableViewDelegate,
 UITableViewDataSource
@@ -183,13 +185,13 @@ UITableViewDataSource
     
     [view addSubview:lineLabel1];
     
-    UIButton *leftBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH - 80 - 75, 8, 70, 25) bgColor:[UIColor clearColor] title:@"取消订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#666666"] slectedTitleColor:nil tag:section action:@selector(tapleftBtn:) vc:self];
+    UIButton *leftBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH - 80 - 75, 8, 70, 25) bgColor:[UIColor clearColor] title:HZOrderCancleOrder titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#666666"] slectedTitleColor:nil tag:section action:@selector(tapleftBtn:) vc:self];
     
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#666666"] withView:leftBtn];
     
     [view addSubview:leftBtn];
     
-    UIButton *rightBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH - 80, 8, 70, 25) bgColor:[UIColor clearColor] title:@"支付订单" titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#FC575A"] slectedTitleColor:nil tag:section action:@selector(tapBtn:) vc:self];
+    UIButton *rightBtn = [WYFTools createButton:CGRectMake(SCREEN_WIDTH - 80, 8, 70, 25) bgColor:[UIColor clearColor] title:HZOrderPayNow titleFont:[UIFont systemFontOfSize:14] titleColor:[UIColor colorWithHexString:@"#FC575A"] slectedTitleColor:nil tag:section action:@selector(tapBtn:) vc:self];
     
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#FC575A"] withView:rightBtn];
 
@@ -197,81 +199,59 @@ UITableViewDataSource
     
     view.backgroundColor=[UIColor whiteColor];
     
-//    if ([model.orderStatus isEqualToString:@"0"]) {
-//
-//        [rightBtn setTitle:@"付款" forState:UIControlStateNormal];
-//
-//        rightBtn.userInteractionEnabled = YES;
-//
-//        rightBtn.hidden = NO;
-//
-//        [leftBtn setTitle:@"取消订单" forState:UIControlStateNormal];
-//
-//        leftBtn.userInteractionEnabled = YES;
-//
-//        leftBtn.hidden = NO;
-//
-//    }else if ([model.orderStatus isEqualToString:@"1"]){
-//
-//        [rightBtn setTitle:@"申请退款" forState:UIControlStateNormal];
-//
-//        rightBtn.userInteractionEnabled = YES;
-//
-//        rightBtn.hidden = NO;
-//
-//        [leftBtn setTitle:@"已付款" forState:UIControlStateNormal];
-//
-//        leftBtn.userInteractionEnabled = NO;
-//
-//        leftBtn.backgroundColor = [UIColor colorWithHexString:@"#B5B5B5"];
-//
-//        leftBtn.hidden = NO;
-//
-//    }else if ([model.orderStatus isEqualToString:@"2"]){
-//
-//        [rightBtn setTitle:@"确认收货" forState:UIControlStateNormal];
-//
-//        rightBtn.userInteractionEnabled = YES;
-//
-//        rightBtn.hidden = NO;
-//
-//        leftBtn.hidden = YES;
-//
-//    }else if ([model.orderStatus isEqualToString:@"8"]){
-//
-//        if ([model.orderType isEqualToString:@"0"]) {
-//
-//            [rightBtn setTitle:@"我要评价" forState:UIControlStateNormal];
-//
-//        }else if ([model.orderType isEqualToString:@"1"]){
-//
-//            [rightBtn setTitle:@"已评价" forState:UIControlStateNormal];
-//
-//            rightBtn.backgroundColor = [UIColor colorWithHexString:@"#B5B5B5"];
-//
-//        }
-//
-//        rightBtn.userInteractionEnabled = YES;
-//
-//        rightBtn.hidden = NO;
-//
-//        leftBtn.hidden = YES;
-//
-//    }else if ([model.orderStatus isEqualToString:@"4"]){
-//
-//        [rightBtn setTitle:@"取消退款" forState:UIControlStateNormal];
-//        rightBtn.userInteractionEnabled = YES;
-//
-//        rightBtn.hidden = NO;
-//
-//        leftBtn.hidden = YES;
-//
-//    }else if ([model.orderStatus isEqualToString:@"5"]){
-//
-//        rightBtn.hidden = YES;
-//
-//        leftBtn.hidden = YES;
-//    }
+    if (_orderType == WXMyOrderUnPay) {
+
+        [rightBtn setTitle:HZOrderPayNow forState:UIControlStateNormal];
+
+        rightBtn.userInteractionEnabled = YES;
+
+        rightBtn.hidden = NO;
+
+        [leftBtn setTitle:HZOrderCancleOrder forState:UIControlStateNormal];
+
+        leftBtn.userInteractionEnabled = YES;
+
+        leftBtn.hidden = NO;
+
+    }else if (_orderType == WXMyOrderUnSend){
+
+        [rightBtn setTitle:HZOrderApplyForRefund forState:UIControlStateNormal];
+
+        rightBtn.userInteractionEnabled = YES;
+
+        rightBtn.hidden = NO;
+
+        [leftBtn setTitle:HZOrderPayed forState:UIControlStateNormal];
+
+        leftBtn.userInteractionEnabled = NO;
+
+        leftBtn.hidden = NO;
+
+    }else if (_orderType == WXMyOrderUnReceive){
+
+        [rightBtn setTitle:HZOrderConfirmReceive forState:UIControlStateNormal];
+
+        rightBtn.userInteractionEnabled = YES;
+
+        rightBtn.hidden = NO;
+
+        [leftBtn setTitle:HZOrderLogisticsInfo forState:UIControlStateNormal];
+        
+        leftBtn.userInteractionEnabled = YES;
+        
+        leftBtn.hidden = NO;
+
+    }else if (_orderType == WXMyOrderComplete){
+
+        [rightBtn setTitle:HZOrderGoEvaluate forState:UIControlStateNormal];
+
+        rightBtn.userInteractionEnabled = YES;
+
+        rightBtn.hidden = NO;
+
+        leftBtn.hidden = YES;
+
+    }
     
     CGSize size = [rightBtn.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, rightBtn.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : rightBtn.titleLabel.font} context:nil].size;
 
@@ -321,7 +301,26 @@ UITableViewDataSource
 }
 -(void)tapBtn:(UIButton *)sender
 {
-    
+    if ([sender.currentTitle isEqualToString:HZOrderPayNow]){
+      //立即支付
+        
+    }else if ([sender.currentTitle isEqualToString:HZOrderApplyForRefund]){
+      //申请退款
+      
+        HZApplyForRefundViewController *refund = [[HZApplyForRefundViewController alloc] init];
+        
+        [self.navigationController pushViewController:refund animated:YES];
+        
+    }else if ([sender.currentTitle isEqualToString:HZOrderConfirmReceive]){
+      //确认收货
+        
+    }else if ([sender.currentTitle isEqualToString:HZOrderGoEvaluate]){
+      //评价
+        HZEvaluateViewController *evaluate = [[HZEvaluateViewController alloc] init];
+        
+        [self.navigationController pushViewController:evaluate animated:YES];
+        
+    }
  
 }
 - (IBAction)orderStatus:(UIButton *)sender {
@@ -385,6 +384,8 @@ UITableViewDataSource
         
     }];
     
+    [_myOrderTableView reloadData];
+
 }
 
 -(void)initnavBtn
