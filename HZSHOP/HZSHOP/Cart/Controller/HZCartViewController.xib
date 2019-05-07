@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HZCartViewController">
             <connections>
+                <outlet property="addToFollowButton" destination="sAf-6j-rCX" id="VJU-qb-yfX"/>
                 <outlet property="cartListTableView" destination="xNp-Vy-UK0" id="DW2-oW-PBK"/>
+                <outlet property="deleteButton" destination="V0A-pW-IQj" id="PrI-yM-RG3"/>
                 <outlet property="editView" destination="ffo-Ff-Chi" id="c65-vt-EYE"/>
                 <outlet property="moneyLabel" destination="ogG-0N-Xx9" id="FXL-e0-fIv"/>
                 <outlet property="selecteButton" destination="2ac-p5-nyp" id="jrT-3C-ycM"/>

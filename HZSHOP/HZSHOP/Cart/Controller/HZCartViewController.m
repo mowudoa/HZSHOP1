@@ -24,6 +24,10 @@ UITableViewDataSource
 
 @property (weak, nonatomic) IBOutlet UIView *editView;//编辑view
 
+@property (weak, nonatomic) IBOutlet UIButton *addToFollowButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
 @property(nonatomic,strong) NSMutableArray *cartGoodsArray;
 
 @property(strong,nonatomic)UIBarButtonItem* rightItem;
@@ -57,10 +61,10 @@ UITableViewDataSource
 {
     self.navigationItem.title = @"购物车";
     
-    self.navigationItem.rightBarButtonItem = self.rightItem;
-    
     _cartGoodsArray = [[NSMutableArray alloc] init];
 
+    self.navigationItem.rightBarButtonItem = self.rightItem;
+    
     //通知以刷新价格
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getTotalPrice:) name:@"getToalMoney" object:nil];
     
@@ -133,10 +137,22 @@ UITableViewDataSource
                 
             }
             
+            if (strongSelf.cartGoodsArray.count > 0) {
+                
+                self.rightItem.customView.hidden = NO;
+                
+            }else{
+                
+                self.rightItem.customView.hidden = YES;
+
+            }
+            
         }else{
             
             
         }
+    
+        
         
         [strongSelf.cartListTableView reloadData];
         
@@ -246,6 +262,8 @@ UITableViewDataSource
     
     sender.selected = !sender.selected;
     
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+
     for (HZCartModel* shopModel in _cartGoodsArray) {
         
         shopModel.isSelect = sender.selected;
@@ -254,11 +272,25 @@ UITableViewDataSource
             
             GoodsPrice +=([shopModel.goodsSalesPrice doubleValue]*[shopModel.goodsNum integerValue]);
             
+            [array addObject:shopModel];
+            
         }else{
             
             
         }
         
+    }
+    
+    if (array.count > 0) {
+        
+        [self changeButtonColor];
+        
+    }else{
+        
+        [_addToFollowButton setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+        
+        [_deleteButton setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+
     }
     
     _moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",GoodsPrice];
@@ -272,18 +304,43 @@ UITableViewDataSource
 {
   double GoodsPrice = 0;
     
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
     for (HZCartModel* model in _cartGoodsArray) {
         
         if (model.isSelect) {
             
             GoodsPrice +=([model.goodsSalesPrice doubleValue]*[model.goodsNum integerValue]);
             
+            [array addObject:model];
         }
     }
     
     _moneyLabel.text = [NSString stringWithFormat:@"￥%.2f",GoodsPrice];
     
+    if (array.count > 0) {
+        
+        [self changeButtonColor];
+        
+    }else{
+        
+        [_addToFollowButton setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+
+        [_deleteButton setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+
+    }
 }
+
+#pragma mark 改变删除按钮颜色
+-(void)changeButtonColor
+{
+    
+    [_addToFollowButton setBackgroundColor:[UIColor colorWithHexString:@"#FDA729"]];
+    
+    [_deleteButton setBackgroundColor:[UIColor colorWithHexString:@"#FB5759"]];
+    
+}
+
 
 #pragma mark 编辑
 -(void)rightAction:(UIButton *)sender
@@ -309,10 +366,66 @@ UITableViewDataSource
 
 #pragma mark 删除
 - (IBAction)deleteCartGoods:(UIButton *)sender {
+
+    if (![[self getGoodsIds] isEqualToString:@"000"]) {
+        
+        NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                               @"ids":[self getGoodsIds]
+                               };
+        
+        [CrazyNetWork CrazyRequest_Post:DELETE_SHOP_CART parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+           
+            LOG(@"删除购物车", dic);
+            
+            if (SUCCESS) {
+             
+                [self initData];
+                
+            }else{
+                
+                [JKToast showWithText:dic[@"message"]];
+                
+            }
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+        }];
+        
+        
+    }
+
 }
 
 #pragma mark 移入关注
 - (IBAction)addFollowGoods:(UIButton *)sender {
+}
+
+-(NSString *)getGoodsIds
+{
+    
+    NSMutableString* cid = [NSMutableString string];
+    
+    for (HZCartModel* model in _cartGoodsArray) {
+        
+        if (model.isSelect) {
+            
+            if (cid.length>0) {
+                [cid appendString:@","];
+            }
+            [cid appendString:model.rootId];;
+            
+        }
+        
+    }
+    if (!(cid.length>0)) {
+        
+        [JKToast showWithText:@"请选择商品"];
+        
+        return @"000";
+    }
+ 
+    return cid;
+    
 }
 
 #pragma mark - UITableViewDataSource

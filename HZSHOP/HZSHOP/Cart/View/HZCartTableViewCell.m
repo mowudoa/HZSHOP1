@@ -169,7 +169,31 @@
 -(void)refreshCartList
 {
     
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"getToalMoney" object:self userInfo:nil];
+    NSDictionary *dict = @{@"id":_carModel.rootId,
+                           @"total":_numTextField.text
+                           };
+    
+    
+    [CrazyNetWork CrazyRequest_Post:EDIT_SHOP_CART parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+      
+        LOG(@"刷新购物车", dic);
+        
+        if (SUCCESS) {
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"getToalMoney" object:self userInfo:nil];
+
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"message"]];
+            
+        }
+        
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
 }
 @end
