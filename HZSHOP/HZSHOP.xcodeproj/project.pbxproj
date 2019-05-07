@@ -1172,8 +1172,8 @@
 		7142A3F8225C8C1800B15D8C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				715F60652281520400AADECE /* Model */,
 				7142A3F9225C8C1800B15D8C /* Controller */,
+				715F60652281520400AADECE /* Model */,
 				7142A3FB225C8C1800B15D8C /* View */,
 			);
 			path = Home;

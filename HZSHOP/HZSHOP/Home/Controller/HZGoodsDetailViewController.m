@@ -297,6 +297,24 @@
 
     [self showGoodsParameter];
     
+    NSDictionary *dict = @{@"goodsid":_goodsId};
+    
+    [CrazyNetWork CrazyRequest_Post:GOODS_PARAMETER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"商品参数获取", dic);
+        
+        if (SUCCESS) {
+         
+            
+        }else{
+            
+            
+        }
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
 }
 
