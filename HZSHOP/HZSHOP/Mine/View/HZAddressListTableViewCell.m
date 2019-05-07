@@ -42,10 +42,19 @@
     }
 }
 
+- (IBAction)isDefault:(UIButton *)sender {
+
+    if ([self.delegate respondsToSelector:@selector(buttonIsDefault:)]) {
+        
+        [self.delegate buttonIsDefault:_addressmodel.rootId];
+    }
+}
+
 - (IBAction)editButton:(UIButton *)sender {
 
     if ([self.delegate respondsToSelector:@selector(buttonEdit:withMode:)]) {
-        
+       
+        [self.delegate buttonEdit:_addressmodel.rootId withMode:_addressmodel];
     }
     
 }

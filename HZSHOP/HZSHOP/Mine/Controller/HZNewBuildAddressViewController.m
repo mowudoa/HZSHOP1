@@ -38,13 +38,41 @@
 
 -(void)initUI
 {
-    self.navigationItem.title = @"新建地址";
+    self.navigationItem.title = self.titleString;
     
     [WYFTools viewLayer:5 withView:_saveButton];
     
     _switchButton.transform = CGAffineTransformMakeScale(0.75, 0.75);
+    
+    if (_addressType == addressEditType) {
+        
+        [self initEditUI];
+    }
 }
 
+-(void)initEditUI
+{
+    
+    _consigneeName.text = _addressModel.userName;
+    
+    _consigneePhone.text = _addressModel.userPhone;
+    
+    _areaTextField.text = _addressModel.address;
+    
+    _areaDetailInfo.text = _addressModel.addressDetail;
+    
+    if ([_addressModel.is_default isEqualToString:@"1"]){
+    
+        _switchButton.on = YES;
+    
+        }else{
+    
+        _switchButton.on = NO;
+
+    }
+    
+    
+}
 - (IBAction)areaChoice:(UIButton *)sender {
 
     NSArray *defaultSelArr = [self.areaTextField.text componentsSeparatedByString:@" "];
@@ -82,29 +110,9 @@
         
     }else{
         
-        NSString *isDefault;
-        
-        if (_switchButton.isOn) {
+        [CrazyNetWork CrazyRequest_Post:ADD_ADDRESS parameters:[self editOrAddParameter] HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
             
-            isDefault = @"1";
-            
-        }else{
-            
-            isDefault = @"0";
-
-        }
-        
-        NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
-                               @"areas":_areaTextField.text,
-                               @"address":_areaDetailInfo.text,
-                               @"mobile":_consigneePhone.text,
-                               @"realname":_consigneeName.text,
-                               @"isdefault":isDefault
-                               };
-        
-        [CrazyNetWork CrazyRequest_Post:ADD_ADDRESS parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
-            
-            LOG(@"添加地址", dic);
+            LOG(@"添加/编辑地址", dic);
             
             if (SUCCESS) {
                 
@@ -114,7 +122,7 @@
                 
             }else{
                 
-                [JKToast showWithText:dic[@"datas"][@"error"]];
+                [JKToast showWithText:dic[@"message"]];
                 
             }
             
@@ -126,6 +134,49 @@
         
         
     }
+    
+}
+
+-(NSDictionary *)editOrAddParameter
+{
+    NSString *isDefault;
+    
+    NSDictionary *dict;
+    
+    if (_switchButton.isOn) {
+        
+        isDefault = @"1";
+        
+    }else{
+        
+        isDefault = @"0";
+        
+    }
+    
+    if (_addressType == addressAddType) {
+        
+        dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                               @"areas":_areaTextField.text,
+                               @"address":_areaDetailInfo.text,
+                               @"mobile":_consigneePhone.text,
+                               @"realname":_consigneeName.text,
+                               @"isdefault":isDefault
+                               };
+        
+    }else if (_addressType == addressEditType){
+        
+        dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                 @"areas":_areaTextField.text,
+                 @"address":_areaDetailInfo.text,
+                 @"mobile":_consigneePhone.text,
+                 @"realname":_consigneeName.text,
+                 @"isdefault":isDefault,
+                 @"id":_addressModel.rootId
+                 };
+        
+    }
+    
+    return dict;
     
 }
 

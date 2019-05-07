@@ -110,6 +110,10 @@ UITableViewDataSource
 
     HZNewBuildAddressViewController *buildAddress = [[HZNewBuildAddressViewController alloc] init];
     
+    buildAddress.titleString = @"新建地址";
+    
+    buildAddress.addressType = addressAddType;
+    
     [self.navigationController pushViewController:buildAddress animated:YES];
     
 }
@@ -181,6 +185,16 @@ UITableViewDataSource
 #pragma mark ADDRESS_CELL_DELEGATE  自定义cell代理
 -(void)buttonEdit:(NSString *)addressId withMode:(HZAddressModel *)model
 {
+  
+    HZNewBuildAddressViewController *buildAddress = [[HZNewBuildAddressViewController alloc] init];
+    
+    buildAddress.titleString = @"新建地址";
+    
+    buildAddress.addressType = addressEditType;
+    
+    buildAddress.addressModel = model;
+    
+    [self.navigationController pushViewController:buildAddress animated:YES];
     
 }
 
@@ -195,21 +209,47 @@ UITableViewDataSource
        
         LOG(@"删除地址", dic);
         
-        if ([[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"1"]) {
-            
-            [JKToast showWithText:Address_Delete_Success];
+        if (SUCCESS) {
             
             [self initData];
             
         }else{
             
-            [JKToast showWithText:Address_Delete_Faile];
+            [JKToast showWithText:dic[@"message"]];
 
         }
         
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
+    
+}
+
+-(void)buttonIsDefault:(NSString *)addressId
+{
+    
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"id":addressId
+                           };
+    
+    [CrazyNetWork CrazyRequest_Post:ADDRESS_SET_DEFAULT parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"设置默认地址", dic);
+        
+        if ([[NSString stringWithFormat:@"%d",[dic[@"status"] intValue]] isEqualToString:@"1"]) {
+                        
+            [self initData];
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"message"]];
+            
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
     
 }
 

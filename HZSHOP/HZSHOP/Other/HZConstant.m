@@ -14,6 +14,6 @@ NSString *const HZOrderConfirmReceive = @"确认收货";
 NSString *const HZOrderLogisticsInfo = @"查看物流";
 NSString *const HZOrderAfterSales = @"申请售后";
 NSString *const HZOrderPayed = @"已付款";
-NSString *const Address_Add_Success = @"添加地址成功";
+NSString *const Address_Add_Success = @"保存成功";
 NSString *const Address_Delete_Success = @"删除成功";
 NSString *const Address_Delete_Faile = @"删除失败";

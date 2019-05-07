@@ -1172,8 +1172,8 @@
 		7142A3F8225C8C1800B15D8C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				715F60652281520400AADECE /* Model */,
 				7142A3F9225C8C1800B15D8C /* Controller */,
-				7142A3FA225C8C1800B15D8C /* Model */,
 				7142A3FB225C8C1800B15D8C /* View */,
 			);
 			path = Home;
@@ -1190,13 +1190,6 @@
 				7141881A22603B9B00ED7987 /* HZGoodsDetailViewController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		7142A3FA225C8C1800B15D8C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		7142A3FB225C8C1800B15D8C /* View */ = {
@@ -2316,6 +2309,13 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		715F60652281520400AADECE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		71EDD06E225DE31F00220105 /* BRPickerView */ = {

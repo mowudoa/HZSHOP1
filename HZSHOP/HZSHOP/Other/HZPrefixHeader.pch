@@ -89,4 +89,6 @@
 #define ADDRESS_LIST        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.getselectorapp"//地址列表
 
 #define ADDRESS_DELETE      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.delete_app"//地址删除
+
+#define ADDRESS_SET_DEFAULT @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.setdefaultapp"//设置默认地址
 #endif //  HZPrefixHeader.pch

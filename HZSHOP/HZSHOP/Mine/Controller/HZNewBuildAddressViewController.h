@@ -7,10 +7,21 @@
 //
 
 #import "XTBaseBackViewController.h"
-
+#import "HZAddressModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum {
+    addressAddType,
+    addressEditType
+}addressType;
+
 @interface HZNewBuildAddressViewController : XTBaseBackViewController
+
+@property(nonatomic)addressType addressType;
+
+@property(nonatomic,copy) NSString *titleString;
+
+@property(nonatomic,strong) HZAddressModel *addressModel;
 
 @end
 

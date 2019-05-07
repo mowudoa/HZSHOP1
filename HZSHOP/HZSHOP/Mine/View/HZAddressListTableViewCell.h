@@ -13,6 +13,9 @@
 
 -(void)buttonDelete:(NSString *)addressId;
 
+-(void)buttonIsDefault:(NSString *)addressId;
+
+
 -(void)buttonEdit:(NSString *)addressId withMode:(HZAddressModel *)model;
 
 @end
