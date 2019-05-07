@@ -85,6 +85,12 @@ UICollectionViewDelegateFlowLayout
             
             NSArray *arr = dic[@"data"][@"list"];
             
+            rootModel *model1 = [[rootModel alloc] init];
+
+            model1.rootTitle = @"推荐分类";
+            
+            [strongSelf.mainClassArray addObject:model1];
+            
             for (NSDictionary *dict in arr) {
                 
                 rootModel *model = [[rootModel alloc] init];
@@ -136,14 +142,14 @@ UICollectionViewDelegateFlowLayout
         
         [btn setTitleColor:[UIColor colorWithHexString:@"#Fc5759"] forState:UIControlStateSelected];
         
-        btn.tag = [model.rootId integerValue];
+        btn.tag = i + 100;
         
         
         if (i == 0) {
             
             btn.selected = YES;
             
-            [self requestSubClass:model.rootId];
+            [self requestSubClass:model];
             
         }
     
@@ -188,74 +194,134 @@ UICollectionViewDelegateFlowLayout
         }
     }
 
-    [self requestSubClass:[NSString stringWithFormat:@"%ld",sender.tag]];
+    [self requestSubClass:_mainClassArray[sender.tag - 100]];
     
 }
 
--(void)requestSubClass:(NSString *)subId
+-(void)requestSubClass:(rootModel *)model
 {
  
-    NSDictionary* dic = @{@"level":@"2",
-                          @"parentid":subId
-                          };
     
-    MJWeakSelf;
-    
-    [CrazyNetWork CrazyRequest_Post:CATEGORY_GOODS parameters:dic HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+    if ([model.rootTitle isEqualToString:@"推荐分类"]) {
+     
+        MJWeakSelf;
         
-        MJStrongSelf;
-        
-        [strongSelf.subClassArray removeAllObjects];
-        
-        LOG(@"商品次分类", dic);
-        
-        if (SUCCESS) {
+        [CrazyNetWork CrazyRequest_Post:CATEGORY_RECOMMEND parameters:nil HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
             
-            //    [JKToast showWithText:dic[@"msg"]];
+            MJStrongSelf;
             
-            NSArray *arr = dic[@"data"][@"list"];
+            [strongSelf.subClassArray removeAllObjects];
             
-            for (NSDictionary *dict in arr) {
+            LOG(@"推荐分类", dic);
+            
+            if (SUCCESS) {
                 
-                 HZCategoryModel*model = [[HZCategoryModel alloc] init];
+                //    [JKToast showWithText:dic[@"msg"]];
                 
-                model.rootTitle = dict[@"name"];
+                NSArray *arr = dic[@"data"][@"list"];
                 
-                model.rootId = dict[@"id"];
+                HZCategoryModel*model = [[HZCategoryModel alloc] init];
                 
-                NSArray *subArr = dict[@"son"];
+                rootModel *model1 = [[rootModel alloc] init];
+
+                model1.rootTitle = @"所有商品";
                 
-                for (NSDictionary *sub in subArr){
-                   
-                    rootModel *model1 = [[rootModel alloc] init];
+                [model.subArray addObject:model1];
+                
+                for (NSDictionary *dict in arr) {
+                        
+                    rootModel *model11 = [[rootModel alloc] init];
+                        
+                    model11.rootTitle = dict[@"name"];
+                        
+                    model11.rootId = dict[@"id"];
+                        
+                    model11.rootImageUrl = dict[@"advimg"];
+                        
+                    [model.subArray addObject:model11];
+                        
+                    }
                     
-                    model1.rootTitle = sub[@"name"];
-                    
-                    model1.rootId = sub[@"id"];
-                    
-                    model1.rootImageUrl = sub[@"advimg"];
-                  
-                    [model.subArray addObject:model1];
-                    
-                }
+                    [strongSelf.subClassArray addObject:model];
                 
-                [strongSelf.subClassArray addObject:model];
+            }else{
+                
+                [JKToast showWithText:dic[@"msg"]];
+                
             }
             
-        }else{
+            [strongSelf.subCategoryCollectionView reloadData];
             
-            [JKToast showWithText:dic[@"msg"]];
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
             
-        }
+            LOG(@"cuow", Json);
+            
+        }];
         
-        [strongSelf.subCategoryCollectionView reloadData];
-        
-    } fail:^(NSError *error, NSString *url, NSString *Json) {
-        
-        LOG(@"cuow", Json);
-        
-    }];
+    }else{
     
+        NSDictionary* dic = @{@"level":@"2",
+                              @"parentid":model.rootId
+                              };
+        
+        MJWeakSelf;
+        
+        [CrazyNetWork CrazyRequest_Post:CATEGORY_GOODS parameters:dic HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+            
+            MJStrongSelf;
+            
+            [strongSelf.subClassArray removeAllObjects];
+            
+            LOG(@"商品次分类", dic);
+            
+            if (SUCCESS) {
+                
+                //    [JKToast showWithText:dic[@"msg"]];
+                
+                NSArray *arr = dic[@"data"][@"list"];
+                
+                for (NSDictionary *dict in arr) {
+                    
+                    HZCategoryModel*model = [[HZCategoryModel alloc] init];
+                    
+                    model.rootTitle = dict[@"name"];
+                    
+                    model.rootId = dict[@"id"];
+                    
+                    NSArray *subArr = dict[@"son"];
+                    
+                    for (NSDictionary *sub in subArr){
+                        
+                        rootModel *model1 = [[rootModel alloc] init];
+                        
+                        model1.rootTitle = sub[@"name"];
+                        
+                        model1.rootId = sub[@"id"];
+                        
+                        model1.rootImageUrl = sub[@"advimg"];
+                        
+                        [model.subArray addObject:model1];
+                        
+                    }
+                    
+                    [strongSelf.subClassArray addObject:model];
+                }
+                
+            }else{
+                
+                [JKToast showWithText:dic[@"msg"]];
+                
+            }
+            
+            [strongSelf.subCategoryCollectionView reloadData];
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+            LOG(@"cuow", Json);
+            
+        }];
+        
+    }
     
 }
 
@@ -345,8 +411,12 @@ UICollectionViewDelegateFlowLayout
     
     rootModel *model1 = model.subArray[indexPath.row];
     
-    more.classId = model1.rootId;
-    
+    if (![model1.rootTitle isEqualToString:@"所有商品"]) {
+        
+        more.classId = model1.rootId;
+
+    }
+
     [self.navigationController pushViewController:more animated:YES];
     
 }
@@ -397,7 +467,11 @@ UICollectionViewDelegateFlowLayout
     
     HZCategoryModel *model = [[HZCategoryModel alloc] init];
     
-    model = _subClassArray[section];
+    if (![model.rootTitle isEqualToString:@"所有商品"]) {
+        
+        model = _subClassArray[section];
+        
+    }
     
     label.text = model.rootTitle;
     
@@ -419,7 +493,6 @@ UICollectionViewDelegateFlowLayout
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithHexString:@"#F7F7F7"]];
 
-    
 }
 /*
 #pragma mark - Navigation

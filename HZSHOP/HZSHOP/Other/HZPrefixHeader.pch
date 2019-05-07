@@ -80,6 +80,8 @@
 #define DELETE_BROWSE       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.history.history_remove"//删除历史记录
 #define CATEGORY_GOODS      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_type_list"//分类列表
 
+#define CATEGORY_RECOMMEND  @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.isrecommand"//获取推荐分类
+
 #define ALL_GOODS           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_list"//商品列表
 
 #define GOODS_DETAIL        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_details"//商品详情

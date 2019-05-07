@@ -88,6 +88,9 @@ UICollectionViewDelegateFlowLayout
     if (_sortType != nil) {
         
         [keyDic addEntriesFromDictionary:@{@"px":_sortType}];
+        
+        [keyDic addEntriesFromDictionary:@{@"pxgz":_collation}];
+        
     }
     
     if (_keyWords != nil) {
@@ -95,9 +98,11 @@ UICollectionViewDelegateFlowLayout
         [keyDic addEntriesFromDictionary:@{@"title":_keyWords}];
     }
     
-    [keyDic addEntriesFromDictionary:@{@"pcate":_classId,
-                                       @"pxgz":_collation
-                                       }];
+    if (_classId != nil) {
+        
+        [keyDic addEntriesFromDictionary:@{@"pcate":_classId}];
+
+    }
     
     
     MJWeakSelf;
@@ -131,6 +136,7 @@ UICollectionViewDelegateFlowLayout
                 model.rootImageUrl = dict[@"thumb"];
                 
                 [strongSelf.allGoodsArray addObject:model];
+                
             }
             
         }else{
