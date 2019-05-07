@@ -51,28 +51,21 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXH-Jj-XCn">
                                 <rect key="frame" x="136.5" y="80" width="12" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="750" constant="12" id="GtR-ke-6hc"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="12" id="GtR-ke-6hc"/>
                                     <constraint firstAttribute="height" constant="22" id="hCg-h2-Ucy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.94509803920000002" green="0.38823529410000002" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPd-VH-eRJ">
-                                <rect key="frame" x="150.5" y="80" width="12" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPd-VH-eRJ">
+                                <rect key="frame" x="150.5" y="84" width="12" height="18"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="G9T-eC-TuK"/>
-                                    <constraint firstAttribute="width" priority="750" constant="12" id="bXJ-0k-Mf4"/>
+                                    <constraint firstAttribute="height" constant="18" id="G9T-eC-TuK"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="12" id="bXJ-0k-Mf4"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="1">
-                                        <attributes>
-                                            <color key="NSColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="15" name=".SFNSText"/>
-                                            <integer key="NSStrikethrough" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="13"/>
+                                <color key="textColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46b-qc-J7U">

@@ -8,6 +8,7 @@
 
 #import "HZGoodsDetailViewController.h"
 #import "scrollPhotos.h"
+#import "HZCartViewController.h"
 #import "HZCartOrderViewController.h"
 
 @interface HZGoodsDetailViewController ()
@@ -45,11 +46,17 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *numTextField;//数量选择
 
+@property (weak, nonatomic) IBOutlet UIView *buyOrShopCartView;
+
+@property (weak, nonatomic) IBOutlet UIButton *commitButton;//确认button
+
 @property(nonatomic,strong) NSMutableArray *bannerArray;
 
 @property(nonatomic,assign) NSInteger stockNum;//库存
 
 @property(nonatomic,strong)scrollPhotos* headScrollView;
+
+@property(nonatomic,copy) NSString * paremeterViewShowType;
 
 @end
 
@@ -110,6 +117,10 @@
             if ([detail[@"issendfree"] isEqualToString:@"1"]) {
                 
                 strongSelf.expressMoney.text = @"快递:包邮";
+            }else{
+                
+                strongSelf.expressMoney.text = @"快递:自费";
+
             }
             
             strongSelf.soldNum.text = [NSString stringWithFormat:@"销量:%@件",detail[@"salesreal"]];
@@ -119,8 +130,6 @@
             strongSelf.stockNum = [detail[@"total"] integerValue];
             
         }else{
-            
-            
             
         }
         
@@ -132,15 +141,40 @@
     
 }
 
+#pragma 添加购物车
+- (IBAction)addShopCart:(UIButton *)sender {
+
+    self.paremeterViewShowType = @"加入购物车";
+
+    [self showGoodsParameter];
+
+}
+
 #pragma mark 立即购买
 - (IBAction)buyNow:(UIButton *)sender {
 
+    self.paremeterViewShowType = @"立即购买";
+
+    [self showGoodsParameter];
+    
+}
+
+#pragma mark 关闭属性选择
+- (IBAction)closeParameter:(UIButton *)sender {
+
+    [self closeGoodsParameter];
+    
+}
+
+-(void)showGoodsParameter
+{
+ 
     _selecteBgView.hidden = NO;
     
     __weak typeof(self) weakSelf = self;
-
+    
     [self.view addSubview:weakSelf.goodsParameterView];
-
+    
     [UIView animateWithDuration:0.2 animations:^{
         
         weakSelf.goodsParameterView.frame = CGRectMake(0,SCREEN_HEIGHT - 300 - SCREEN_NAVRECT - SCREEN_STATUSRECT - BOTTOM_SAFEAREA,SCREEN_WIDTH,300);
@@ -149,27 +183,41 @@
         
     }];
     
+    if (![_paremeterViewShowType isEqualToString:@"参数选择"]) {
+        
+        _buyOrShopCartView.hidden = YES;
+        
+        _commitButton.hidden = NO;
+        
+    }else{
+        
+        _buyOrShopCartView.hidden = NO;
+        
+        _commitButton.hidden = YES;
+        
+    }
+    
+    
 }
 
-#pragma mark 关闭属性选择
-- (IBAction)closeParameter:(UIButton *)sender {
-
+-(void)closeGoodsParameter
+{
+    
     _selecteBgView.hidden = YES;
     
     __weak typeof(self) weakSelf = self;
     
     [UIView animateWithDuration:0.5 animations:^{
         
-        
         weakSelf.goodsParameterView.frame = CGRectMake(0,SCREEN_HEIGHT ,SCREEN_WIDTH,300);
-
+        
     } completion:^(BOOL finished) {
         
         [weakSelf.goodsParameterView removeFromSuperview];
         
     }];
-    
 }
+
 
 #pragma mark 商品数量选择
 - (IBAction)numChoice:(UIButton *)sender {
@@ -207,12 +255,68 @@
     
 }
 
+#pragma mark a加入购物车/立即购买
+- (IBAction)buyNowOrShopCart:(UIButton *)sender {
+
+    if (sender.tag == 200) {
+        
+        [self addGoodsToShopCart];
+        
+    }else if (sender.tag == 201){
+        
+        [self buyGoodsNow];
+    }
+    
+}
+
+#pragma mark 收藏/店铺/跳转购物车
+- (IBAction)jumbShopCart:(UIButton *)sender {
+
+    //300
+    if (sender.tag == 300) {
+        
+    }else if (sender.tag == 301){
+        
+    }else if (sender.tag == 302){
+      
+        HZCartViewController *cart = [[HZCartViewController alloc] init];
+        
+        cart.isRootNav = YES;
+        
+        [self.navigationController pushViewController:cart animated:YES];
+        
+    }
+    
+    
+}
+
+#pragma mark 参数选择
+- (IBAction)selectParameter:(UIButton *)sender {
+
+    _paremeterViewShowType = @"参数选择";
+
+    [self showGoodsParameter];
+    
+    
+}
+
 #pragma mark 商品订单提交
 - (IBAction)commitOrder:(UIButton *)sender {
 
-    HZCartOrderViewController *cartOrder = [[HZCartOrderViewController alloc] init];
     
-    [self.navigationController pushViewController:cartOrder animated:YES];
+    if ([_paremeterViewShowType isEqualToString:@"加入购物车"]) {
+        
+        [self addGoodsToShopCart];
+        
+    }else if ([_paremeterViewShowType isEqualToString:@"立即购买"]){
+        
+        [self buyGoodsNow];
+        
+    }else if ([_paremeterViewShowType isEqualToString:@"参数选择"]){
+        
+        
+    }
+    
     
 }
 
@@ -270,6 +374,46 @@
     
 }
 
+-(void)addGoodsToShopCart
+{
+  
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"goodsid":_goodsId,
+                           @"total":_numTextField.text
+                           };
+
+    [CrazyNetWork CrazyRequest_Post:GOODS_ADD_CART parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"加入购物车", dic);
+        
+        if (SUCCESS) {
+           
+            [JKToast showWithText:Shop_AddCart_Success];
+            
+            [self closeGoodsParameter];
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"message"]];
+            
+        }
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
+
+-(void)buyGoodsNow
+{
+    
+    HZCartOrderViewController *cartOrder = [[HZCartOrderViewController alloc] init];
+    
+    [self.navigationController pushViewController:cartOrder animated:YES];
+    
+}
+
 -(scrollPhotos *)headScrollView
 {
     
@@ -289,20 +433,20 @@
 
 -(void)viewDidLayoutSubviews
 {
-    self.goodsInfoView.frame = CGRectMake(_goodsInfoView.mj_x, _goodsInfoView.mj_y,SCREEN_WIDTH,_goodsInfoView.height + _goodsTitle.height + _goodsSubTitle.height - 26);
-
-    self.selecetNumView.frame = CGRectMake(_selecetNumView.mj_x, _goodsInfoView.mj_y + _goodsInfoView.height + 8,_selecetNumView.width ,_selecetNumView.height);
-    
-    self.shopView.frame = CGRectMake(_shopView.mj_x,_selecetNumView.mj_y + _selecetNumView.height + 8,_shopView.width, _shopView.height);
-    
-    self.detailView.frame = CGRectMake(_detailView.mj_x, _shopView.mj_y + _shopView.height + 8,_detailView.width, _detailView.height);
+  
     
 }
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
   
-  //  self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,self.detailView.mj_y + _detailView.height + 8);
+    self.goodsInfoView.frame = CGRectMake(_goodsInfoView.mj_x, _goodsInfoView.mj_y,SCREEN_WIDTH,_goodsInfoView.height + _goodsTitle.height + _goodsSubTitle.height - 26);
+    
+    self.selecetNumView.frame = CGRectMake(_selecetNumView.mj_x, _goodsInfoView.mj_y + _goodsInfoView.height + 8,_selecetNumView.width ,_selecetNumView.height);
+    
+    self.shopView.frame = CGRectMake(_shopView.mj_x,_selecetNumView.mj_y + _selecetNumView.height + 8,_shopView.width, _shopView.height);
+    
+    self.detailView.frame = CGRectMake(_detailView.mj_x, _shopView.mj_y + _shopView.height + 8,_detailView.width, _detailView.height);
     
     self.bgScrollView.contentSize = CGSizeMake(0,_shopView.mj_y + _shopView.height + 8 + _detailView.height);
     

@@ -42,13 +42,13 @@
     
     _selectButton.selected = carModel.isSelect;
 
-    _goodsPrice.text = _carModel.goodsSalesPrice;
+    _goodsPrice.text = [NSString stringWithFormat:@"￥%@",_carModel.goodsSalesPrice];
     
     _numTextField.text = _carModel.goodsNum;
     
     _goodsTitle.text = _carModel.rootTitle;
 
-    _goodsOldPrice.text = _carModel.goodsOldPrice;
+    _goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:[NSString stringWithFormat:@"￥%@",_carModel.goodsOldPrice]];
     
 }
 

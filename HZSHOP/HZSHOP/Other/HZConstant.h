@@ -60,3 +60,4 @@ UIKIT_EXTERN NSString *const HZOrderPayed;
 UIKIT_EXTERN NSString *const Address_Add_Success;
 UIKIT_EXTERN NSString *const Address_Delete_Success;
 UIKIT_EXTERN NSString *const Address_Delete_Faile;
+UIKIT_EXTERN NSString *const Shop_AddCart_Success;

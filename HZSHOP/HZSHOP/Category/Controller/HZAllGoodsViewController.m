@@ -19,6 +19,10 @@ UICollectionViewDelegateFlowLayout
 >
 @property (weak, nonatomic) IBOutlet UICollectionView *allGoodsCollectionView;
 
+@property (weak, nonatomic) IBOutlet UIView *screenBgView;
+
+@property (weak, nonatomic) IBOutlet UIView *screenView;
+
 @property(nonatomic,strong) UISearchBar *searchBar;
 
 @property(nonatomic,strong) UIView *searchView;
@@ -33,6 +37,7 @@ UICollectionViewDelegateFlowLayout
 
 @property(assign,nonatomic) NSInteger tipNum;//价格点击次数
 
+@property(strong,nonatomic) NSMutableDictionary *screenDic;//筛选字典
 
 @end
 
@@ -64,8 +69,30 @@ UICollectionViewDelegateFlowLayout
     
     self.allGoodsArray = [[NSMutableArray alloc] init];
     
+    self.screenDic = [[NSMutableDictionary alloc] init];
+    
+    [self initScreenButton];
+    
 }
 
+-(void)initScreenButton
+{
+   
+    for (UIView *view in _screenView.subviews) {
+        
+        if ([view isKindOfClass:[UIButton class]]) {
+            
+            UIButton *btn = (UIButton *)view;
+
+            [WYFTools viewLayer:3 withView:btn];
+            
+            [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#999999"] withView:btn];
+            
+        }
+
+    }
+    
+}
 -(void)registeCell
 {
     
@@ -77,13 +104,32 @@ UICollectionViewDelegateFlowLayout
     
     [_allGoodsCollectionView registerNib:cate1 forCellWithReuseIdentifier:@"TableCollectionViewCell"];
     
+    // 下拉加载
+    self.allGoodsCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.allGoodsCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_allGoodsCollectionView];
+    
 }
 
 -(void)initData
 {
    
-    NSMutableDictionary *keyDic = [[NSMutableDictionary alloc] init];
+    self.nowPage = 1;
 
+    NSMutableDictionary *keyDic = [[NSMutableDictionary alloc] init];
     
     if (_sortType != nil) {
         
@@ -104,6 +150,9 @@ UICollectionViewDelegateFlowLayout
 
     }
     
+    [keyDic addEntriesFromDictionary:_screenDic];
+    
+    [keyDic addEntriesFromDictionary:@{@"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]}];
     
     MJWeakSelf;
     
@@ -146,6 +195,97 @@ UICollectionViewDelegateFlowLayout
         }
         
         [strongSelf.allGoodsCollectionView reloadData];
+        
+        [strongSelf.allGoodsCollectionView.mj_header endRefreshing];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+        LOG(@"cuow", Json);
+        
+    }];
+    
+    
+}
+
+-(void)initMoreData
+{
+    
+    NSMutableDictionary *keyDic = [[NSMutableDictionary alloc] init];
+    
+    if (_sortType != nil) {
+        
+        [keyDic addEntriesFromDictionary:@{@"px":_sortType}];
+        
+        [keyDic addEntriesFromDictionary:@{@"pxgz":_collation}];
+        
+    }
+    
+    if (_keyWords != nil) {
+        
+        [keyDic addEntriesFromDictionary:@{@"title":_keyWords}];
+    }
+    
+    if (_classId != nil) {
+        
+        [keyDic addEntriesFromDictionary:@{@"pcate":_classId}];
+        
+    }
+    
+    [keyDic addEntriesFromDictionary:_screenDic];
+    
+    [keyDic addEntriesFromDictionary:@{@"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]}];
+    
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:ALL_GOODS parameters:keyDic HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        MJStrongSelf;
+                
+        LOG(@"商品列表", dic);
+        
+        if (SUCCESS) {
+            
+            //    [JKToast showWithText:dic[@"msg"]];
+            
+            NSArray *arr = dic[@"data"][@"list"];
+            
+            for (NSDictionary *dict in arr) {
+                
+                HZGoodsModel*model = [[HZGoodsModel alloc] init];
+                
+                model.rootTitle = dict[@"title"];
+                
+                model.rootId = dict[@"id"];
+                
+                model.goodsOldPrice = dict[@"productprice"];
+                
+                model.goodsPrice = dict[@"marketprice"];
+                
+                model.rootImageUrl = dict[@"thumb"];
+                
+                [strongSelf.allGoodsArray addObject:model];
+                
+            }
+            
+            [strongSelf.allGoodsCollectionView reloadData];
+            
+            [strongSelf.allGoodsCollectionView.mj_footer endRefreshing];
+            
+            if (arr.count > 0) {
+                
+            }else{
+                
+                [JKToast showWithText:NOMOREDATA_STRING];
+                
+                [strongSelf.allGoodsCollectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+        }else{
+            
+            [JKToast showWithText:dic[@"msg"]];
+            
+        }
+    
         
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
@@ -292,6 +432,103 @@ UICollectionViewDelegateFlowLayout
     
     [self initData];
 
+}
+
+- (IBAction)screenClick:(UIButton *)sender {
+
+    [_screenDic removeAllObjects];
+    
+    for (UIView *view in sender.superview.superview.subviews) {
+        
+        ((UIButton *)[view.subviews objectAtIndex:0]).selected = NO;
+        
+    }
+    
+    sender.selected = !sender.selected;
+    
+    _screenView.hidden = NO;
+    
+    _screenBgView.hidden = NO;
+    
+}
+
+#pragma makr 筛选(可复选)
+- (IBAction)screenType:(UIButton *)sender {
+
+    sender.selected = !sender.selected;
+    
+    NSString *screenSort;
+    
+    if (sender.selected) {
+
+        screenSort = @"1";
+        
+        sender.layer.borderColor = [UIColor colorWithHexString:@"#FA5658"].CGColor;
+        
+//        isnew：查询条件-新品 为1时返回新品标签商品，0或不传为则不判断新品
+//        ishot：查询条件-热门 同上
+//        isrecommand：查询条件-推荐 同上
+//        isdiscount：查询条件-促销 同上
+//        issendfree：查询条件-包邮 同上
+//        istime：查询条件-热门 限时卖 同上
+        
+    }else{
+        
+        screenSort = @"0";
+
+        sender.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
+        
+    }
+
+    switch (sender.tag - 100) {
+        case 1:
+            [_screenDic addEntriesFromDictionary:@{@"isrecommand":screenSort}];
+            
+            break;
+        case 2:
+            [_screenDic addEntriesFromDictionary:@{@"isnew":screenSort}];
+            
+            break;
+        case 3:
+            [_screenDic addEntriesFromDictionary:@{@"ishot":screenSort}];
+            
+            break;
+        case 4:
+            [_screenDic addEntriesFromDictionary:@{@"isdiscount":screenSort}];
+            
+            break;
+        case 5:
+            [_screenDic addEntriesFromDictionary:@{@"issendfree":screenSort}];
+            
+            break;
+        case 6:
+            [_screenDic addEntriesFromDictionary:@{@"istime":screenSort}];
+            
+            break;
+        default:
+            break;
+    }
+    
+}
+
+#pragma mark 取消/提交筛选
+- (IBAction)cancleOrCommitScreen:(UIButton *)sender {
+
+    if (sender.tag == 200) {
+     
+        [_screenDic removeAllObjects];
+        
+    }else if (sender.tag == 201){
+        
+      
+        [self initData];
+        
+    }
+    
+    _screenView.hidden = YES;
+    
+    _screenBgView.hidden = YES;
+    
 }
 
 

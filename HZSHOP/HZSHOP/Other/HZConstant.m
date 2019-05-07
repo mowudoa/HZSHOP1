@@ -17,3 +17,4 @@ NSString *const HZOrderPayed = @"已付款";
 NSString *const Address_Add_Success = @"保存成功";
 NSString *const Address_Delete_Success = @"删除成功";
 NSString *const Address_Delete_Faile = @"删除失败";
+NSString *const Shop_AddCart_Success = @"加入购物车成功";

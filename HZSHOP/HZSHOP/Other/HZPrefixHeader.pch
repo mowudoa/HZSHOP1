@@ -86,6 +86,8 @@
 
 #define GOODS_DETAIL        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_details"//商品详情
 
+#define GOODS_ADD_CART      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.cart.addcartapp"//商品添加购物车
+
 #define ADD_ADDRESS         @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.submitapp"//添加收货地址
 
 #define ADDRESS_LIST        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.getselectorapp"//地址列表
