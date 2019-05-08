@@ -9,9 +9,15 @@
 #import "HZGoodsDetailViewController.h"
 #import "scrollPhotos.h"
 #import "HZCartViewController.h"
+#import "HZGoodsParameterModel.h"
 #import "HZCartOrderViewController.h"
+#import "HZGoodsParameterTableViewCell.h"
 
-@interface HZGoodsDetailViewController ()
+
+@interface HZGoodsDetailViewController ()<
+UITableViewDelegate,
+UITableViewDataSource
+>
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;
@@ -50,6 +56,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *commitButton;//确认button
 
+@property (weak, nonatomic) IBOutlet UITableView *parameterTableView;
+
 @property(nonatomic,strong) NSMutableArray *bannerArray;
 
 @property(nonatomic,assign) NSInteger stockNum;//库存
@@ -57,6 +65,8 @@
 @property(nonatomic,strong)scrollPhotos* headScrollView;
 
 @property(nonatomic,copy) NSString * paremeterViewShowType;
+
+@property(nonatomic,strong) NSMutableArray *parameterArray;
 
 @end
 
@@ -68,6 +78,8 @@
     
     [self initUI];
     
+    [self registerCell];
+    
     [self initData];
     
 }
@@ -76,6 +88,8 @@
     self.navigationItem.title = @"商品详情";
     
     _bannerArray = [[NSMutableArray alloc] init];
+    
+    _parameterArray = [[NSMutableArray alloc] init];
     
     [WYFTools viewLayer:_jumpShopButton.height/2 withView:_jumpShopButton];
     
@@ -88,6 +102,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(putGoodsNum:) name:@"putGoodsNum" object:nil];
 
 }
+
+-(void)registerCell
+{
+ 
+    UINib* nib   =[UINib nibWithNibName:@"HZGoodsParameterTableViewCell" bundle:nil];
+    
+    [_parameterTableView registerNib:nib forCellReuseIdentifier:@"GoodsParameterTableViewCell"];
+    
+}
+
 -(void)initData
 {
     NSDictionary *dict = @{@"goodsid":_goodsId};
@@ -117,6 +141,7 @@
             if ([detail[@"issendfree"] isEqualToString:@"1"]) {
                 
                 strongSelf.expressMoney.text = @"快递:包邮";
+                
             }else{
                 
                 strongSelf.expressMoney.text = @"快递:自费";
@@ -287,7 +312,6 @@
         
     }
     
-    
 }
 
 #pragma mark 参数选择
@@ -299,13 +323,48 @@
     
     NSDictionary *dict = @{@"goodsid":_goodsId};
     
+    MJWeakSelf;
+    
     [CrazyNetWork CrazyRequest_Post:GOODS_PARAMETER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
        
         LOG(@"商品参数获取", dic);
         
+        MJStrongSelf;
+        
+        [strongSelf.parameterArray removeAllObjects];
+        
         if (SUCCESS) {
          
+            NSArray *list = dic[@"data"];
             
+            for (NSDictionary *dic1 in list) {
+                
+                HZGoodsParameterModel *model = [[HZGoodsParameterModel alloc] init];
+                
+                model.rootId = dic1[@"id"];
+                
+                model.rootTitle = dic1[@"title"];
+                
+                NSArray *itemArray = dic1[@"item"];
+                
+                for (NSDictionary *dic2 in itemArray) {
+                    
+                    rootModel *model1 = [[rootModel alloc] init];
+                    
+                    model1.rootId = dic2[@"id"];
+                    
+                    model1.rootTitle = dic2[@"title"];
+                    
+                    [model.parameterArray addObject:model];
+                    
+                }
+                
+                [strongSelf.parameterArray addObject:model];
+
+                
+            }
+            [strongSelf.parameterTableView reloadData];
+
         }else{
             
             
@@ -468,6 +527,73 @@
     
     self.bgScrollView.contentSize = CGSizeMake(0,_shopView.mj_y + _shopView.height + 8 + _detailView.height);
     
+}
+
+#pragma mark - UITableViewDataSource  数据源方法
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return _parameterArray.count;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HZGoodsParameterTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"GoodsParameterTableViewCell" forIndexPath:indexPath];
+    
+    HZGoodsParameterModel *model = _parameterArray[indexPath.section];
+    
+    [cell setParameterModel:model];
+    
+    return cell;
+    
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    HZGoodsParameterModel *model = _parameterArray[section];
+    
+    UIView* backView = [[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 20)];
+    
+    backView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(5,30,SCREEN_WIDTH - 10,1)];
+    
+    lineLabel.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
+    
+  //  [backView addSubview:lineLabel];
+    
+    UILabel *timeLabel = [WYFTools createLabel:CGRectMake(10,0,SCREEN_WIDTH - 20,20) bgColor:[UIColor clearColor] text:model.rootTitle textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:[UIColor blackColor] tag:section];
+    
+    [backView addSubview:timeLabel];
+    
+    return backView;
+    
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - UITableViewDelegate  代理
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 30;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
 }
 
 -(void)dealloc
