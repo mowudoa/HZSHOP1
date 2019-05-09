@@ -92,6 +92,8 @@
 
 #define GOODS_PARAMETER     @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.getoptions"//商品参数
 
+#define GOODS_GETOPENTIONID  @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.getoptionsid"//获取optionsid
+
 #define GOODS_ADD_CART      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.cart.addcartapp"//商品添加购物车
 
 #define ADD_ADDRESS         @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.submitapp"//添加收货地址

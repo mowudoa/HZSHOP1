@@ -228,7 +228,9 @@ static WYFTools *god = nil;
     
     for (int index = 0; index < array.count; index++) {
         
-        NSString *itemString = [array objectAtIndex:index];
+        rootModel *model = array[index];
+        
+        NSString *itemString = model.rootTitle;;
         
         NSDictionary *attribute = @{NSFontAttributeName: font};
         
@@ -239,7 +241,7 @@ static WYFTools *god = nil;
             
         }else{
             
-            size.width = size.width + 10;//为了给每个label 留点显示边距  ＋10
+            size.width = size.width + 30;//为了给每个label 留点显示边距  ＋10
             
         }
         
@@ -247,6 +249,7 @@ static WYFTools *god = nil;
             
             size.width = myView.frame.size.width - itemSpace * 2;
         }
+        
         if (currentX + size.width > myView.frame.size.width - 2 * itemSpace) {
             
             //计算的宽度大于 屏幕的宽度
@@ -254,21 +257,20 @@ static WYFTools *god = nil;
             
             currentX = 0;
         }
-        UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        
+        UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
         
         button.frame = CGRectMake(currentX + itemSpace, currentY + itemSpace, size.width, itemHeight);
         
-        button.backgroundColor = [UIColor clearColor];
+        button.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         
         button.layer.masksToBounds = YES;
         
         button.layer.cornerRadius = 2;
         
-        [button setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
+        [button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         
-        button.layer.borderColor = [UIColor orangeColor].CGColor;
-        
-        button.layer.borderWidth = 1;
+        [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
         
         [button setTitle:itemString forState:(UIControlStateNormal)];
         
@@ -279,9 +281,12 @@ static WYFTools *god = nil;
         [button addTarget:vc action:action forControlEvents:UIControlEventTouchUpInside];
         button.userInteractionEnabled = enable;
         
+        button.tag = [model.rootId integerValue];
+        
         [myView addSubview:button];
         
         height = currentY;
+        
     }
     
     return height + itemHeight;

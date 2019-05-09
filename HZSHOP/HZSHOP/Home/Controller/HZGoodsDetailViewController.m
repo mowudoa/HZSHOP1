@@ -13,10 +13,10 @@
 #import "HZCartOrderViewController.h"
 #import "HZGoodsParameterTableViewCell.h"
 
-
 @interface HZGoodsDetailViewController ()<
 UITableViewDelegate,
-UITableViewDataSource
+UITableViewDataSource,
+parameterSlecteDelete
 >
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -68,6 +68,10 @@ UITableViewDataSource
 
 @property(nonatomic,strong) NSMutableArray *parameterArray;
 
+@property(nonatomic,strong) NSMutableDictionary *parameterDic;
+
+@property(nonatomic,copy) NSString *optionsid;//optionsid
+
 @end
 
 @implementation HZGoodsDetailViewController
@@ -82,6 +86,8 @@ UITableViewDataSource
     
     [self initData];
     
+    [self getGoodsParameter];
+    
 }
 -(void)initUI
 {
@@ -90,6 +96,8 @@ UITableViewDataSource
     _bannerArray = [[NSMutableArray alloc] init];
     
     _parameterArray = [[NSMutableArray alloc] init];
+    
+    _parameterDic = [[NSMutableDictionary alloc] init];
     
     [WYFTools viewLayer:_jumpShopButton.height/2 withView:_jumpShopButton];
     
@@ -166,6 +174,65 @@ UITableViewDataSource
     
 }
 
+#pragma mark 获取商品参数
+-(void)getGoodsParameter
+{
+    NSDictionary *dict = @{@"goodsid":_goodsId};
+    
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:GOODS_PARAMETER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"商品参数获取", dic);
+        
+        MJStrongSelf;
+        
+        [strongSelf.parameterArray removeAllObjects];
+        
+        if (SUCCESS) {
+            
+            NSArray *list = dic[@"data"];
+            
+            for (NSDictionary *dic1 in list) {
+                
+                HZGoodsParameterModel *model = [[HZGoodsParameterModel alloc] init];
+                
+                model.rootId = dic1[@"id"];
+                
+                model.rootTitle = dic1[@"title"];
+                
+                NSArray *itemArray = dic1[@"item"];
+                
+                for (NSDictionary *dic2 in itemArray) {
+                    
+                    rootModel *model1 = [[rootModel alloc] init];
+                    
+                    model1.rootId = dic2[@"id"];
+                    
+                    model1.rootTitle = dic2[@"title"];
+                    
+                    [model.parameterArray addObject:model1];
+                    
+                }
+                
+                [strongSelf.parameterArray addObject:model];
+                
+                
+            }
+            [strongSelf.parameterTableView reloadData];
+            
+        }else{
+            
+            
+        }
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
+
 #pragma 添加购物车
 - (IBAction)addShopCart:(UIButton *)sender {
 
@@ -228,6 +295,8 @@ UITableViewDataSource
 -(void)closeGoodsParameter
 {
     
+    [_parameterDic removeAllObjects];
+    
     _selecteBgView.hidden = YES;
     
     __weak typeof(self) weakSelf = self;
@@ -242,7 +311,6 @@ UITableViewDataSource
         
     }];
 }
-
 
 #pragma mark 商品数量选择
 - (IBAction)numChoice:(UIButton *)sender {
@@ -321,60 +389,7 @@ UITableViewDataSource
 
     [self showGoodsParameter];
     
-    NSDictionary *dict = @{@"goodsid":_goodsId};
-    
-    MJWeakSelf;
-    
-    [CrazyNetWork CrazyRequest_Post:GOODS_PARAMETER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
-       
-        LOG(@"商品参数获取", dic);
-        
-        MJStrongSelf;
-        
-        [strongSelf.parameterArray removeAllObjects];
-        
-        if (SUCCESS) {
-         
-            NSArray *list = dic[@"data"];
-            
-            for (NSDictionary *dic1 in list) {
-                
-                HZGoodsParameterModel *model = [[HZGoodsParameterModel alloc] init];
-                
-                model.rootId = dic1[@"id"];
-                
-                model.rootTitle = dic1[@"title"];
-                
-                NSArray *itemArray = dic1[@"item"];
-                
-                for (NSDictionary *dic2 in itemArray) {
-                    
-                    rootModel *model1 = [[rootModel alloc] init];
-                    
-                    model1.rootId = dic2[@"id"];
-                    
-                    model1.rootTitle = dic2[@"title"];
-                    
-                    [model.parameterArray addObject:model];
-                    
-                }
-                
-                [strongSelf.parameterArray addObject:model];
-
-                
-            }
-            [strongSelf.parameterTableView reloadData];
-
-        }else{
-            
-            
-        }
-        
-        
-    } fail:^(NSError *error, NSString *url, NSString *Json) {
-        
-    }];
-    
+  
 }
 
 #pragma mark 商品订单提交
@@ -453,11 +468,26 @@ UITableViewDataSource
 
 -(void)addGoodsToShopCart
 {
-  
-    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
-                           @"goodsid":_goodsId,
-                           @"total":_numTextField.text
-                           };
+
+    dispatch_queue_t queue = dispatch_queue_create("serialQueue", DISPATCH_QUEUE_SERIAL);
+    
+    dispatch_sync(queue, ^{
+       
+        [self linkParameter];
+
+    });
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    
+    [dict addEntriesFromDictionary:@{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                                     @"goodsid":_goodsId,
+                                     @"total":_numTextField.text
+                                     }];
+    
+    if (!(_optionsid == nil)) {
+        
+        [dict addEntriesFromDictionary:@{@"optionid":_optionsid}];
+    }
 
     [CrazyNetWork CrazyRequest_Post:GOODS_ADD_CART parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
        
@@ -549,6 +579,10 @@ UITableViewDataSource
     
     [cell setParameterModel:model];
     
+    cell.bgView.tag = indexPath.section + 100;
+    
+    cell.delegate = self;
+    
     return cell;
     
 }
@@ -557,7 +591,7 @@ UITableViewDataSource
 {
     HZGoodsParameterModel *model = _parameterArray[section];
     
-    UIView* backView = [[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 20)];
+    UIView* backView = [[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 30)];
     
     backView.backgroundColor = [UIColor whiteColor];
     
@@ -567,7 +601,7 @@ UITableViewDataSource
     
   //  [backView addSubview:lineLabel];
     
-    UILabel *timeLabel = [WYFTools createLabel:CGRectMake(10,0,SCREEN_WIDTH - 20,20) bgColor:[UIColor clearColor] text:model.rootTitle textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:[UIColor blackColor] tag:section];
+    UILabel *timeLabel = [WYFTools createLabel:CGRectMake(10,5,SCREEN_WIDTH - 20,20) bgColor:[UIColor clearColor] text:model.rootTitle textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:[UIColor blackColor] tag:section];
     
     [backView addSubview:timeLabel];
     
@@ -583,12 +617,15 @@ UITableViewDataSource
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 30;
+    HZGoodsParameterModel *model = _parameterArray[indexPath.section];
+    
+    return model.cellHeight;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20;
+    return 30;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -596,6 +633,65 @@ UITableViewDataSource
     return 0.01;
 }
 
+#pragma mark parameterSlecteDelete
+-(void)parameterSelete:(NSString *)parameterId sort:(NSInteger)parameterSort
+{
+    [_parameterDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%ld",parameterSort]:parameterId}];
+    
+}
+
+#pragma mark 链接参数
+-(void)linkParameter
+{
+    
+    NSMutableString *parameterString = [[NSMutableString alloc] init];
+
+    if (_parameterDic != nil) {
+        
+        NSArray *arr = [[_parameterDic allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *string1,NSString *string2) {
+            
+            return [string1 compare:string2];
+            
+        }];
+        
+        for (int i = 0 ; i < arr.count; i ++) {
+            
+            if (!(i == 0)) {
+                
+                [parameterString appendString:@"_"];
+                
+            }
+            
+            [parameterString appendString:_parameterDic[arr[i]]];
+            
+        }
+        
+        NSLog(@"%@",parameterString);
+    }
+    
+    if (parameterString != nil) {
+      
+        NSDictionary *dict = @{@"specs":parameterString,
+                               @"goodsid":_goodsId
+                               };
+        
+        [CrazyNetWork CrazyRequest_Post:GOODS_GETOPENTIONID parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+            
+            LOG(@"获取optionsid", dic);
+            
+            if (SUCCESS) {
+                
+                self->_optionsid = dic[@"data"];
+                
+            }
+            
+        } fail:^(NSError *error, NSString *url, NSString *Json) {
+            
+        }];
+        
+    }
+   
+}
 -(void)dealloc
 {
     
