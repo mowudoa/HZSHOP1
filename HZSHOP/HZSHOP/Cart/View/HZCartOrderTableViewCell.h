@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HZGoodsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZCartOrderTableViewCell : UITableViewCell<
@@ -15,6 +15,8 @@ UITableViewDelegate,
 UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *cartGoodsTableView;
+
+@property(nonatomic,strong) NSMutableArray *goodsArray;
 
 @end
 

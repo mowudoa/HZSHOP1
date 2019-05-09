@@ -7,7 +7,7 @@
 //
 
 #import "XTBaseBackViewController.h"
-
+#import "HZGoodsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,CellType){
@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger,CellType){
 };
 
 @interface HZCartOrderViewController : XTBaseBackViewController
+
+@property(nonatomic,copy) NSMutableArray *goodsArray;
 
 @end
 

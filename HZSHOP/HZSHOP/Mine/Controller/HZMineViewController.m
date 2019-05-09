@@ -117,6 +117,8 @@
 
     HZAddressListViewController *address = [[HZAddressListViewController alloc] init];
     
+    address.addressListType = addressSeeType;
+    
     [self.navigationController pushViewController:address animated:YES];
     
 }

@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZOrderTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *goodsIcon;
+@property (weak, nonatomic) IBOutlet UILabel *goodsTitle;
+@property (weak, nonatomic) IBOutlet UILabel *goodsPrice;
+@property (weak, nonatomic) IBOutlet UILabel *goodsNum;
 
 @end
 

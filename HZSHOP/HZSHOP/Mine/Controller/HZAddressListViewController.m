@@ -7,7 +7,6 @@
 //
 
 #import "HZAddressListViewController.h"
-#import "HZAddressModel.h"
 #import "HZAddressListTableViewCell.h"
 #import "HZNewBuildAddressViewController.h"
 @interface HZAddressListViewController ()<
@@ -145,7 +144,24 @@ UITableViewDataSource
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    HZAddressModel *model = _addressArray[indexPath.section];
     
+    if (_addressListType == addressChoiceType) {
+        
+        MJWeakSelf;
+        
+        if (self.addressInfoBlock) {
+            //将值传到接收方
+            weakSelf.addressInfoBlock(model);
+            
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }else if (_addressListType == addressSeeType){
+        
+        
+    }
   
 }
 

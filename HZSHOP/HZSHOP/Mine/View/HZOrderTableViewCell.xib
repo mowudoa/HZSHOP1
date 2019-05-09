@@ -80,6 +80,12 @@
                     <constraint firstItem="O3F-RF-5wS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="x9Y-Ek-b8Y"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="goodsIcon" destination="URy-4s-UKv" id="AeG-ue-ZI0"/>
+                <outlet property="goodsNum" destination="Trq-Bn-qJ4" id="Sut-dq-Fa3"/>
+                <outlet property="goodsPrice" destination="O3F-RF-5wS" id="Ldq-DD-X6Q"/>
+                <outlet property="goodsTitle" destination="6J5-nf-wuM" id="Afe-9A-rtb"/>
+            </connections>
             <point key="canvasLocation" x="105.59999999999999" y="107.0464767616192"/>
         </tableViewCell>
     </objects>

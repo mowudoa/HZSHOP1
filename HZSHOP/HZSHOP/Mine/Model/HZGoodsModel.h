@@ -18,8 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,copy) NSString *goodsId;//商品id
 
+@property(nonatomic,copy) NSString *goodsNum;//商品数量
+
+@property(nonatomic,copy) NSString *goodsStockNum;//商品库存
+
+@property(nonatomic,copy) NSString *isFree;//是否包邮
 
 @property(nonatomic,copy) NSString *goodsTime;//日期
+
+@property(nonatomic,copy) NSString *optionId;//optionId
+
+@property(nonatomic,copy) NSString *specs;//规格
 
 
 @end

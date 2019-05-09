@@ -48,9 +48,13 @@
             
             UIButton *btn = (UIButton *)view;
             
-            [btn setBackgroundColor:[UIColor colorWithHexString:@"#F7F7F7"]];
-            
-            btn.selected = NO;
+            if (sender.tag != btn.tag) {
+             
+                [btn setBackgroundColor:[UIColor colorWithHexString:@"#F7F7F7"]];
+                
+                btn.selected = NO;
+                
+            }
             
         }
         
@@ -58,13 +62,25 @@
     
     sender.selected = !sender.selected;
     
-    [sender setBackgroundColor:[UIColor colorWithHexString:@"#FC585A"]];
+    if (sender.selected) {
     
-    if ([self.delegate respondsToSelector:@selector(parameterSelete:sort:)]) {
+        [sender setBackgroundColor:[UIColor colorWithHexString:@"#FC585A"]];
         
-        [self.delegate parameterSelete:[NSString stringWithFormat:@"%ld",sender.tag] sort:_bgView.tag - 99];
+        if ([self.delegate respondsToSelector:@selector(parameterSelete:titleSting:sort:isSelect:)]) {
+            
+            [self.delegate parameterSelete:[NSString stringWithFormat:@"%ld",sender.tag] titleSting:sender.currentTitle sort:_bgView.tag - 99 isSelect:sender.selected];
+            
+        }
         
+    }else{
+        
+        [sender setBackgroundColor:[UIColor colorWithHexString:@"#F7F7F7"]];
+
+        [self.delegate parameterSelete:[NSString stringWithFormat:@"%ld",sender.tag] titleSting:sender.currentTitle sort:_bgView.tag - 99 isSelect:sender.selected];
+
     }
+    
+  
     
 }
 

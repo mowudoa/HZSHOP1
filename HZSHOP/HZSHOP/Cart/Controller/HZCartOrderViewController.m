@@ -7,6 +7,7 @@
 //
 
 #import "HZCartOrderViewController.h"
+#import "HZAddressModel.h"
 #import "HZOrderPayViewController.h"
 #import "HZCartOrderTableViewCell.h"
 #import "HZGoodsPriceTableViewCell.h"
@@ -20,7 +21,9 @@ UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *cartOrderTableView;
 
-@property(nonatomic,strong) NSMutableArray *goodsArray;
+@property(strong,nonatomic) NSMutableArray *addressArray;
+
+@property(copy,nonatomic) NSString *addressId;
 
 @end
 
@@ -39,6 +42,9 @@ UITableViewDataSource
 -(void)initUI
 {
     self.navigationItem.title = @"确认订单";
+    
+    _addressArray = [[NSMutableArray alloc] init];
+    
 }
 
 -(void)registercell
@@ -70,6 +76,48 @@ UITableViewDataSource
 
 - (IBAction)submitOrder:(UIButton *)sender {
 
+    NSMutableArray *orderParameter = [[NSMutableArray alloc] init];
+    
+    
+    for (HZGoodsModel *model in _goodsArray) {
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        
+        [dic addEntriesFromDictionary:@{@"goodsid":model.goodsId}];
+        
+        [dic addEntriesFromDictionary:@{@"total":model.goodsNum}];
+        
+        [dic addEntriesFromDictionary:@{@"optionid":model.optionId}];
+
+        [orderParameter addObject:dic];
+                
+    }
+    NSData *data = [NSJSONSerialization dataWithJSONObject:orderParameter options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSString *jsonStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *dic = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]
+,                         @"goods":jsonStr,
+                          @"addressid":_addressId
+                          };
+    
+    [CrazyNetWork CrazyRequest_Post:COMMIT_ORDER parameters:dic HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"提交订单", dic);
+        
+        if (SUCCESS) {
+            
+        }else{
+            
+            
+        }
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+    
     HZOrderPayViewController *orderPay = [[HZOrderPayViewController alloc] init];
     
     [self.navigationController pushViewController:orderPay animated:YES];
@@ -96,11 +144,38 @@ UITableViewDataSource
      
         HZAddressSelectTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"AddressSelectTableViewCell" forIndexPath:indexPath];
 
+        if (_addressArray.count > 0) {
+         
+            HZAddressModel *model = _addressArray[indexPath.row];
+            
+            cell.addressInfoView.hidden = NO;
+            
+            cell.addressAddView.hidden = YES;
+            
+            cell.addressUserName.text = model.userName;
+            
+            cell.addressUserPhone.text = model.userPhone;
+            
+            cell.addressDetail.text = [NSString stringWithFormat:@"%@%@",model.address,model.addressDetail];
+            
+        }else{
+            
+        
+            cell.addressInfoView.hidden = YES;
+            
+            cell.addressAddView.hidden = NO;
+            
+        }
+        
+        
+        
         return cell;
         
     }else if (indexPath.section == GoodsType - 100){
         
         HZCartOrderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CartOrderTableViewCell" forIndexPath:indexPath];
+        
+        [cell setGoodsArray:_goodsArray];
         
         return cell;
         
@@ -157,8 +232,24 @@ UITableViewDataSource
 {
   
     if (indexPath.section == AddressType - 100){
-       
+        
         HZAddressListViewController *address = [[HZAddressListViewController alloc] init];
+        
+        address.addressListType = addressChoiceType;
+        
+        MJWeakSelf;
+        
+        address.addressInfoBlock = ^(HZAddressModel *model) {
+           
+            [weakSelf.addressArray removeAllObjects];
+            
+            [weakSelf.addressArray addObject:model];
+            
+            weakSelf.addressId = model.rootId;
+            
+            [weakSelf.cartOrderTableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+        };
         
         [self.navigationController pushViewController:address animated:YES];
         
@@ -174,7 +265,7 @@ UITableViewDataSource
         
     }else if (indexPath.section == GoodsType - 100){
         
-        return (HEIGHT(127) + 30) * 10;
+        return (HEIGHT(127) + 30) * _goodsArray.count;
 
     }else if (indexPath.section == LeaveMessageType - 100){
         

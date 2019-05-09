@@ -7,12 +7,15 @@
 //
 
 #import "XTBaseBackViewController.h"
+#import "HZGoodsModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZGoodsDetailViewController : XTBaseBackViewController
 
 @property(nonatomic,copy) NSString *goodsId;
+
+@property(nonatomic,strong) HZGoodsModel *goodsModel;
 
 @end
 

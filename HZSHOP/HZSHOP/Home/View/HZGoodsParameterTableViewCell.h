@@ -11,7 +11,7 @@
 
 @protocol parameterSlecteDelete <NSObject>
 
--(void)parameterSelete:(NSString *)parameterId sort: (NSInteger)parameterSort;
+-(void)parameterSelete:(NSString *)parameterId titleSting:(NSString *)title sort: (NSInteger)parameterSort isSelect:(BOOL)isSelecte;
 
 @end
 

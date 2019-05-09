@@ -68,7 +68,9 @@ parameterSlecteDelete
 
 @property(nonatomic,strong) NSMutableArray *parameterArray;
 
-@property(nonatomic,strong) NSMutableDictionary *parameterDic;
+@property(nonatomic,strong) NSMutableDictionary *parameterDic;//参数id
+
+@property(nonatomic,strong) NSMutableDictionary *parameterStringDic;//参数名
 
 @property(nonatomic,copy) NSString *optionsid;//optionsid
 
@@ -99,6 +101,8 @@ parameterSlecteDelete
     
     _parameterDic = [[NSMutableDictionary alloc] init];
     
+    _parameterStringDic = [[NSMutableDictionary alloc] init];
+
     [WYFTools viewLayer:_jumpShopButton.height/2 withView:_jumpShopButton];
     
     [WYFTools viewLayerBorderWidth:1 borderColor:[UIColor colorWithHexString:@"#fc5759"] withView:_jumpShopButton];
@@ -138,6 +142,8 @@ parameterSlecteDelete
          
             NSDictionary *detail = dic[@"data"];
             
+            [strongSelf getGoodsInfo:detail];
+            
             strongSelf.goodsTitle.text = detail[@"title"];
             
             strongSelf.goodsSubTitle.text = detail[@"shorttitle"];
@@ -171,6 +177,23 @@ parameterSlecteDelete
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
+    
+}
+
+#pragma mark 获取商品信息
+-(void)getGoodsInfo:(NSDictionary *)goodsDic
+{
+    _goodsModel = [[HZGoodsModel alloc] init];
+    
+    _goodsModel.rootTitle = goodsDic[@"title"];
+    
+    _goodsModel.rootSubTitle = goodsDic[@"shorttitle"];
+    
+    _goodsModel.goodsOldPrice = goodsDic[@"productprice"];
+    
+    _goodsModel.goodsPrice = goodsDic[@"marketprice"];
+    
+    _goodsModel.rootImageUrl = goodsDic[@"thumb"];
     
 }
 
@@ -217,8 +240,8 @@ parameterSlecteDelete
                 
                 [strongSelf.parameterArray addObject:model];
                 
-                
             }
+            
             [strongSelf.parameterTableView reloadData];
             
         }else{
@@ -297,6 +320,8 @@ parameterSlecteDelete
     
     [_parameterDic removeAllObjects];
     
+    [_parameterStringDic removeAllObjects];
+    
     _selecteBgView.hidden = YES;
     
     __weak typeof(self) weakSelf = self;
@@ -353,11 +378,15 @@ parameterSlecteDelete
 
     if (sender.tag == 200) {
         
-        [self addGoodsToShopCart];
+        self.paremeterViewShowType = @"加入购物车";
+
+        [self getAddGoodsToShopCartOptionid];
         
     }else if (sender.tag == 201){
         
-        [self buyGoodsNow];
+        self.paremeterViewShowType = @"立即购买";
+
+        [self getbuyGoodsNowParameter];
     }
     
 }
@@ -398,11 +427,11 @@ parameterSlecteDelete
     
     if ([_paremeterViewShowType isEqualToString:@"加入购物车"]) {
         
-        [self addGoodsToShopCart];
+        [self getAddGoodsToShopCartOptionid];
         
     }else if ([_paremeterViewShowType isEqualToString:@"立即购买"]){
         
-        [self buyGoodsNow];
+        [self getbuyGoodsNowParameter];
         
     }else if ([_paremeterViewShowType isEqualToString:@"参数选择"]){
         
@@ -420,7 +449,6 @@ parameterSlecteDelete
 }
 
 #pragma mark 商品数量输入
-
 - (void)putGoodsNum:(NSNotification *)notification{
     //done按钮的操作
     
@@ -444,7 +472,6 @@ parameterSlecteDelete
         
     }else if ([_numTextField.text integerValue] > _stockNum){
         
-        
         [JKToast showWithText:@"已达到最大库存限制"];
         
         _numTextField.text = [NSString stringWithFormat:@"%ld",_stockNum];
@@ -466,17 +493,36 @@ parameterSlecteDelete
     
 }
 
+#pragma mark 加入购物车(获取optionid)
+-(void)getAddGoodsToShopCartOptionid
+{
+    
+    if (_parameterArray.count > 0) {
+    
+        if (_parameterArray.count == [_parameterDic allKeys].count) {
+            
+            [self linkParameter];
+
+        }else{
+            
+            [JKToast showWithText:@"请选择规格"];
+            
+            return ;
+            
+        }
+        
+
+    }else{
+        
+        [self addGoodsToShopCart];
+    }
+    
+}
+
+#pragma mark 加入购物车
 -(void)addGoodsToShopCart
 {
-
-    dispatch_queue_t queue = dispatch_queue_create("serialQueue", DISPATCH_QUEUE_SERIAL);
-    
-    dispatch_sync(queue, ^{
-       
-        [self linkParameter];
-
-    });
-    
+   
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
     [dict addEntriesFromDictionary:@{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
@@ -488,13 +534,13 @@ parameterSlecteDelete
         
         [dict addEntriesFromDictionary:@{@"optionid":_optionsid}];
     }
-
+    
     [CrazyNetWork CrazyRequest_Post:GOODS_ADD_CART parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
-       
+        
         LOG(@"加入购物车", dic);
         
         if (SUCCESS) {
-           
+            
             [JKToast showWithText:Shop_AddCart_Success];
             
             [self closeGoodsParameter];
@@ -505,20 +551,75 @@ parameterSlecteDelete
             
         }
         
-        
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
     
 }
 
--(void)buyGoodsNow
+#pragma mark 立即购买参数
+-(void)getbuyGoodsNowParameter
 {
+    
+    if (_parameterArray.count > 0) {
+     
+        if (_parameterArray.count == [_parameterDic allKeys].count) {
+            
+            [self linkParameter];
+            
+        }else{
+            
+            [JKToast showWithText:@"请选择规格"];
+            
+            return ;
+            
+        }
+        
+    }else{
+        
+        [self goodsBuyNow];
+        
+    }
+    
+
+}
+
+#pragma mark 立即购买
+-(void)goodsBuyNow
+{
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    
+    HZGoodsModel *model = [[HZGoodsModel alloc] init];
+    
+    model = _goodsModel;
+    
+    model.goodsId = _goodsId;
+    
+    if (_optionsid != nil) {
+        
+        model.optionId = _optionsid;
+        
+    }
+    
+    model.goodsNum = _numTextField.text;
+    
+    if ([self linkParameterString] != nil) {
+        
+        model.specs = [self linkParameterString];
+        
+    }
+    
+    [arr addObject:model];
     
     HZCartOrderViewController *cartOrder = [[HZCartOrderViewController alloc] init];
     
+    cartOrder.goodsArray = arr;
+    
     [self.navigationController pushViewController:cartOrder animated:YES];
     
+    [self closeGoodsParameter];
+
 }
 
 -(scrollPhotos *)headScrollView
@@ -560,7 +661,6 @@ parameterSlecteDelete
 }
 
 #pragma mark - UITableViewDataSource  数据源方法
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return _parameterArray.count;
@@ -634,10 +734,24 @@ parameterSlecteDelete
 }
 
 #pragma mark parameterSlecteDelete
--(void)parameterSelete:(NSString *)parameterId sort:(NSInteger)parameterSort
+-(void)parameterSelete:(NSString *)parameterId titleSting:(NSString *)title sort:(NSInteger)parameterSort isSelect:(BOOL)isSelecte
 {
-    [_parameterDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%ld",parameterSort]:parameterId}];
+    if (isSelecte) {
     
+        [_parameterDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%ld",parameterSort]:parameterId}];
+        
+        [_parameterStringDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%ld",parameterSort]:title}];
+        
+    }else{
+        
+        [_parameterDic removeObjectForKey:[NSString stringWithFormat:@"%ld",parameterSort]];
+        
+        [_parameterStringDic removeObjectForKey:[NSString stringWithFormat:@"%ld",parameterSort]];
+        
+    }
+    
+ 
+
 }
 
 #pragma mark 链接参数
@@ -671,6 +785,8 @@ parameterSlecteDelete
     
     if (parameterString != nil) {
       
+        MJWeakSelf;
+        
         NSDictionary *dict = @{@"specs":parameterString,
                                @"goodsid":_goodsId
                                };
@@ -679,9 +795,20 @@ parameterSlecteDelete
             
             LOG(@"获取optionsid", dic);
             
+            MJStrongSelf;
+            
             if (SUCCESS) {
                 
-                self->_optionsid = dic[@"data"];
+                strongSelf.optionsid = dic[@"data"];
+                
+                if ([strongSelf.paremeterViewShowType isEqualToString:@"加入购物车"]) {
+                 
+                    [strongSelf addGoodsToShopCart];
+
+                }else if ([strongSelf.paremeterViewShowType isEqualToString:@"立即购买"]){
+                    
+                    [strongSelf goodsBuyNow];
+                }
                 
             }
             
@@ -692,6 +819,36 @@ parameterSlecteDelete
     }
    
 }
+-(NSMutableString *)linkParameterString
+{
+  
+    NSMutableString *parameterString = [[NSMutableString alloc] init];
+    
+    if (_parameterStringDic != nil) {
+        
+        NSArray *arr = [[_parameterStringDic allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *string1,NSString *string2) {
+            
+            return [string1 compare:string2];
+            
+        }];
+        
+        for (int i = 0 ; i < arr.count; i ++) {
+            
+            if (!(i == 0)) {
+                
+                [parameterString appendString:@" "];
+                
+            }
+            
+            [parameterString appendString:_parameterStringDic[arr[i]]];
+            
+        }
+        
+    }
+    
+    return parameterString;
+}
+
 -(void)dealloc
 {
     

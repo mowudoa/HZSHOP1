@@ -50,6 +50,8 @@
 
     _goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:[NSString stringWithFormat:@"￥%@",_carModel.goodsOldPrice]];
     
+    [_imageIcon sd_setImageWithURL:[NSURL URLWithString:_carModel.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
+
 }
 
 #pragma mark 选择商品

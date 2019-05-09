@@ -121,6 +121,29 @@ UITableViewDataSource
 -(void)initData
 {
     
+    self.nowPage = 1;
+    
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]};
+    
+    
+    [CrazyNetWork CrazyRequest_Post:MY_COUPON parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"优惠券领取记录",dic);
+        
+        if (SUCCESS) {
+            
+        }else{
+            
+            
+        }
+        
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+    
     for (int i = 0; i < 10; i ++) {
         
          HZcouponModel*model = [[HZcouponModel alloc] init];

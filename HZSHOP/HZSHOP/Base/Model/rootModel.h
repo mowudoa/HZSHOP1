@@ -20,6 +20,8 @@
 
 @property(nonatomic,copy) NSString *rootTitle;//标题
 
+@property(nonatomic,copy) NSString *rootSubTitle;//副标题
+
 @property(nonatomic,copy) NSString *rootImageUrl;//icon
 
 @property(nonatomic,copy) NSString *rootRemark;//备注

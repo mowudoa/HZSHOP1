@@ -67,6 +67,8 @@
 
 #define COUPON_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.couponList"//领取优惠券中心
 
+#define MY_COUPON           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.getlistapp"//我的优惠券
+
 #define COUPON_DETAIL       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.detail.coupon_detail"//优惠券详情
 
 #define SHOP_CART           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.cart.card_list"//购物车
@@ -103,4 +105,8 @@
 #define ADDRESS_DELETE      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.delete_app"//地址删除
 
 #define ADDRESS_SET_DEFAULT @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.address.setdefaultapp"//设置默认地址
+
+#define COMMIT_ORDER        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=order.create.submitapp"//提交订单
+
+#define ORDER_DETAIL        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=order.order_detail"//订单详情
 #endif //  HZPrefixHeader.pch

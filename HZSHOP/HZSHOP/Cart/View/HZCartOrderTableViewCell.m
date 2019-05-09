@@ -30,6 +30,13 @@
     _cartGoodsTableView.dataSource = self;
     
 }
+-(void)setGoodsArray:(NSMutableArray *)goodsArray
+{
+    _goodsArray = goodsArray;
+    
+    [_cartGoodsTableView reloadData];
+    
+}
 
 -(void)registercell
 {
@@ -44,7 +51,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return _goodsArray.count;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -56,6 +63,16 @@
 {
     
     HZOrderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"OrderTableViewCell" forIndexPath:indexPath];
+    
+    HZGoodsModel *model = _goodsArray[indexPath.section];
+    
+    [cell.goodsIcon sd_setImageWithURL:[NSURL URLWithString:model.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
+    
+    cell.goodsTitle.text = model.rootTitle;
+    
+    cell.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.goodsPrice];
+
+    cell.goodsNum.text = [NSString stringWithFormat:@"X%@",model.goodsNum];
     
     return cell;
     
