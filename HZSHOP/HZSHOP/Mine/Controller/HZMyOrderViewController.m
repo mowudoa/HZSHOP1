@@ -66,6 +66,22 @@ UITableViewDataSource
 
 -(void)initData
 {
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]};
+
+    [CrazyNetWork CrazyRequest_Post:MY_ORDER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"我的订单", dic);
+        
+        if (SUCCESS) {
+        
+            
+        }else{
+            
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
     for (int i = 0; i < 10; i ++) {
         
@@ -88,7 +104,7 @@ UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 1;
+    return 2;
     
 
 }
@@ -103,8 +119,11 @@ UITableViewDataSource
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    HZOrderModel *model = _orderListArray[indexPath.row];
     
     HZOrderDetailViewController *orderDetail = [[HZOrderDetailViewController alloc] init];
+    
+    orderDetail.orderId = @"210";
     
     [self.navigationController pushViewController:orderDetail animated:YES];
 

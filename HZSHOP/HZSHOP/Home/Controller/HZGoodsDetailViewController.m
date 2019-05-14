@@ -292,10 +292,12 @@ parameterSlecteDelete
     
     [UIView animateWithDuration:0.2 animations:^{
         
-        weakSelf.goodsParameterView.frame = CGRectMake(0,SCREEN_HEIGHT - 300 - SCREEN_NAVRECT - SCREEN_STATUSRECT - BOTTOM_SAFEAREA,SCREEN_WIDTH,300);
-        
+        [weakSelf.parameterTableView reloadData];
+
     } completion:^(BOOL finished) {
-        
+    
+        weakSelf.goodsParameterView.frame = CGRectMake(0,SCREEN_HEIGHT - 300 - SCREEN_NAVRECT - SCREEN_STATUSRECT - BOTTOM_SAFEAREA,SCREEN_WIDTH,300);
+
     }];
     
     if (![_paremeterViewShowType isEqualToString:@"参数选择"]) {

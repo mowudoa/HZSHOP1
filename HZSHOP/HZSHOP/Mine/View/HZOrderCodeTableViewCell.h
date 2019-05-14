@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZOrderCodeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *orderTimelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orderCodelLabel;
 
 @end
 

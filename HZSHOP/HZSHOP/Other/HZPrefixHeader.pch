@@ -65,6 +65,8 @@
 
 #define MEMBER_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.userIndex"//会员中心
 
+#define MY_ORDER            @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=order.order_list"//我的订单
+
 #define COUPON_CENTER       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.couponList"//领取优惠券中心
 
 #define MY_COUPON           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=sale.coupon.getlistapp"//我的优惠券
@@ -109,4 +111,5 @@
 #define COMMIT_ORDER        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=order.create.submitapp"//提交订单
 
 #define ORDER_DETAIL        @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=order.order_detail"//订单详情
+
 #endif //  HZPrefixHeader.pch

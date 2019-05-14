@@ -78,7 +78,6 @@ UITableViewDataSource
 
     NSMutableArray *orderParameter = [[NSMutableArray alloc] init];
     
-    
     for (HZGoodsModel *model in _goodsArray) {
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -106,6 +105,12 @@ UITableViewDataSource
         LOG(@"提交订单", dic);
         
         if (SUCCESS) {
+           
+            HZOrderPayViewController *orderPay = [[HZOrderPayViewController alloc] init];
+            
+            orderPay.orderId = dic[@"orderid"];
+            
+            [self.navigationController pushViewController:orderPay animated:YES];
             
         }else{
             
@@ -116,11 +121,6 @@ UITableViewDataSource
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
-    
-    
-    HZOrderPayViewController *orderPay = [[HZOrderPayViewController alloc] init];
-    
-    [self.navigationController pushViewController:orderPay animated:YES];
     
 }
 

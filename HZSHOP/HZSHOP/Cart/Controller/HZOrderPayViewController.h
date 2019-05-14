@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZOrderPayViewController : XTBaseBackViewController
 
+@property(nonatomic,copy) NSString *orderId;
 @end
 
 NS_ASSUME_NONNULL_END

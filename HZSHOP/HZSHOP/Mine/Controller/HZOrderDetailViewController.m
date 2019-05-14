@@ -7,6 +7,7 @@
 //
 
 #import "HZOrderDetailViewController.h"
+#import "HZGoodsModel.h"
 #import "HZOrderPayViewController.h"
 #import "HZOrderCodeTableViewCell.h"
 #import "HZCartOrderTableViewCell.h"
@@ -23,6 +24,21 @@ UITableViewDataSource
 
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
+@property(strong,nonatomic) NSMutableArray *goodsListArray;
+
+@property(strong,nonatomic) NSMutableDictionary *addressDic;
+
+@property(copy,nonatomic) NSString *orderCode;//订单编号
+
+@property(copy,nonatomic) NSString *orderTime;//订单时间
+
+@property(copy,nonatomic) NSString *orderStauts;//订单状态
+
+@property(copy,nonatomic) NSString *orderPrice;//实付金额
+
+@property(copy,nonatomic) NSString *goodsPrice;//商品总价
+
+@property(copy,nonatomic) NSString *expressPrice;//运费
 @end
 
 @implementation HZOrderDetailViewController
@@ -35,12 +51,18 @@ UITableViewDataSource
     
     [self registercell];
     
+    [self initData];
+    
 }
 
 -(void)initUI
 {
     self.navigationItem.title = @"订单详情";
 
+    _addressDic = [[NSMutableDictionary alloc] init];
+    
+    _goodsListArray = [[NSMutableArray alloc] init];
+    
     [_leftButton setTitle:@"   删除订单   " forState:UIControlStateNormal];
     
     [_rightButton setTitle:@"   支付订单   " forState:UIControlStateNormal];
@@ -79,6 +101,71 @@ UITableViewDataSource
     [_OrderDetailTableView registerNib:nib5 forCellReuseIdentifier:@"OrderCodeTableViewCell"];
 }
 
+-(void)initData
+{
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"orderid":_orderId
+                           };
+
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:ORDER_DETAIL parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"订单详情", dict)
+        
+        MJStrongSelf;
+
+        if (SUCCESS) {
+         
+            NSDictionary *orderDetailDic = dic[@"data"];
+            
+            strongSelf.orderStauts = orderDetailDic[@"status"];
+            
+            strongSelf.orderTime = orderDetailDic[@"createtime"];
+            
+            strongSelf.orderCode = orderDetailDic[@"ordersn"];
+            
+            strongSelf.orderPrice = orderDetailDic[@"price"];
+            
+            strongSelf.expressPrice = orderDetailDic[@"dispatchprice"];
+            
+            strongSelf.goodsPrice = orderDetailDic[@"goodsprice"];
+            
+            NSArray *goodsArr = orderDetailDic[@"goods_list"];
+            
+            for (NSDictionary *goodsDic in goodsArr) {
+                
+                HZGoodsModel *model = [[HZGoodsModel alloc] init];
+                
+                model.rootTitle = goodsDic[@"title"];
+                
+                model.goodsPrice = goodsDic[@"price"];
+
+                model.rootImageUrl = goodsDic[@"thumb"];
+                
+                model.goodsNum = goodsDic[@"total"];
+                
+                model.specs = goodsDic[@"optiontitle"];
+                
+                [strongSelf.goodsListArray addObject:model];
+                
+            }
+            
+            [strongSelf.addressDic addEntriesFromDictionary:orderDetailDic[@"address"]];
+            
+        }else{
+            
+            
+        }
+        
+        [self reloadData];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
+
 #pragma mark - UITableViewDataSource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -99,6 +186,29 @@ UITableViewDataSource
         
         HZOrderStatusTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"OrderStatusTableViewCell" forIndexPath:indexPath];
         
+        switch ([_orderStauts integerValue]) {
+            case 0:
+                
+                cell.orderStatusLabel.text = @"等待付款";
+                break;
+            case 1:
+                
+                cell.orderStatusLabel.text = @"待发货";
+                break;
+            case 2:
+                
+                cell.orderStatusLabel.text = @"待收货";
+                break;
+            case 3:
+                
+                cell.orderStatusLabel.text = @"已完成";
+                break;
+            default:
+                break;
+        }
+        
+        cell.orderPriceLabel.text = [NSString stringWithFormat:@"订单金额(含运费):￥%@",_orderPrice];
+        
         return cell;
         
     }else if (indexPath.section == AddressTYpe - 100){
@@ -111,17 +221,29 @@ UITableViewDataSource
         
         cell.addressInfoView.hidden = NO;
         
+        cell.addressUserName.text = _addressDic[@"realname"];
+        
+        cell.addressUserPhone.text = _addressDic[@"mobile"];
+        
+        cell.addressDetail.text = [NSString stringWithFormat:@"%@%@%@%@",_addressDic[@"province"],_addressDic[@"city"],_addressDic[@"area"],_addressDic[@"address"]];
+        
         return cell;
         
     }else if (indexPath.section == OrderGoodsType - 100){
         
         HZCartOrderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CartOrderTableViewCell" forIndexPath:indexPath];
         
+        [cell setGoodsArray:_goodsListArray];
+        
         return cell;
         
     }else if (indexPath.section == 6){
         
         HZOrderCodeTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCodeTableViewCell" forIndexPath:indexPath];
+        
+        cell.orderTimelLabel.text = [NSString stringWithFormat:@"创建时间:%@",[WYFTools ConvertStrToTime:_orderTime dateModel:@"yyyy-MM-dd HH:mm:ss" withDateMultiple:1]];
+        
+        cell.orderCodelLabel.text = [NSString stringWithFormat:@"订单编号:%@",_orderCode];
         
         return cell;
         
@@ -133,7 +255,7 @@ UITableViewDataSource
             
             cell.title.text = @"商品小计:";
             
-            cell.money.text = @"￥ 3.00";
+            cell.money.text = [NSString stringWithFormat:@"￥ %@",_goodsPrice];
             
             cell.money.textColor = [UIColor colorWithHexString:@"#666666"];
 
@@ -141,7 +263,7 @@ UITableViewDataSource
             
             cell.title.text = @"运费:";
             
-            cell.money.text = @"￥ 4.00";
+            cell.money.text = [NSString stringWithFormat:@"￥ %@",_expressPrice];
             
             cell.money.textColor = [UIColor colorWithHexString:@"#666666"];
 
@@ -149,7 +271,7 @@ UITableViewDataSource
             
             cell.title.text = @"实付费(含运费):";
             
-            cell.money.text = @"￥ 7.00";
+            cell.money.text = [NSString stringWithFormat:@"￥ %@",_orderPrice];
             
             cell.money.textColor = [UIColor redColor];
             
@@ -177,7 +299,7 @@ UITableViewDataSource
         
     }else if (indexPath.section == OrderGoodsType - 100){
         
-        return (HEIGHT(127) + 30) * 10;
+        return (HEIGHT(127) + 30) * _goodsListArray.count;
         
     }else if (indexPath.section == 6){
         
@@ -226,6 +348,16 @@ UITableViewDataSource
         
     }
     
+}
+
+-(void)reloadData
+{
+    if (_addressDic != nil && _goodsListArray != nil) {
+     
+        [_OrderDetailTableView reloadData];
+        
+    }
+
 }
 
 /*

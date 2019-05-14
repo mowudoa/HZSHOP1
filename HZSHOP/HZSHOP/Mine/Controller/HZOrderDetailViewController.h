@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger,CellType){
 
 @interface HZOrderDetailViewController : XTBaseBackViewController
 
+@property(nonatomic,copy) NSString *orderId;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZOrderStatusTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *orderPriceLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END
