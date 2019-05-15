@@ -70,6 +70,12 @@
     
     cell.goodsTitle.text = model.rootTitle;
     
+    if (model.specs != nil) {
+        
+        cell.goodsSpecs.text = model.specs;
+
+    }
+    
     cell.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.goodsPrice];
 
     cell.goodsNum.text = [NSString stringWithFormat:@"X%@",model.goodsNum];

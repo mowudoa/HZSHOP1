@@ -14,7 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString* orderStatus; //订单状态
 
-@property(copy,nonatomic)NSString* orderStatusString; //订单状态
+@property(copy,nonatomic)NSString* orderStatusString; //订单状态字符串
+
+@property(copy,nonatomic)NSString* orderEvaluateStatus; //订单评价状态
+
+@property(copy,nonatomic)NSString* orderRefundStatus; //订单退款状态
 
 @property(copy,nonatomic)NSString* orderPrice; //订单价格
 

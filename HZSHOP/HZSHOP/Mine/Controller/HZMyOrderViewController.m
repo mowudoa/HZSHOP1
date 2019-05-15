@@ -9,6 +9,7 @@
 #import "HZMyOrderViewController.h"
 #import "HZOrderModel.h"
 #import "HZGoodsModel.h"
+#import "BRStringPickerView.h"
 #import "HZOrderTableViewCell.h"
 #import "HZEvaluateViewController.h"
 #import "HZOrderDetailViewController.h"
@@ -118,6 +119,10 @@ UITableViewDataSource
                 
                 model.orderStatus = order[@"status"];
                 
+                model.orderEvaluateStatus = order[@"iscomment"];
+                
+                model.orderRefundStatus = order[@"refundstate"];
+                
                 model.orderStatusString = order[@"statusstr"];
                 
                 model.orderPrice = order[@"price"];
@@ -134,9 +139,12 @@ UITableViewDataSource
                     
                     model1.rootImageUrl = goods[@"thumb"];
                     
+                    model1.specs = goods[@"optiontitle"];
+                    
                     model1.goodsPrice = goods[@"price"];
                     
                     [model.goodsArray addObject:model1];
+                    
                 }
                 
                 [strongSelf.orderListArray addObject:model];
@@ -188,6 +196,10 @@ UITableViewDataSource
                 
                 model.orderStatus = order[@"status"];
                 
+                model.orderEvaluateStatus = order[@"iscomment"];
+                
+                model.orderRefundStatus = order[@"refundstate"];
+                
                 model.orderStatusString = order[@"statusstr"];
 
                 model.orderPrice = order[@"price"];
@@ -206,7 +218,10 @@ UITableViewDataSource
                     
                     model1.goodsPrice = goods[@"price"];
                     
+                    model1.specs = goods[@"optiontitle"];
+
                     [model.goodsArray addObject:model1];
+                    
                 }
                 
                 [strongSelf.orderListArray addObject:model];
@@ -257,6 +272,12 @@ UITableViewDataSource
     HZGoodsModel *model = model1.goodsArray[indexPath.row];
     
     cell.goodsTitle.text = model.rootTitle;
+    
+    if (model.specs != nil) {
+        
+        cell.goodsSpecs.text = model.specs;
+        
+    }
     
     cell.goodsPrice.text = model.goodsPrice;
     
@@ -413,11 +434,21 @@ UITableViewDataSource
         
         leftBtn.hidden = NO;
 
-    }else if ([model.orderStatus isEqualToString:@"4"]){
+    }else if ([model.orderStatus isEqualToString:@"3"]){
 
-        [rightBtn setTitle:HZOrderGoEvaluate forState:UIControlStateNormal];
-
-        rightBtn.userInteractionEnabled = YES;
+        if ([model.orderEvaluateStatus isEqualToString:@"2"]) {
+           
+            [rightBtn setTitle:HZOrderEvaluated forState:UIControlStateNormal];
+            
+            rightBtn.userInteractionEnabled = NO;
+            
+        }else{
+            
+            [rightBtn setTitle:HZOrderGoEvaluate forState:UIControlStateNormal];
+            
+            rightBtn.userInteractionEnabled = YES;
+            
+        }
 
         rightBtn.hidden = NO;
 
@@ -468,7 +499,18 @@ UITableViewDataSource
 }
 -(void)tapleftBtn:(UIButton *)sender
 {
+   
+    HZOrderModel *model = _orderListArray[sender.tag];
     
+    if ([sender.currentTitle isEqualToString:HZOrderCancleOrder]) {
+        
+        [BRStringPickerView showStringPickerWithTitle:nil dataSource:@[@"不想要了", @"卖家缺货", @"拍错了",@"其他"] defaultSelValue:@"不想要了" resultBlock:^(id selectValue) {
+            
+            [self cancleOrder:model.rootId withCancleReason:selectValue];
+            
+        }];
+    
+    }
     
 }
 -(void)tapBtn:(UIButton *)sender
@@ -495,6 +537,13 @@ UITableViewDataSource
     }
  
 }
+
+#pragma mark 取消订单
+-(void)cancleOrder:(NSString *)orderId withCancleReason:(NSString *)reason
+{
+    
+}
+
 - (IBAction)orderStatus:(UIButton *)sender {
     
     
@@ -596,7 +645,7 @@ UITableViewDataSource
         case WXMyOrderUnReceive:
             num = 3;
             break;
-        case WXMyOrderUnEvaluate:
+        case WXMyOrderComplete:
             num = 4;
             break;
         default:

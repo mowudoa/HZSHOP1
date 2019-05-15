@@ -48,6 +48,12 @@
     
     _goodsTitle.text = _carModel.rootTitle;
 
+    if (_carModel.goodsSpecs != nil) {
+    
+        _goodsSpecs.text = _carModel.goodsSpecs;
+
+    }
+    
     _goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:[NSString stringWithFormat:@"￥%@",_carModel.goodsOldPrice]];
     
     [_imageIcon sd_setImageWithURL:[NSURL URLWithString:_carModel.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];

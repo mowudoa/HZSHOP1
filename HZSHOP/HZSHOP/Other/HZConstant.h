@@ -53,6 +53,7 @@ UIKIT_EXTERN NSString *const HZOrderPayNow;
 UIKIT_EXTERN NSString *const HZOrderCancleOrder;
 UIKIT_EXTERN NSString *const HZOrderApplyForRefund;
 UIKIT_EXTERN NSString *const HZOrderGoEvaluate;
+UIKIT_EXTERN NSString *const HZOrderEvaluated;
 UIKIT_EXTERN NSString *const HZOrderConfirmReceive;
 UIKIT_EXTERN NSString *const HZOrderLogisticsInfo;
 UIKIT_EXTERN NSString *const HZOrderAfterSales;

@@ -10,6 +10,7 @@ NSString *const HZOrderPayNow = @"支付订单";
 NSString *const HZOrderCancleOrder = @"取消订单";
 NSString *const HZOrderApplyForRefund = @"申请退款";
 NSString *const HZOrderGoEvaluate = @"立即评价";
+NSString *const HZOrderEvaluated = @"已评价";
 NSString *const HZOrderConfirmReceive = @"确认收货";
 NSString *const HZOrderLogisticsInfo = @"查看物流";
 NSString *const HZOrderAfterSales = @"申请售后";

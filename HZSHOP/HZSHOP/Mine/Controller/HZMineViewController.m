@@ -85,7 +85,7 @@
 
     }else if (sender.tag == 304){
       
-        order.orderType = WXMyOrderUnEvaluate;
+    //    order.orderType = WXMyOrderComplete;
 
     }else{
        
