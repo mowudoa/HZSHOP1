@@ -8,7 +8,14 @@
 
 #import "HZHomeViewController.h"
 
-@interface HZHomeViewController ()
+@interface HZHomeViewController ()<
+UICollectionViewDelegate,
+UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout
+>
+@property (weak, nonatomic) IBOutlet UICollectionView *homecollectionView;
+
+@property (strong,nonatomic) UIView *headerView;
 
 @end
 
@@ -17,8 +24,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self initUI];
+    
+    [self registerCell];
+    
+    [self initData];
+    
 }
 
+-(void)initUI
+{
+    self.navigationItem.title = @"首页";
+}
+
+-(void)registerCell
+{
+    
+}
+
+-(void)initData
+{
+    
+}
+
+-(UIView *)headerView
+{
+    
+    if (_headerView == nil) {
+      
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH,SCREEN_WIDTH *1.3)];
+        
+    }
+    
+    return _headerView;
+    
+}
 /*
 #pragma mark - Navigation
 

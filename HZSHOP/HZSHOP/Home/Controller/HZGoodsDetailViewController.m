@@ -146,7 +146,7 @@ parameterSlecteDelete
             
             strongSelf.goodsTitle.text = detail[@"title"];
             
-            strongSelf.goodsSubTitle.text = detail[@"shorttitle"];
+            strongSelf.goodsSubTitle.text = detail[@"subtitle"];
             
             strongSelf.goodsOldPrice.attributedText = [WYFTools AddCenterLineToView:[NSString stringWithFormat:@"￥%@",detail[@"productprice"]]];
             
@@ -158,7 +158,16 @@ parameterSlecteDelete
                 
             }else{
                 
-                strongSelf.expressMoney.text = @"快递:自费";
+                if ([detail[@"dispatchprice"] isEqualToString:@"0.00"]) {
+                   
+                    strongSelf.expressMoney.text = @"快递:包邮";
+
+                }else{
+                    
+                    strongSelf.expressMoney.text = [NSString stringWithFormat:@"快递:%@",detail[@"dispatchprice"]];
+
+                }
+                
 
             }
             

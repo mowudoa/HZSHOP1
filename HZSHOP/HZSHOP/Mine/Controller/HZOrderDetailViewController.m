@@ -39,6 +39,11 @@ UITableViewDataSource
 @property(copy,nonatomic) NSString *goodsPrice;//商品总价
 
 @property(copy,nonatomic) NSString *expressPrice;//运费
+
+@property(copy,nonatomic) NSString *evaluateStatus;//评价状态
+
+@property(copy,nonatomic) NSString *refundStatus;//评价状态
+
 @end
 
 @implementation HZOrderDetailViewController
@@ -62,10 +67,6 @@ UITableViewDataSource
     _addressDic = [[NSMutableDictionary alloc] init];
     
     _goodsListArray = [[NSMutableArray alloc] init];
-    
-    [_leftButton setTitle:@"   删除订单   " forState:UIControlStateNormal];
-    
-    [_rightButton setTitle:@"   支付订单   " forState:UIControlStateNormal];
     
     [WYFTools viewLayer:_leftButton.height/2 withView:_leftButton];
     
@@ -111,7 +112,7 @@ UITableViewDataSource
     
     [CrazyNetWork CrazyRequest_Post:ORDER_DETAIL parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
         
-        LOG(@"订单详情", dict)
+        LOG(@"订单详情", dic)
         
         MJStrongSelf;
 
@@ -193,15 +194,15 @@ UITableViewDataSource
                 break;
             case 1:
                 
-                cell.orderStatusLabel.text = @"待发货";
+                cell.orderStatusLabel.text = @"买家已付款";
                 break;
             case 2:
                 
-                cell.orderStatusLabel.text = @"待收货";
+                cell.orderStatusLabel.text = @"卖家已发货";
                 break;
             case 3:
                 
-                cell.orderStatusLabel.text = @"已完成";
+                cell.orderStatusLabel.text = @"交易完成";
                 break;
             default:
                 break;
@@ -358,6 +359,40 @@ UITableViewDataSource
         
     }
 
+    if ([_orderStauts isEqualToString:@"0"]) {
+        
+        [_leftButton setTitle:@"   取消订单   " forState:UIControlStateNormal];
+        
+        [_rightButton setTitle:@"   支付订单   " forState:UIControlStateNormal];
+        
+    }else if ([_orderStauts isEqualToString:@"1"]){
+        
+        _leftButton.hidden = YES;
+        
+        [_rightButton setTitle:@"   申请退款   " forState:UIControlStateNormal];
+        
+    }else if ([_orderStauts isEqualToString:@"2"]){
+        
+        [_leftButton setTitle:@"   确认收货   " forState:UIControlStateNormal];
+
+        [_rightButton setTitle:@"   申请售后   " forState:UIControlStateNormal];
+        
+    }else if ([_orderStauts isEqualToString:@"3"]){
+        
+        [_leftButton setTitle:@"   删除订单   " forState:UIControlStateNormal];
+
+        if ([_evaluateStatus isEqualToString:@"2"]) {
+          
+            [_rightButton setTitle:@"   已评价   " forState:UIControlStateNormal];
+
+        }else{
+            
+            [_rightButton setTitle:@"   立即评价   " forState:UIControlStateNormal];
+
+        }
+        
+    }
+    
 }
 
 /*
