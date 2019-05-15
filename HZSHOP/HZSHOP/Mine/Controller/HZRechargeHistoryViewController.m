@@ -7,6 +7,7 @@
 //
 
 #import "HZRechargeHistoryViewController.h"
+#import "HZRechareModel.h"
 #import "HZRechargeHistoryTableViewCell.h"
 @interface HZRechargeHistoryViewController ()<
 UITableViewDelegate,
@@ -46,21 +47,149 @@ UITableViewDataSource
     
     [_rechargeHistoryTableView registerNib:nib forCellReuseIdentifier:@"RechargeHistoryTableViewCell"];
     
+    // 下拉加载
+    self.rechargeHistoryTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.rechargeHistoryTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_rechargeHistoryTableView];
+    
 }
 
 -(void)initData
 {
+    self.nowPage = 1;
     
-    for (int i = 0; i < 10; i ++) {
-        
-        rootModel *model = [[rootModel alloc] init];
-        
-        [_rechageArray addObject:model];
-    }
+    MJWeakSelf;
     
-    [_rechargeHistoryTableView reloadData];
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
+
+    
+    [CrazyNetWork CrazyRequest_Post:MY_RECHARGE_HISTORRY parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+       
+        LOG(@"充值记录", dic);
+        
+        MJStrongSelf;
+        
+        [strongSelf.rechageArray removeAllObjects];
+
+        if (SUCCESS) {
+            
+            NSArray *rechargeArr = dic[@"data"][@"list"];
+            
+            for (NSDictionary *dic1 in rechargeArr) {
+                
+                HZRechareModel *model = [[HZRechareModel alloc] init];
+                
+                model.rootTitle = dic1[@"title"];
+                
+                model.rechargeStatus = dic1[@"status"];
+                
+                model.rechargeTime = dic1[@"createtime"];
+                
+                model.rechargeMoney = dic1[@"money"];
+                
+                model.rechargeType = dic1[@"rechargetype"];
+                
+                model.rechargeRemark = dic1[@"remark"];
+                
+                [strongSelf.rechageArray addObject:model];
+                
+            }
+            
+            
+        }else{
+            
+            
+        }
+        
+        [strongSelf.rechargeHistoryTableView reloadData];
+        
+        [strongSelf.rechargeHistoryTableView.mj_header endRefreshing];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
     
 }
+
+-(void)initMoreData
+{
+    
+    MJWeakSelf;
+    
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
+    
+    
+    [CrazyNetWork CrazyRequest_Post:MY_RECHARGE_HISTORRY parameters:dict HUD:YES success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"充值记录", dic);
+        
+        MJStrongSelf;
+                
+        if (SUCCESS) {
+            
+            NSArray *rechargeArr = dic[@"data"][@"list"];
+            
+            for (NSDictionary *dic1 in rechargeArr) {
+                
+                HZRechareModel *model = [[HZRechareModel alloc] init];
+                
+                model.rootTitle = dic1[@"title"];
+                
+                model.rechargeStatus = dic1[@"status"];
+                
+                model.rechargeTime = dic1[@"createtime"];
+                
+                model.rechargeMoney = dic1[@"money"];
+                
+                model.rechargeType = dic1[@"rechargetype"];
+                
+                model.rechargeRemark = dic1[@"remark"];
+                
+                [strongSelf.rechageArray addObject:model];
+                
+            }
+          
+            [strongSelf.rechargeHistoryTableView reloadData];
+            
+            [strongSelf.rechargeHistoryTableView.mj_footer endRefreshing];
+            
+            if (rechargeArr.count > 0) {
+                
+            }else{
+                
+                [JKToast showWithText:NOMOREDATA_STRING];
+                
+                [strongSelf.rechargeHistoryTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+        }else{
+            
+            
+        }
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
+
 #pragma mark UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -73,6 +202,26 @@ UITableViewDataSource
 {
     
     HZRechargeHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RechargeHistoryTableViewCell"];
+    
+    HZRechareModel *model = _rechageArray[indexPath.row];
+    
+    cell.rechargeMoneyLabel.text = [NSString stringWithFormat:@"%@:%@元",model.rootTitle,model.rechargeMoney];
+    
+    cell.rechargeTimeLabel.text = model.rechargeTime;
+    
+    if ([model.rechargeStatus isEqualToString:@"1"]) {
+        
+        cell.rechargeStatusLabel.text = @"成功";
+        
+        cell.rechargeStatusLabel.backgroundColor = [UIColor colorWithHexString:@"#1AA91B"];
+        
+    }else if ([model.rechargeStatus isEqualToString:@"-1"]){
+        
+        cell.rechargeStatusLabel.text = @"失败";
+        
+        cell.rechargeStatusLabel.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
+
+    }
     
     return cell;
     

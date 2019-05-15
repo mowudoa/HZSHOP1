@@ -117,9 +117,9 @@ UITableViewDataSource
              
                 lifeTime = @"永久有效";
                 
-                strongSelf.couponLifeTime.text = [NSString stringWithFormat:@"有效期%@",lifeTime];
+                strongSelf.couponLifeTime.text = [NSString stringWithFormat:@"有效期:%@",lifeTime];
                 
-            }else if ([coupon[@"timestr"] isEqualToString:@"0"]){
+            }else if ([coupon[@"timestr"] isEqualToString:@"1"]){
                 
                 lifeTime = [NSString stringWithFormat:@"即%@日内%@天有效",coupon[@"gettypestr"],coupon[@"timedays"]];
                 
@@ -146,7 +146,6 @@ UITableViewDataSource
                 [strongSelf.couponArray addObject:model];
                 
             }
-            
             
         }else{
             

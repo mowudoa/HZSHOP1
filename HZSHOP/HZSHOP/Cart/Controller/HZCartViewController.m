@@ -8,8 +8,9 @@
 
 #import "HZCartViewController.h"
 #import "HZCartModel.h"
+#import "HZGoodsModel.h"
 #import "HZCartTableViewCell.h"
-
+#import "HZCartOrderViewController.h"
 @interface HZCartViewController ()<
 UITableViewDelegate,
 UITableViewDataSource
@@ -44,8 +45,6 @@ UITableViewDataSource
     
     [self registercell];
     
-    [self initData];
-
 }
 
 -(void)registercell
@@ -127,6 +126,12 @@ UITableViewDataSource
                 
                 model.rootImageUrl = cartDic[@"thumb"];
                 
+                model.goodsOptionid = cartDic[@"optionid"];
+                
+                model.goodsSpecs = cartDic[@"optiontitle"];
+                
+                model.goodsId = cartDic[@"goodsid"];
+                
                 model.goodsSalesPrice = cartDic[@"productprice"];
                 
                 model.goodsOldPrice = [cartDic[@"marketprice"] stringValue];
@@ -191,6 +196,12 @@ UITableViewDataSource
                 model.goodsNum = cartDic[@"total"];
                 
                 model.rootTitle = cartDic[@"title"];
+                
+                model.goodsOptionid = cartDic[@"optionid"];
+                
+                model.goodsSpecs = cartDic[@"optiontitle"];
+                
+                model.goodsId = cartDic[@"goodsid"];
                 
                 model.rootImageUrl = cartDic[@"thumb"];
                 
@@ -428,6 +439,54 @@ UITableViewDataSource
     
 }
 
+#pragma mark 结算
+- (IBAction)submitOrder:(UIButton *)sender {
+
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    
+    for (HZCartModel* shopModel in _cartGoodsArray) {
+    
+        if (shopModel.isSelect) {
+         
+            HZGoodsModel *model = [[HZGoodsModel alloc] init];
+            
+            model.rootTitle = shopModel.rootTitle;
+            
+            model.goodsNum = shopModel.goodsNum;
+            
+            model.goodsId = shopModel.goodsId;
+            
+            model.rootImageUrl  =shopModel.rootImageUrl;
+            
+            model.specs = shopModel.goodsSpecs;
+            
+            model.optionId = shopModel.goodsOptionid;
+            
+            model.goodsPrice = shopModel.goodsSalesPrice;
+            
+            [arr addObject:model];
+            
+        }
+        
+    
+    }
+    
+    if (!(arr.count > 0)) {
+        
+        [JKToast showWithText:@"请选择商品"];
+        
+        return;
+    }
+    
+    HZCartOrderViewController *cartOrder = [[HZCartOrderViewController alloc] init];
+    
+    cartOrder.goodsArray = arr;
+    
+    [self.navigationController pushViewController:cartOrder animated:YES];
+    
+}
+
+
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -472,6 +531,8 @@ UITableViewDataSource
         [YY_APPDELEGATE.tabBarControll.tabBar setHidden:YES];
     }
     
+    [self initData];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated

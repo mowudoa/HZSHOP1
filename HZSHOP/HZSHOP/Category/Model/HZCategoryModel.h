@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HZCategoryModel : rootModel
 
-@property(nonatomic,copy) NSMutableArray *subArray;
+@property(nonatomic,strong) NSMutableArray *subArray;
 
 @end
 

@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HZRechargeHistoryTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *rechargeMoneyLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *rechargeTimeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *rechargeStatusLabel;
 @end
 
 NS_ASSUME_NONNULL_END

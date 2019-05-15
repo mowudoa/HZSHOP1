@@ -10,4 +10,13 @@
 
 @implementation HZOrderModel
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _goodsArray = [NSMutableArray array];
+    }
+    return self;
+}
+
 @end

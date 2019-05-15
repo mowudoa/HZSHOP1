@@ -16,6 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString* goodsOldPrice;//购买原价
 
+@property(copy,nonatomic)NSString* goodsSpecs;//规格
+
+@property(copy,nonatomic)NSString* goodsOptionid;//optionid
+
+@property(copy,nonatomic)NSString* goodsId;//商品id
+
 @property(copy,nonatomic)NSString* goodsSalesPrice;//购买价格
 
 @property(copy,nonatomic)NSString* goodsStockNum;//库存

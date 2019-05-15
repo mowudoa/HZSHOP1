@@ -114,12 +114,12 @@
                                 <constraint firstItem="nYe-az-avN" firstAttribute="top" secondItem="kOy-9t-YNY" secondAttribute="bottom" constant="5" id="lgI-ZW-fPU"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okc-aN-KtI">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okc-aN-KtI">
                             <rect key="frame" x="118" y="4" width="84" height="22"/>
                             <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="B03-1n-yhE"/>
-                                <constraint firstAttribute="width" priority="750" constant="84" id="UpO-HS-tAT"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="84" id="UpO-HS-tAT"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,7 +129,7 @@
                             <rect key="frame" x="108" y="116" width="104" height="18"/>
                             <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" priority="750" constant="104" id="4FP-vE-iwX"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="104" id="4FP-vE-iwX"/>
                                 <constraint firstAttribute="height" constant="18" id="4Kc-qn-PAb"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>

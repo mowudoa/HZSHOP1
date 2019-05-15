@@ -15,6 +15,7 @@ typedef enum {
     WXMyOrderUnPay,
     WXMyOrderUnSend,
     WXMyOrderUnReceive,
+    WXMyOrderUnEvaluate,
     WXMyOrderComplete
 }WXMyOrder;
 

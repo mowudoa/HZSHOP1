@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HZMyOrderViewController">
             <connections>
+                <outlet property="headerView" destination="9te-A1-wQY" id="dZl-bF-b2K"/>
                 <outlet property="myOrderTableView" destination="btD-9T-XgB" id="arS-kI-nuL"/>
                 <outlet property="orderNumForSection" destination="Ws5-KL-f2L" id="9Xe-AH-VUS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -80,7 +81,7 @@
                         <button opaque="NO" tag="504" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4S-lU-Sxt">
                             <rect key="frame" x="256" y="0.0" width="64" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="已完成">
+                            <state key="normal" title="待评价">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="selected">

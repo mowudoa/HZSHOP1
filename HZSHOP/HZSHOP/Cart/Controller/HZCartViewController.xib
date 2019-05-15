@@ -88,6 +88,9 @@
                             <state key="normal" title="结算">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="submitOrder:" destination="-1" eventType="touchUpInside" id="VEl-yC-VKi"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogG-0N-Xx9">
                             <rect key="frame" x="132" y="0.0" width="113" height="35"/>

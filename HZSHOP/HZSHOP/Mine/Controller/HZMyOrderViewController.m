@@ -8,6 +8,7 @@
 
 #import "HZMyOrderViewController.h"
 #import "HZOrderModel.h"
+#import "HZGoodsModel.h"
 #import "HZOrderTableViewCell.h"
 #import "HZEvaluateViewController.h"
 #import "HZOrderDetailViewController.h"
@@ -18,13 +19,15 @@ UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *myOrderTableView;
 
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+
+@property (strong, nonatomic) IBOutlet UIView *orderNumForSection;
+
 @property(nonatomic,strong) UILabel *lineLabel;
 
 @property(nonatomic,copy) NSString *orderStatus;
 
 @property(nonatomic,strong) NSMutableArray *orderListArray;
-
-@property (strong, nonatomic) IBOutlet UIView *orderNumForSection;
 
 @end
 
@@ -37,8 +40,6 @@ UITableViewDataSource
     [self initUI];
     
     [self registercell];
-    
-    [self initData];
     
 }
 
@@ -54,6 +55,24 @@ UITableViewDataSource
     
     [self.view addSubview:_lineLabel];
     
+    // 下拉加载
+    self.myOrderTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self initData];
+        
+    }];
+    
+    // 上拉刷新
+    self.myOrderTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        self.nowPage ++;
+        
+        [self initMoreData];
+        
+    }];
+    
+    [WYFTools autuLayoutNewMJ:_myOrderTableView];
+    
 }
 
 -(void)registercell
@@ -66,15 +85,147 @@ UITableViewDataSource
 
 -(void)initData
 {
-    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"]};
+    self.nowPage = 1;
+    
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"status":_orderStatus,
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
 
+    MJWeakSelf;
+    
     [CrazyNetWork CrazyRequest_Post:MY_ORDER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
        
         LOG(@"我的订单", dic);
         
+        MJStrongSelf;
+        
+        [strongSelf.orderListArray removeAllObjects];
+        
         if (SUCCESS) {
         
+            NSArray *orderList = dic[@"data"][@"list"];
             
+            for (NSDictionary *order in orderList) {
+                
+                HZOrderModel *model = [[HZOrderModel alloc] init];
+                
+                model.rootId = order[@"id"];
+                
+                model.orderCode = order[@"ordersn"];
+                
+                model.orderGoodsNum = [order[@"goods_num"] stringValue];
+                
+                model.orderStatus = order[@"status"];
+                
+                model.orderStatusString = order[@"statusstr"];
+                
+                model.orderPrice = order[@"price"];
+                
+                NSArray *goodsList = order[@"goods"][0][@"goods"];
+                
+                for (NSDictionary *goods in goodsList) {
+                 
+                    HZGoodsModel *model1 = [[HZGoodsModel alloc] init];
+                    
+                    model1.rootTitle = goods[@"title"];
+                    
+                    model1.goodsNum = goods[@"total"];
+                    
+                    model1.rootImageUrl = goods[@"thumb"];
+                    
+                    model1.goodsPrice = goods[@"price"];
+                    
+                    [model.goodsArray addObject:model1];
+                }
+                
+                [strongSelf.orderListArray addObject:model];
+                
+            }
+            
+        }else{
+            
+        }
+        
+        [strongSelf.myOrderTableView reloadData];
+        
+        [strongSelf.myOrderTableView.mj_header endRefreshing];
+        
+    } fail:^(NSError *error, NSString *url, NSString *Json) {
+        
+    }];
+    
+}
+
+-(void)initMoreData
+{
+
+    NSDictionary *dict = @{USER_ID:[USER_DEFAULT objectForKey:@"user_id"],
+                           @"status":_orderStatus,
+                           @"page":[NSString stringWithFormat:@"%ld",(long)self.nowPage]
+                           };
+    MJWeakSelf;
+    
+    [CrazyNetWork CrazyRequest_Post:MY_ORDER parameters:dict HUD:NO success:^(NSDictionary *dic, NSString *url, NSString *Json) {
+        
+        LOG(@"我的订单", dic);
+        
+        MJStrongSelf;
+                
+        if (SUCCESS) {
+            
+            NSArray *orderList = dic[@"data"][@"list"];
+            
+            for (NSDictionary *order in orderList) {
+                
+                HZOrderModel *model = [[HZOrderModel alloc] init];
+                
+                model.rootId = order[@"id"];
+                
+                model.orderCode = order[@"ordersn"];
+                
+                model.orderGoodsNum = [order[@"goods_num"] stringValue];
+                
+                model.orderStatus = order[@"status"];
+                
+                model.orderStatusString = order[@"statusstr"];
+
+                model.orderPrice = order[@"price"];
+                
+                NSArray *goodsList = order[@"goods"][0][@"goods"];
+                
+                for (NSDictionary *goods in goodsList) {
+                    
+                    HZGoodsModel *model1 = [[HZGoodsModel alloc] init];
+                    
+                    model1.rootTitle = goods[@"title"];
+                    
+                    model1.goodsNum = goods[@"total"];
+                    
+                    model1.rootImageUrl = goods[@"thumb"];
+                    
+                    model1.goodsPrice = goods[@"price"];
+                    
+                    [model.goodsArray addObject:model1];
+                }
+                
+                [strongSelf.orderListArray addObject:model];
+                
+            }
+           
+            [strongSelf.myOrderTableView reloadData];
+            
+            [strongSelf.myOrderTableView.mj_footer endRefreshing];
+            
+            if (orderList.count > 0) {
+                
+            }else{
+                
+                [JKToast showWithText:NOMOREDATA_STRING];
+                
+                [strongSelf.myOrderTableView.mj_footer endRefreshingWithNoMoreData];
+                
+            }
         }else{
             
         }
@@ -82,19 +233,7 @@ UITableViewDataSource
     } fail:^(NSError *error, NSString *url, NSString *Json) {
         
     }];
-    
-    for (int i = 0; i < 10; i ++) {
-        
-        HZOrderModel *model = [[HZOrderModel alloc] init];
-        
-        [_orderListArray addObject:model];
-        
-    }
-    
-    [_myOrderTableView reloadData];
-    
 }
-
 #pragma  mark ===TbaleViewDateSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -103,15 +242,27 @@ UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    HZOrderModel *model = _orderListArray[section];
     
-    return 2;
+    return model.goodsArray.count;
     
-
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     HZOrderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"OrderTableViewCell" forIndexPath:indexPath];
+    
+    HZOrderModel *model1 = _orderListArray[indexPath.section];
+    
+    HZGoodsModel *model = model1.goodsArray[indexPath.row];
+    
+    cell.goodsTitle.text = model.rootTitle;
+    
+    cell.goodsPrice.text = model.goodsPrice;
+    
+    cell.goodsNum.text = [NSString stringWithFormat:@"X%@",model.goodsNum];
+    
+    [cell.goodsIcon sd_setImageWithURL:[NSURL URLWithString:model.rootImageUrl] placeholderImage:[UIImage imageNamed:@"appIcon"]];
     
     return cell;
     
@@ -119,11 +270,11 @@ UITableViewDataSource
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    HZOrderModel *model = _orderListArray[indexPath.row];
+    HZOrderModel *model = _orderListArray[indexPath.section];
     
     HZOrderDetailViewController *orderDetail = [[HZOrderDetailViewController alloc] init];
     
-    orderDetail.orderId = @"210";
+    orderDetail.orderId = model.rootId;
     
     [self.navigationController pushViewController:orderDetail animated:YES];
 
@@ -137,6 +288,7 @@ UITableViewDataSource
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    HZOrderModel *model = _orderListArray[section];
     
     UIView* backView = [[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 31)];
     
@@ -148,13 +300,13 @@ UITableViewDataSource
     
     [backView addSubview:lineLabel];
     
-    UILabel *shanghu = [WYFTools createLabel:CGRectMake(10, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:@"订单号:SH20190418092212" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"#666666"] tag:section];
+    UILabel *shanghu = [WYFTools createLabel:CGRectMake(10, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:[NSString stringWithFormat:@"订单号:%@",model.orderCode] textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentLeft textColor:[UIColor colorWithHexString:@"#666666"] tag:section];
     
     shanghu.adjustsFontSizeToFitWidth = YES;
     
     [backView addSubview:shanghu];
     
-    UILabel *dingdantime = [WYFTools createLabel:CGRectMake(SCREEN_WIDTH/2, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:@"待付款" textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"666666"] tag:section];
+    UILabel *dingdantime = [WYFTools createLabel:CGRectMake(SCREEN_WIDTH/2, 5, SCREEN_WIDTH/2-10, 20) bgColor:[UIColor clearColor] text:model.orderStatusString textFont:[UIFont systemFontOfSize:12] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"666666"] tag:section];
     
     dingdantime.adjustsFontSizeToFitWidth = YES;
     
@@ -169,6 +321,7 @@ UITableViewDataSource
 }
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
+    HZOrderModel *model = _orderListArray[section];
     
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
     
@@ -182,9 +335,9 @@ UITableViewDataSource
     
     UILabel *dingdanNum = [WYFTools createLabel:CGRectMake(10, 10, SCREEN_WIDTH - 20, 20) bgColor:[UIColor clearColor] text:@"" textFont:[UIFont systemFontOfSize:13] textAlignment:NSTextAlignmentRight textColor:[UIColor colorWithHexString:@"#BABABA"] tag:section];
     
-    NSString *string1 = @"共一件商品,实付:";
+    NSString *string1 = [NSString stringWithFormat:@"共%@件商品,实付:",model.orderGoodsNum];
     
-    NSString *string2 = @"Y11.00";
+    NSString *string2 = [NSString stringWithFormat:@"￥%@",model.orderPrice];
 
     NSMutableAttributedString *string3 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",string1,string2]];
     
@@ -218,7 +371,7 @@ UITableViewDataSource
     
     view.backgroundColor=[UIColor whiteColor];
     
-    if (_orderType == WXMyOrderUnPay) {
+    if ([model.orderStatus isEqualToString:@"0"]) {
 
         [rightBtn setTitle:HZOrderPayNow forState:UIControlStateNormal];
 
@@ -232,7 +385,7 @@ UITableViewDataSource
 
         leftBtn.hidden = NO;
 
-    }else if (_orderType == WXMyOrderUnSend){
+    }else if ([model.orderStatus isEqualToString:@"1"]){
 
         [rightBtn setTitle:HZOrderApplyForRefund forState:UIControlStateNormal];
 
@@ -246,7 +399,7 @@ UITableViewDataSource
 
         leftBtn.hidden = NO;
 
-    }else if (_orderType == WXMyOrderUnReceive){
+    }else if ([model.orderStatus isEqualToString:@"2"]){
 
         [rightBtn setTitle:HZOrderConfirmReceive forState:UIControlStateNormal];
 
@@ -260,7 +413,7 @@ UITableViewDataSource
         
         leftBtn.hidden = NO;
 
-    }else if (_orderType == WXMyOrderComplete){
+    }else if ([model.orderStatus isEqualToString:@"4"]){
 
         [rightBtn setTitle:HZOrderGoEvaluate forState:UIControlStateNormal];
 
@@ -364,28 +517,23 @@ UITableViewDataSource
     
     switch (index) {
         case 0:
-            _orderStatus = @"1";
+            _orderStatus = @"-1";
             
-            _orderType = WXMyOrderAll;
             break;
         case 1:
-            _orderStatus = @"2";
-            _orderType = WXMyOrderUnPay;
+            _orderStatus = @"0";
             
             break;
         case 2:
-            _orderStatus = @"11";
-            _orderType = WXMyOrderUnSend;
+            _orderStatus = @"1";
             
             break;
         case 3:
-            _orderStatus = @"8";
-            _orderType = WXMyOrderUnReceive;
+            _orderStatus = @"2";
             
             break;
         case 4:
-            _orderStatus = @"4";
-            _orderType = WXMyOrderComplete;
+            _orderStatus = @"3";
             
             break;
         default:
@@ -401,10 +549,32 @@ UITableViewDataSource
         
         self->_lineLabel.frame = lineFrame;
         
+        [self changebuttonColcor:index];
+        
     }];
     
-    [_myOrderTableView reloadData];
+    [self initData];
 
+}
+
+-(void)changebuttonColcor:(NSInteger)index
+{
+    
+    for (UIButton *btn in _headerView.subviews) {
+        
+        if (btn.tag == index + 500) {
+            
+            btn.selected = YES;
+            
+        }else{
+            
+            btn.selected = NO;
+
+        }
+        
+    }
+    
+    
 }
 
 -(void)initnavBtn
@@ -426,7 +596,7 @@ UITableViewDataSource
         case WXMyOrderUnReceive:
             num = 3;
             break;
-        case WXMyOrderComplete:
+        case WXMyOrderUnEvaluate:
             num = 4;
             break;
         default:

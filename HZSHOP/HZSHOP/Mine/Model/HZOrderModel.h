@@ -14,13 +14,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic)NSString* orderStatus; //订单状态
 
+@property(copy,nonatomic)NSString* orderStatusString; //订单状态
+
 @property(copy,nonatomic)NSString* orderPrice; //订单价格
+
+@property(copy,nonatomic)NSString* orderCode; //订单号
+
+@property(copy,nonatomic)NSString* orderGoodsNum; //订单商品数量
 
 @property(copy,nonatomic)NSString* orderTime; //订单时间
 
 @property(copy,nonatomic)NSString* orderNeedPayPrice; //订单实际支付价格
 
 @property(copy,nonatomic)NSString* orderType; //订单类型
+
+@property(nonatomic,strong) NSMutableArray *goodsArray;
 
 @end
 

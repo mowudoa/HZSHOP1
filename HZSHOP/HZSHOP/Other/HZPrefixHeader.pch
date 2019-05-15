@@ -85,6 +85,8 @@
 
 #define MY_BROWSE           @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.history.history_list"//我的足迹
 
+#define MY_RECHARGE_HISTORRY @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.log.log_list"//充值记录
+
 #define DELETE_BROWSE       @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=member.history.history_remove"//删除历史记录
 #define CATEGORY_GOODS      @"http://weixinz.ttwx.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=goods.goods_type_list"//分类列表
 
